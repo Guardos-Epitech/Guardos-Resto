@@ -2,10 +2,39 @@ import React from "react";
 import styles from "./HomePage.module.scss";
 import Header from "@src/components/Header/Header";
 import RestoCard from "@src/components/RestoCard/RestoCard";
-import MapButton from "@src/components/MapButton/MapButton";
-import Filter from "@src/components/Filter/Filter";
+import Button from "@mui/material/Button";
+import { NavigateTo } from "@src/utils/NavigateTo";
+import { useNavigate } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const PageBtn = () => {
+  return createTheme({
+    typography: {
+      button: {
+        fontFamily: "Montserrat",
+        textTransform: "none",
+        fontSize: "1.13rem",
+        fontWeight: "500",
+      },
+    },
+    palette: {
+      primary: {
+        main: "#AC2A37",
+        contrastText: "#ffffff",
+      },
+      secondary: {
+        main: "#094067",
+        contrastText: "#ffffff",
+      },
+    },
+    shape: {
+      borderRadius: 5,
+    },
+  });
+};
 
 const HomePage = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <Header />
@@ -13,12 +42,7 @@ const HomePage = () => {
         <span className={styles.TitleSearch}>My Restaurants</span>
       </div>
       <div className={styles.DivContent}>
-        <div className={styles.DivMapBtn}>
-          <MapButton />
-          <Filter />
-        </div>
         <div>
-          <h1 className={styles.TitleCard}>Berlin - +12548 Restaurants</h1>
           <RestoCard />
           <RestoCard />
           <RestoCard />
@@ -26,6 +50,17 @@ const HomePage = () => {
           <RestoCard />
           <RestoCard />
         </div>
+      </div>
+      <div className={styles.FixedBtn}>
+        <ThemeProvider theme={PageBtn()}>
+          <Button
+            variant="contained"
+            sx={{ width: "15.13rem" }}
+            onClick={() => NavigateTo("/menu", navigate)}
+          >
+            Add Restaurant
+          </Button>
+        </ThemeProvider>
       </div>
     </div>
   );
