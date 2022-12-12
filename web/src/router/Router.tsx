@@ -1,16 +1,20 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import FilterPage from "@src/pages/FilterPage";
+import AddRestaurantPage from "@src/pages/AddRestaurantPage";
 import MenuPage from "@src/pages/MenuPage";
 import HomePage from "@src/pages/HomePage";
 import ScrollToTop from "@src/components/ScrollToTop/ScrollToTop";
+import IngredientsPage from "@src/pages/IngredientsPage";
+import DishesPage from "@src/pages/DishesPage";
 
 const MVPRouter = () => {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        <Route path="filter" element={<FilterPage />} />
+        <Route path="addResto" element={<AddRestaurantPage />} />
+        <Route path="dishes" element={<DishesPage />} />
+        <Route path="ingredients" element={<IngredientsPage />} />
         <Route path="menu" element={<MenuPage />} />
         <Route path="/" element={<HomePage />}></Route>
       </Routes>

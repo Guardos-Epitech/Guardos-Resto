@@ -56,7 +56,7 @@ const HomePage = () => {
           <Button
             variant="contained"
             sx={{ width: "15.13rem" }}
-            onClick={() => NavigateTo("/menu", navigate)}
+            onClick={() => NavigateTo("/addResto", navigate)}
           >
             Add Restaurant
           </Button>
