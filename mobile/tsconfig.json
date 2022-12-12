@@ -9,9 +9,6 @@
     "allowJs": false,
     "moduleResolution": "node",
     "baseUrl": ".",
-    "paths": {
-      "@src/*": ["src/*"]
-    }
   },
   "extends": "expo/tsconfig.base"
 }
