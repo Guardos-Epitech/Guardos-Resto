@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FilterPage from "@src/pages/FilterPage";
 import MenuPage from "@src/pages/MenuPage";
