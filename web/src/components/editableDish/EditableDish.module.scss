@@ -1,3 +1,5 @@
+@import "../../general";
+
 .JustificationPrint {
   text-align: justify;
   text-justify: inter-word;
@@ -5,6 +7,26 @@
 
 .ImageParent {
   display: flex;
+}
+
+.AttachToRightOfParent {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 1rem 1rem 0;
+}
+
+.IconScale {
+  transform: scale(1.5);
+  margin: 0.5rem;
+}
+
+.DishBox {
+  background: $white;
+}
+
+.DishBox:hover {
+  background-color: $white;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 768px) {

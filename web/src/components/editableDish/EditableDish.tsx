@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Grid, Paper } from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import styles from "@src/components/editableDish/EditableDish.module.scss";
 
@@ -42,9 +44,9 @@ const EditableDish = (props: IEditableDishProps) => {
             <p className={styles.JustificationPrint}>
               {extended ? dishDescription : shortenedDescription}
             </p>
+            {/*TODO: change allergens to ingredients list*/}
             {extended && <AllergenTags dishAllergens={dishAllergens} titleVisible/>}
           </Grid>
-
         </Grid>
       </div>
 
@@ -62,11 +64,18 @@ const EditableDish = (props: IEditableDishProps) => {
 
           <Grid item xs={3} className={styles.GridItemImage}>
             {imageSrc && <img src={imageSrc} alt={dishName} className={styles.ImageDimensions}/>}
+            {/*TODO: change allergens to ingredients list*/}
             {extended && <AllergenTags dishAllergens={dishAllergens} titleVisible/>}
           </Grid>
 
         </Grid>
       </div>
+      {extended &&
+        <div className={styles.AttachToRightOfParent}>
+          <EditIcon className={styles.IconScale}/>
+          <DeleteIcon className={styles.IconScale}/>
+        </div>
+      }
     </Paper>
   )
 }
