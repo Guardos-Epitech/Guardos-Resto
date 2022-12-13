@@ -17,7 +17,7 @@ const PageBtn = () => {
     },
     palette: {
       primary: {
-        main: "#283b00",
+        main: "#d09ea8",
         contrastText: "#ffffff",
       },
       secondary: {
