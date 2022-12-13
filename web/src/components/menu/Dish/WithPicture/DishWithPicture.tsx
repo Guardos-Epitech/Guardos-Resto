@@ -40,7 +40,7 @@ const DishWithPicture = (props: IDishWithPictureProps) => {
                         <p className={styles.JustificationPrint}>
                             {extended ? dishDescription : shortenedDescription}
                         </p>
-                        {extended && <AllergenTags dishAllergens={dishAllergens}/>}
+                        {extended && <AllergenTags dishAllergens={dishAllergens} titleVisible/>}
                     </Grid>
 
                 </Grid>
@@ -60,7 +60,7 @@ const DishWithPicture = (props: IDishWithPictureProps) => {
 
                     <Grid item xs={3} className={styles.GridItemImage}>
                         {imageSrc && <img src={imageSrc} alt={dishName} className={styles.ImageDimensions}/>}
-                        {extended && <AllergenTags dishAllergens={dishAllergens}/>}
+                        {extended && <AllergenTags dishAllergens={dishAllergens} titleVisible/>}
                     </Grid>
 
                 </Grid>

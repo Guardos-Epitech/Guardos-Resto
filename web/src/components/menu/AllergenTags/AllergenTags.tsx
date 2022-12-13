@@ -4,17 +4,18 @@ import {Chip} from "@mui/material";
 import styles from "@src/components/menu/AllergenTags/AllergenTags.module.scss";
 
 interface IAllergenTagsProps {
-    dishAllergens: string[]
+  titleVisible: boolean,
+  dishAllergens: string[]
 }
 
 const AllergenTags = (props: IAllergenTagsProps) => {
-    const dishAllergens = props.dishAllergens;
+    const { dishAllergens, titleVisible } = props;
 
     return (
         <>
-            <p className={styles.LowerBottomMargin}>
+            {titleVisible && <p className={styles.LowerBottomMargin}>
                 {"Allergens:"}
-            </p>
+            </p>}
             {dishAllergens.length != 0 && dishAllergens.map((allergen) => (
                 <Chip
                     key={allergen}

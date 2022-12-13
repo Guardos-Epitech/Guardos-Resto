@@ -16,3 +16,27 @@
   font-size: 2.188rem;
   color: #ffffff;
 }
+
+.Ingredient {
+  padding: 1rem;
+}
+
+.IngredientTitle {
+  margin: 0.5rem 0;
+}
+
+.IngredientInfo {
+  position: relative;
+}
+
+.IngredientList {
+  width: 90%;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.IngredientDeleteBtn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
