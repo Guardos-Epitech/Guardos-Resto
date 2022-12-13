@@ -22,3 +22,25 @@
   justify-content: center;
   align-items: center;
 }
+
+.FormControlContainer {
+  display: flex;
+}
+
+.FormControlMargin {
+  margin: 1.5rem 0.5rem;
+  align-items: center;
+}
+
+.ImageDimensions {
+  width: 100%;
+  height: auto;
+  max-height: 25rem;
+  max-width: 15rem;
+  object-fit: cover;
+  margin: 0 1rem;
+}
+
+.FieldMargin {
+    margin: 0 0.5rem;
+}
