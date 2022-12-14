@@ -4,7 +4,7 @@ import AddRestaurantPage from "@src/pages/AddRestaurantPage";
 import MenuPage from "@src/pages/MenuPage";
 import HomePage from "@src/pages/HomePage";
 import ScrollToTop from "@src/components/ScrollToTop/ScrollToTop";
-import IngredientsPage from "@src/pages/IngredientsPage";
+import ProductsPage from "@src/pages/ProductsPage";
 import DishesPage from "@src/pages/DishesPage";
 import AddDishPage from "@src/pages/AddDishPage";
 import EditDishPage from "@src/pages/EditDishPage";
@@ -20,7 +20,7 @@ const MVPRouter = () => {
         <Route path="dishes" element={<DishesPage />} />
         <Route path="editDish" element={<EditDishPage />} />
         <Route path="editResto" element={<EditRestaurantPage />} />
-        <Route path="ingredients" element={<IngredientsPage />} />
+        <Route path="products" element={<ProductsPage />} />
         <Route path="menu" element={<MenuPage />} />
         <Route path="/" element={<HomePage />}></Route>
       </Routes>

@@ -20,8 +20,8 @@ const Header = () => {
       >My Dishes</span>
       <span
         className={styles.NavTitle}
-        onClick={() => NavigateTo("/ingredients", navigate)}
-      >My Ingredients</span>
+        onClick={() => NavigateTo("/products", navigate)}
+      >My Products</span>
     </div>
   );
 };

@@ -47,7 +47,7 @@ const EditableDish = (props: IEditableDishProps) => {
             <p className={styles.JustificationPrint}>
               {extended ? dishDescription : shortenedDescription}
             </p>
-            {/*TODO: change allergens to ingredients list*/}
+            {/*TODO: change allergens to products list*/}
             {extended && <AllergenTags dishAllergens={dishAllergens} titleVisible/>}
           </Grid>
         </Grid>
@@ -67,7 +67,7 @@ const EditableDish = (props: IEditableDishProps) => {
 
           <Grid item xs={3} className={styles.GridItemImage}>
             {imageSrc && <img src={imageSrc} alt={dishName} className={styles.ImageDimensions}/>}
-            {/*TODO: change allergens to ingredients list*/}
+            {/*TODO: change allergens to products list*/}
             {extended && <AllergenTags dishAllergens={dishAllergens} titleVisible/>}
           </Grid>
 

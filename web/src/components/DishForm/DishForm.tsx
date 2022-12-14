@@ -40,7 +40,7 @@ const PageBtn = () => {
 
 interface IDishFormProps {
   dishName?: string,
-  dishIngredients?: string[],
+  dishProducts?: string[],
   dishDescription?: string,
   imageSrc?: string,
   price?: number,
@@ -48,23 +48,23 @@ interface IDishFormProps {
 
 interface IProduct {
   name: string;
-  ingredients: string[];
+  products: string[];
   allergens: string[];
 }
 
 const DishForm = (props: IDishFormProps) => {
   const navigate = useNavigate();
-  const {dishName, dishIngredients, dishDescription, price } = props;
+  const {dishName, dishProducts, dishDescription, price } = props;
   const imageSrc = props.imageSrc && props.imageSrc.length != 0 ? props.imageSrc : placeholderImg;
 
   const products:IProduct[] = [
-    { name: 'Fish soup seasoning', ingredients: ["Fish", "Water", "Salt"], allergens: ["Fish"] },
-    { name: 'Butter', ingredients: ["Butter"], allergens: ["milk"] },
-    { name: 'Flour', ingredients: ["Wheat flour"], allergens: ["gluten"] },
-    { name: 'Tomato', ingredients: ["Tomato"], allergens: [] },
-    { name: 'Peanut butter', ingredients: ["Peanuts", "oil"], allergens: ["nuts"] },
+    { name: 'Fish soup seasoning', products: ["Fish", "Water", "Salt"], allergens: ["Fish"] },
+    { name: 'Butter', products: ["Butter"], allergens: ["milk"] },
+    { name: 'Flour', products: ["Wheat flour"], allergens: ["gluten"] },
+    { name: 'Tomato', products: ["Tomato"], allergens: [] },
+    { name: 'Peanut butter', products: ["Peanuts", "oil"], allergens: ["nuts"] },
   ];
-  const dishProducts = products.filter(product => dishIngredients?.includes(product.name));
+  const dishProductsList = products.filter(product => dishProducts?.includes(product.name));
 
   return (
     <Box sx={{ display: 'flex', flexWrap: 'wrap', }}>
@@ -124,12 +124,12 @@ const DishForm = (props: IDishFormProps) => {
                 id="tags-outlined"
                 options={products}
                 getOptionLabel={(option) => (option ? (option as IProduct).name : "")}
-                defaultValue={dishProducts}
+                defaultValue={dishProductsList}
                 filterSelectedOptions
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="Ingredients"
+                    label="Products"
                   />
                 )}
               />

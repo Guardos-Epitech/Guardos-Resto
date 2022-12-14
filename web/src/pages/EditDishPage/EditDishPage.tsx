@@ -12,7 +12,7 @@ const EditDishPage = () => {
         <span className={styles.TitleSearch}>Edit restaurant</span>
       </div>
       <Layout>
-        <DishForm dishName={"Fish soup"} dishIngredients={["Fish soup seasoning", "Flour", "Butter"]} dishDescription={"Some description ".repeat(20)} price={10} />
+        <DishForm dishName={"Fish soup"} dishProducts={["Fish soup seasoning", "Flour", "Butter"]} dishDescription={"Some description ".repeat(20)} price={10} />
       </Layout>
     </div>
   );
