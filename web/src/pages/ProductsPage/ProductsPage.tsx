@@ -99,7 +99,7 @@ const ProductsPage = () => {
             ))}
           </Grid>
         </Container>
-        <FixedBtn title={"Add product"} redirect={"/products"}/>
+        <FixedBtn title={"Add product"} redirect={"/addProduct"}/>
       </div>
   );
 };
