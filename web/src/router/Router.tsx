@@ -6,12 +6,14 @@ import HomePage from "@src/pages/HomePage";
 import ScrollToTop from "@src/components/ScrollToTop/ScrollToTop";
 import IngredientsPage from "@src/pages/IngredientsPage";
 import DishesPage from "@src/pages/DishesPage";
+import AddDishPage from "@src/pages/AddDishPage";
 
 const MVPRouter = () => {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
+        <Route path="addDish" element={<AddDishPage />} />
         <Route path="addResto" element={<AddRestaurantPage />} />
         <Route path="dishes" element={<DishesPage />} />
         <Route path="ingredients" element={<IngredientsPage />} />

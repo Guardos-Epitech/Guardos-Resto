@@ -29,7 +29,7 @@ const DishesPage = () => {
           <EditableDish dishName={dishName} dishAllergens={dishAllergens} dishDescription={dishDescription} imageSrc={burgerImg} price={price} />
           <EditableDish dishName={dishName} dishAllergens={dishAllergens} dishDescription={dishDescription} imageSrc={burgerImg} price={price} />
         </Layout>
-        <FixedBtn title={"Add dish"} redirect={"/dishes"}/>
+        <FixedBtn title={"Add dish"} redirect={"/addDish"}/>
       </div>
   );
 };
