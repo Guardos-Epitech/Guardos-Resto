@@ -28,7 +28,7 @@
 }
 
 .FormControlMargin {
-  margin: 1.5rem 0.5rem;
+  margin: 1.5rem 0.8rem;
   align-items: center;
 }
 
@@ -38,9 +38,33 @@
   max-height: 25rem;
   max-width: 15rem;
   object-fit: cover;
-  margin: 0 1rem;
+  margin: auto;
+  display: flex;
 }
 
-.FieldMargin {
-    margin: 0 0.5rem;
+.FieldMarginLeft {
+  padding-left: 0.4rem;
+}
+
+.FieldMarginRight {
+  padding-right: 0.4rem;
+}
+
+.ImageFlex {
+  display: flex !important;
+}
+
+.TextNextToImageField {
+  padding-left: 1rem ;
+}
+
+.GridSpaceTop {
+  margin-top: 1.5rem;
+}
+
+.SaveBtn {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  margin-top: 2.5rem !important;
 }

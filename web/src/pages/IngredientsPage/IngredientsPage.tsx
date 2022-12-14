@@ -82,7 +82,7 @@ const IngredientsPage = () => {
         <div className={styles.RectOnImg}>
           <span className={styles.TitleSearch}>My products</span>
         </div>
-        <Container maxWidth={"lg"}>
+        <Container className={styles.ContainerSpace} maxWidth={"lg"}>
           <Grid container justifyContent={"space-between"}>
             {/*display grid item for each element in ingredients*/}
             {ingredients.map((ingredient, index) => (
