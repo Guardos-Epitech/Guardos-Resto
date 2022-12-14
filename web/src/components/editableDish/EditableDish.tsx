@@ -8,6 +8,8 @@ import styles from "@src/components/editableDish/EditableDish.module.scss";
 import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
 import DishHeader from "@src/components/menu/Dish/DishHeader/DishHeader";
 import placeholderImg from "@src/assets/placeholder.png";
+import { NavigateTo } from "@src/utils/NavigateTo";
+import { useNavigate } from "react-router-dom";
 
 interface IEditableDishProps {
   dishName: string,
@@ -18,6 +20,7 @@ interface IEditableDishProps {
 }
 
 const EditableDish = (props: IEditableDishProps) => {
+  const navigate = useNavigate();
   const [extended, setExtended] = useState(false);
   const {dishName, dishAllergens, dishDescription, price } = props;
   const imageSrc = props.imageSrc && props.imageSrc.length != 0 ? props.imageSrc : placeholderImg;
@@ -72,7 +75,7 @@ const EditableDish = (props: IEditableDishProps) => {
       </div>
       {extended &&
         <div className={styles.AttachToRightOfParent}>
-          <EditIcon className={styles.IconScale}/>
+          <EditIcon className={styles.IconScale} onClick={() => NavigateTo("/editDish", navigate)}/>
           <DeleteIcon className={styles.IconScale}/>
         </div>
       }
