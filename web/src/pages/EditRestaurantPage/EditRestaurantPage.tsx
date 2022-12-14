@@ -1,11 +1,10 @@
 import React from "react";
 import Header from "@src/components/Header/Header";
-import styles from "@src/pages/AddRestaurantPage/AddRestaurantPage.module.scss";
+import styles from "@src/pages/EditRestaurantPage/EditRestaurantPage.module.scss";
 import Layout from "../../components/Layout/Layout";
 import RestaurantForm from "@src/components/RestaurantForm/RestaurantForm";
 
-const AddRestaurantPage = () => {
-
+const EditRestaurantPage = () => {
   return (
     <div className="test">
       <Header />
@@ -13,10 +12,18 @@ const AddRestaurantPage = () => {
         <span className={styles.TitleSearch}>My new restaurant</span>
       </div>
       <Layout>
-        <RestaurantForm />
+        <RestaurantForm
+          restaurantName={"Restaurant 1"}
+          phone={"+0123 / 92"}
+          street={"ABC street"}
+          streetNumber={5}
+          postalCode={"01234"}
+          country={"Germany"}
+          description={"Some description ".repeat(20)}
+        />
       </Layout>
     </div>
   );
 };
 
-export default AddRestaurantPage;
+export default EditRestaurantPage;

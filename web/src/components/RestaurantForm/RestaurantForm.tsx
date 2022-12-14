@@ -1,13 +1,13 @@
 import React from "react";
-import styles from "@src/components/DishForm/DishForm.module.scss";
+import styles from "@src/components/RestaurantForm/RestaurantForm.module.scss";
 import {
-  Autocomplete,
   Box, Button,
   FormControl,
-  Grid, InputAdornment,
-  TextField
+  Grid,
+  InputLabel,
+  OutlinedInput, TextField
 } from "@mui/material";
-import placeholderImg from "@src/assets/placeholder.png";
+import placeholderImg from "@src/assets/profile-placeholder.png";
 import { NavigateTo } from "@src/utils/NavigateTo";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
@@ -38,33 +38,21 @@ const PageBtn = () => {
   });
 };
 
-interface IDishFormProps {
-  dishName?: string,
-  dishIngredients?: string[],
-  dishDescription?: string,
+interface IRestaurantFormProps {
+  restaurantName?: string,
+  street?: string,
+  streetNumber?: number,
+  postalCode?: string,
+  country?: string,
+  description?: string,
   imageSrc?: string,
-  price?: number,
+  phone?: string,
 }
 
-interface IProduct {
-  name: string;
-  ingredients: string[];
-  allergens: string[];
-}
-
-const DishForm = (props: IDishFormProps) => {
+const RestaurantForm = (props: IRestaurantFormProps) => {
   const navigate = useNavigate();
-  const {dishName, dishIngredients, dishDescription, price } = props;
+  const {restaurantName, street, streetNumber, postalCode, country, description, phone } = props;
   const imageSrc = props.imageSrc && props.imageSrc.length != 0 ? props.imageSrc : placeholderImg;
-
-  const products:IProduct[] = [
-    { name: 'Fish soup seasoning', ingredients: ["Fish", "Water", "Salt"], allergens: ["Fish"] },
-    { name: 'Butter', ingredients: ["Butter"], allergens: ["milk"] },
-    { name: 'Flour', ingredients: ["Wheat flour"], allergens: ["gluten"] },
-    { name: 'Tomato', ingredients: ["Tomato"], allergens: [] },
-    { name: 'Peanut butter', ingredients: ["Peanuts", "oil"], allergens: ["nuts"] },
-  ];
-  const dishProducts = products.filter(product => dishIngredients?.includes(product.name));
 
   return (
     <Box sx={{ display: 'flex', flexWrap: 'wrap', }}>
@@ -87,24 +75,61 @@ const DishForm = (props: IDishFormProps) => {
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid item xs={4} sm={5} md={8} className={styles.FieldMarginRight}>
               <FormControl fullWidth>
-                <TextField
-                  label="Name"
-                  defaultValue={dishName}
+                <InputLabel htmlFor="component-outlined">Name</InputLabel>
+                <OutlinedInput
                   id="component-outlined"
-                  fullWidth
+                  defaultValue={restaurantName}
+                  label="Name"
                 />
               </FormControl>
             </Grid>
             <Grid item xs={4} sm={3} md={4} className={styles.FieldMarginLeft}>
               <FormControl fullWidth>
-                <TextField
-                  label="Price"
-                  id="outlined-end-adornment"
-                  fullWidth
-                  defaultValue={price?.toFixed(2)}
-                  InputProps={{
-                    endAdornment: <InputAdornment position="end">€</InputAdornment>,
-                  }}
+                <InputLabel htmlFor="component-outlined">Phone number</InputLabel>
+                <OutlinedInput
+                  id="component-outlined"
+                  defaultValue={phone}
+                  label="Phone number"
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={3} sm={7} md={10}>
+              <FormControl fullWidth>
+                <InputLabel htmlFor="component-outlined">Street name</InputLabel>
+                <OutlinedInput
+                  id="component-outlined"
+                  defaultValue={street}
+                  label="Street name"
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={1} sm={1} md={2}>
+              <FormControl fullWidth>
+                <InputLabel htmlFor="component-outlined">Street number</InputLabel>
+                <OutlinedInput
+                  id="component-outlined"
+                  defaultValue={streetNumber}
+                  label="Street number"
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={4} sm={8} md={12}>
+              <FormControl fullWidth>
+                <InputLabel htmlFor="component-outlined">Postal code</InputLabel>
+                <OutlinedInput
+                  id="component-outlined"
+                  defaultValue={postalCode}
+                  label="Postal code"
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={4} sm={8} md={12}>
+              <FormControl fullWidth>
+                <InputLabel htmlFor="component-outlined">Country</InputLabel>
+                <OutlinedInput
+                  id="component-outlined"
+                  defaultValue={country}
+                  label="Country"
                 />
               </FormControl>
             </Grid>
@@ -112,27 +137,11 @@ const DishForm = (props: IDishFormProps) => {
               <FormControl fullWidth>
                 <TextField
                   id="outlined-multiline-flexible"
+                  defaultValue={description}
                   label="Description"
-                  defaultValue={dishDescription}
                   multiline
                 />
               </FormControl>
-            </Grid>
-            <Grid item xs={4} sm={8} md={12}>
-              <Autocomplete
-                multiple
-                id="tags-outlined"
-                options={products}
-                getOptionLabel={(option) => (option ? (option as IProduct).name : "")}
-                defaultValue={dishProducts}
-                filterSelectedOptions
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Ingredients"
-                  />
-                )}
-              />
             </Grid>
           </Grid>
         </Grid>
@@ -142,7 +151,7 @@ const DishForm = (props: IDishFormProps) => {
           className={styles.SaveBtn}
           variant="contained"
           sx={{ width: "12.13rem" }}
-          onClick={() => NavigateTo("/dishes", navigate)}
+          onClick={() => NavigateTo("/", navigate)}
         >
           Save
         </Button>
@@ -151,4 +160,4 @@ const DishForm = (props: IDishFormProps) => {
   );
 };
 
-export default DishForm;
+export default RestaurantForm;

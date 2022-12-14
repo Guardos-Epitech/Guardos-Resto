@@ -54,7 +54,7 @@ const RestoCard = () => {
             />
             <span className={styles.TitleRating}>(78)</span>
           </div>
-          <EditIcon className={styles.EditIcon} />
+          <EditIcon className={styles.EditIcon} onClick={() => NavigateTo("/editResto", navigate)}/>
         </div>
         <div className={styles.DivAddress}>
           <PlaceIcon />
