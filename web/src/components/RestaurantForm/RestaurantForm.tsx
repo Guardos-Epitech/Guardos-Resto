@@ -151,7 +151,7 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
           className={styles.SaveBtn}
           variant="contained"
           sx={{ width: "12.13rem" }}
-          onClick={() => NavigateTo("/", navigate)}
+          onClick={() => NavigateTo("/", navigate, { successfulForm : true })}
         >
           Save
         </Button>

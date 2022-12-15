@@ -1,8 +1,9 @@
-import React from "react";
+import React  from "react";
 import styles from "./HomePage.module.scss";
 import Header from "@src/components/Header/Header";
 import RestoCard from "@src/components/RestoCard/RestoCard";
 import FixedBtn from "../../components/FixedBtn/FixedBtn";
+import SuccessAlert from "@src/components/SuccessAlert/SuccessAlert";
 
 const HomePage = () => {
   return (
@@ -22,6 +23,7 @@ const HomePage = () => {
         </div>
       </div>
       <FixedBtn title={"Add Restaurant"} redirect={"/addResto"}/>
+      <SuccessAlert />
     </div>
   );
 };

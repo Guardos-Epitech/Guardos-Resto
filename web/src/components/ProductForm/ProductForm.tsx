@@ -95,7 +95,7 @@ const ProductForm = (props: IDishFormProps) => {
             className={styles.SaveBtn}
             variant="contained"
             sx={{ width: "12.13rem" }}
-            onClick={() => NavigateTo("/products", navigate)}
+            onClick={() => NavigateTo("/products", navigate, { successfulForm : true })}
           >
             Save
           </Button>

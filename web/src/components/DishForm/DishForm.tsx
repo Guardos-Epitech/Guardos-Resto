@@ -142,7 +142,7 @@ const DishForm = (props: IDishFormProps) => {
           className={styles.SaveBtn}
           variant="contained"
           sx={{ width: "12.13rem" }}
-          onClick={() => NavigateTo("/dishes", navigate)}
+          onClick={() => NavigateTo("/dishes", navigate, { successfulForm : true })}
         >
           Save
         </Button>

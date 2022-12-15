@@ -7,6 +7,7 @@ import EditableDish from "../../components/editableDish/EditableDish";
 import burgerImg from "@src/assets/dishImages/burger.jpg";
 import pizzaImg from "@src/assets/dishImages/pizza.jpg";
 import FixedBtn from "../../components/FixedBtn/FixedBtn";
+import SuccessAlert from "@src/components/SuccessAlert/SuccessAlert";
 
 const DishesPage = () => {
   const dishName = "Juicy Burger";
@@ -30,6 +31,7 @@ const DishesPage = () => {
           <EditableDish dishName={dishName} dishAllergens={dishAllergens} dishDescription={dishDescription} imageSrc={burgerImg} price={price} />
         </Layout>
         <FixedBtn title={"Add dish"} redirect={"/addDish"}/>
+        <SuccessAlert />
       </div>
   );
 };

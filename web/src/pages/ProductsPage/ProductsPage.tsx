@@ -5,6 +5,7 @@ import { Container, Grid, Paper } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
 import FixedBtn from "@src/components/FixedBtn/FixedBtn";
+import SuccessAlert from "@src/components/SuccessAlert/SuccessAlert";
 
 interface IProduct {
   name: string,
@@ -100,6 +101,7 @@ const ProductsPage = () => {
           </Grid>
         </Container>
         <FixedBtn title={"Add product"} redirect={"/addProduct"}/>
+        <SuccessAlert />
       </div>
   );
 };
