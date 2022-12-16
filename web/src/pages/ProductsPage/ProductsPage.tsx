@@ -90,12 +90,12 @@ const ProductsPage = () => {
               {products.map((product, index) => (
                 <Grid item xs={6} key={index}>
                   <Paper className={styles.Product} elevation={3}>
-                    <h3 className={styles.ProductTitle}>{product.name}</h3>
-                    <AllergenTags dishAllergens={product.allergens} titleVisible={false}/>
-                    <div className={styles.ProductInfo}>
-                      <span className={styles.IngredientList}>{"Ingredients: " + product.ingredients.join(", ")}</span>
+                    <div className={styles.ProductHeader}>
+                      <h3 className={styles.ProductTitle}>{product.name}</h3>
                       <DeleteIcon className={styles.ProductDeleteBtn} />
                     </div>
+                    <AllergenTags dishAllergens={product.allergens} titleVisible={false}/>
+                    <span className={styles.IngredientList}>{"Ingredients: " + product.ingredients.join(", ")}</span>
                   </Paper>
                 </Grid>
               ))}
