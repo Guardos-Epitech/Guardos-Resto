@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "./RestoCard.module.scss";
-import restoimg from "@src/asset/restoimg.jpeg";
+import restoimg from "@src/assets/restoimg.jpeg";
+import EditIcon from '@mui/icons-material/Edit';
 import PlaceIcon from "@mui/icons-material/Place";
 import { loremIpsum } from "lorem-ipsum";
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import ratingimg from "@src/asset/ratingimg.png";
+import ratingimg from "@src/assets/ratingimg.png";
 import { useNavigate } from "react-router-dom";
 import { NavigateTo } from "@src/utils/NavigateTo";
 
@@ -42,15 +43,18 @@ const RestoCard = () => {
       <img className={styles.RestoImg} src={restoimg} alt="Resto Img" />
       <div>
         <div className={styles.DivTopTitle}>
-          <span className={styles.TitleResto}>Bar & Restaurant Wartesaal</span>
+          <span className={styles.TitleResto}>
+            Bar & Restaurant Wartesaal
+          </span>
           <div className={styles.DivRating}>
-            <span className={styles.TitleRating}>Rating:</span>
             <img
               className={styles.RatingImg}
               src={ratingimg}
               alt="Rating Img"
             />
+            <span className={styles.TitleRating}>(78)</span>
           </div>
+          <EditIcon className={styles.EditIcon} onClick={() => NavigateTo("/editResto", navigate)}/>
         </div>
         <div className={styles.DivAddress}>
           <PlaceIcon />
@@ -61,7 +65,7 @@ const RestoCard = () => {
           <div className={styles.BtnPage}>
             <ThemeProvider theme={PageBtn()}>
               <Button
-                variant="contained"
+                variant="outlined"
                 sx={{ width: "12.13rem" }}
                 onClick={() => NavigateTo("/menu", navigate)}
               >

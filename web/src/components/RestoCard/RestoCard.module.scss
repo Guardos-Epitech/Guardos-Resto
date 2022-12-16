@@ -42,8 +42,7 @@
 .TitleRating {
   font-weight: 400;
   font-family: "Montserrat", sans-serif;
-  font-size: 1.06rem;
-  margin-left: 18rem;
+  font-size: 0.86rem;
 }
 
 .RatingImg {
@@ -53,6 +52,7 @@
 .DivRating {
   display: flex;
   align-items: center;
+  margin-left: 0.7rem;
 }
 
 .DivTopTitle {
@@ -62,4 +62,9 @@
 
 .BtnPage {
   margin-left: 1rem;
+}
+
+.EditIcon {
+  margin-left: 15rem;
+  transform: scale(1.8);
 }
