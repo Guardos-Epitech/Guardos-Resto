@@ -1,13 +1,13 @@
 import React from "react";
-import Header from "@src/components/Header/Header";
+import Header from "@src/components/dumpComponents/Header/Header";
 import styles from "@src/pages/DishesPage/DishesPage.module.scss";
-import Layout from "../../components/Layout/Layout";
-import EditableDish from "../../components/editableDish/EditableDish";
+import Layout from "../../components/dumpComponents/Layout/Layout";
+import EditableDish from "../../components/menu/EditableDish/EditableDish";
 
 import burgerImg from "@src/assets/dishImages/burger.jpg";
 import pizzaImg from "@src/assets/dishImages/pizza.jpg";
-import FixedBtn from "../../components/FixedBtn/FixedBtn";
-import SuccessAlert from "@src/components/SuccessAlert/SuccessAlert";
+import FixedBtn from "../../components/dumpComponents/buttons/FixedBtn/FixedBtn";
+import SuccessAlert from "@src/components/dumpComponents/SuccessAlert/SuccessAlert";
 
 const DishesPage = () => {
   const dishName = "Juicy Burger";

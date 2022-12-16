@@ -1,9 +1,10 @@
 import React  from "react";
 import styles from "./HomePage.module.scss";
-import Header from "@src/components/Header/Header";
+import Header from "@src/components/dumpComponents/Header/Header";
 import RestoCard from "@src/components/RestoCard/RestoCard";
-import FixedBtn from "../../components/FixedBtn/FixedBtn";
-import SuccessAlert from "@src/components/SuccessAlert/SuccessAlert";
+import FixedBtn from "../../components/dumpComponents/buttons/FixedBtn/FixedBtn";
+import SuccessAlert from "@src/components/dumpComponents/SuccessAlert/SuccessAlert";
+import Layout from "@src/components/dumpComponents/Layout/Layout";
 
 const HomePage = () => {
   return (
@@ -12,16 +13,18 @@ const HomePage = () => {
       <div className={styles.RectOnImg}>
         <span className={styles.TitleSearch}>My Restaurants</span>
       </div>
-      <div className={styles.DivContent}>
-        <div>
-          <RestoCard />
-          <RestoCard />
-          <RestoCard />
-          <RestoCard />
-          <RestoCard />
-          <RestoCard />
+      <Layout>
+        <div className={styles.DivContent}>
+          <div>
+            <RestoCard />
+            <RestoCard />
+            <RestoCard />
+            <RestoCard />
+            <RestoCard />
+            <RestoCard />
+          </div>
         </div>
-      </div>
+      </Layout>
       <FixedBtn title={"Add Restaurant"} redirect={"/addResto"}/>
       <SuccessAlert />
     </div>

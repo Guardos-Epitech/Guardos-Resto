@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "@src/components/ProductForm/ProductForm.module.scss";
+import styles from "@src/components/forms/ProductForm/ProductForm.module.scss";
 import {
   Autocomplete,
   Box, Button, Container,
@@ -61,7 +61,7 @@ const ProductForm = (props: IDishFormProps) => {
 
   return (
     <Container maxWidth={"md"}>
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', }}>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
         <Grid className={styles.GridSpaceTop} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           <Grid item xs={4} sm={8} md={12}>
             <FormControl fullWidth>

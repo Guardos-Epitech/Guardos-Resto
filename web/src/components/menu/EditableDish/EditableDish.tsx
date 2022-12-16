@@ -3,7 +3,7 @@ import { Grid, Paper } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import styles from "@src/components/editableDish/EditableDish.module.scss";
+import styles from "@src/components/menu/EditableDish/EditableDish.module.scss";
 
 import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
 import DishHeader from "@src/components/menu/Dish/DishHeader/DishHeader";
@@ -27,7 +27,7 @@ const EditableDish = (props: IEditableDishProps) => {
   const shortenedDescription = dishDescription.substring(0, 250);
 
   return (
-    <Paper className={styles.DishBox} elevation={3} sx={{ m: 2 }} onClick={() => setExtended(!extended)}>
+    <Paper className={styles.DishBox} elevation={3} onClick={() => setExtended(!extended)}>
       {/*mobile version of dish element*/}
       <div className={styles.MobileVersion}>
         <Grid container justifyContent={"space-between"}>

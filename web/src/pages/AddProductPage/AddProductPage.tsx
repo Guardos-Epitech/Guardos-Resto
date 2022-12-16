@@ -1,8 +1,8 @@
 import React from "react";
-import Header from "@src/components/Header/Header";
+import Header from "@src/components/dumpComponents/Header/Header";
 import styles from "@src/pages/AddProductPage/AddProductPage.module.scss";
-import Layout from "../../components/Layout/Layout";
-import ProductForm from "@src/components/ProductForm/ProductForm";
+import Layout from "../../components/dumpComponents/Layout/Layout";
+import ProductForm from "@src/components/forms/ProductForm/ProductForm";
 
 const AddProductPage = () => {
   return (

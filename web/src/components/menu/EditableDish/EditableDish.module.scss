@@ -1,4 +1,4 @@
-@import "../../general";
+@import "../../../general";
 
 .JustificationPrint {
   text-align: justify;
@@ -22,6 +22,7 @@
 
 .DishBox {
   background: $white;
+  margin-bottom: 1.5rem;
 }
 
 .DishBox:hover {

@@ -1,11 +1,12 @@
 import React from "react";
-import Header from "@src/components/Header/Header";
+import Header from "@src/components/dumpComponents/Header/Header";
 import styles from "@src/pages/ProductsPage/ProductsPage.module.scss";
-import { Container, Grid, Paper } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
-import FixedBtn from "@src/components/FixedBtn/FixedBtn";
-import SuccessAlert from "@src/components/SuccessAlert/SuccessAlert";
+import FixedBtn from "@src/components/dumpComponents/buttons/FixedBtn/FixedBtn";
+import SuccessAlert from "@src/components/dumpComponents/SuccessAlert/SuccessAlert";
+import Layout from "@src/components/dumpComponents/Layout/Layout";
 
 interface IProduct {
   name: string,
@@ -83,12 +84,12 @@ const ProductsPage = () => {
         <div className={styles.RectOnImg}>
           <span className={styles.TitleSearch}>My products</span>
         </div>
-        <Container className={styles.ContainerSpace} maxWidth={"lg"}>
-          <Grid container justifyContent={"space-between"}>
-            {/*display grid item for each element in products*/}
-            {products.map((product, index) => (
+        <Layout>
+            <Grid container spacing={{ xs: 1, sm: 2, md: 3 }} justifyContent={"space-between"}>
+              {/*display grid item for each element in products*/}
+              {products.map((product, index) => (
                 <Grid item xs={6} key={index}>
-                  <Paper className={styles.Product} elevation={3} sx={{ m: 2 }}>
+                  <Paper className={styles.Product} elevation={3}>
                     <h3 className={styles.ProductTitle}>{product.name}</h3>
                     <AllergenTags dishAllergens={product.allergens} titleVisible={false}/>
                     <div className={styles.ProductInfo}>
@@ -97,9 +98,9 @@ const ProductsPage = () => {
                     </div>
                   </Paper>
                 </Grid>
-            ))}
-          </Grid>
-        </Container>
+              ))}
+            </Grid>
+        </Layout>
         <FixedBtn title={"Add product"} redirect={"/addProduct"}/>
         <SuccessAlert />
       </div>
