@@ -47,7 +47,7 @@ const AllergenTags = (props: IAllergenTagsProps) => {
                       color="primary"
                       variant={"filled"}
                       size="small"
-                      sx={{ m: 0.5 }}
+                      className={styles.TagMargin}
                   />
               ))}
           </ThemeProvider>
