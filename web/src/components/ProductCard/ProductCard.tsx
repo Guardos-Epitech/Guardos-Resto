@@ -30,7 +30,7 @@ const ProductCard = (props: IProductCardProps) => {
           <h3 className={styles.ProductTitle}>{product.name}</h3>
           <DeleteIcon className={styles.ProductDeleteBtn} />
         </div>
-        { extended && <AllergenTags dishAllergens={product.allergens} titleVisible={false}/> }
+        { extended && <AllergenTags dishAllergens={product.allergens}/> }
         <span className={extended ? styles.IngredientList : styles.IngredientListWrap}>
               <b>
                 {"Ingredients: "}

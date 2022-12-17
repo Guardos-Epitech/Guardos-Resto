@@ -27,31 +27,25 @@ const Tags = () => {
 };
 
 interface IAllergenTagsProps {
-  titleVisible: boolean,
   dishAllergens: string[]
 }
 
 const AllergenTags = (props: IAllergenTagsProps) => {
-    const { dishAllergens, titleVisible } = props;
+    const { dishAllergens } = props;
 
     return (
-        <>
-            {titleVisible && <p className={styles.LowerBottomMargin}>
-                {"Allergens:"}
-            </p>}
-          <ThemeProvider theme={Tags()}>
-            {dishAllergens.length != 0 && dishAllergens.map((allergen) => (
-                  <Chip
-                      key={allergen}
-                      label={allergen}
-                      color="primary"
-                      variant={"filled"}
-                      size="small"
-                      className={styles.TagMargin}
-                  />
-              ))}
-          </ThemeProvider>
-        </>
+      <ThemeProvider theme={Tags()}>
+        {dishAllergens.length != 0 && dishAllergens.map((allergen) => (
+          <Chip
+              key={allergen}
+              label={allergen}
+              color="primary"
+              variant={"filled"}
+              size="small"
+              className={styles.TagMargin}
+          />
+        ))}
+      </ThemeProvider>
     )
 }
 
