@@ -21,7 +21,6 @@ const Dish = (props: IEditableDishProps) => {
   const [extended, setExtended] = useState(false);
   const {dishName, dishAllergens, dishDescription, options, price, editable } = props;
   const imageSrc = props.imageSrc && props.imageSrc.length != 0 ? props.imageSrc : placeholderImg;
-  const shortenedDescription = dishDescription.substring(0, 150);
   const priceStr = `${price.toFixed(2)} €`;
 
   const handleChildClick = (e: any) => {
@@ -51,12 +50,12 @@ const Dish = (props: IEditableDishProps) => {
             <img src={imageSrc} className={styles.ImageDimensions} alt={dishName} />
           </Grid>
           <Grid item xs={12} className={styles.GridItemDescription}>
-            <p className={styles.JustificationPrint}>
-              {extended ? dishDescription : shortenedDescription}
+            <p className={extended ? styles.JustificationPrintExtended : styles.JustificationPrint}>
+              {dishDescription}
             </p>
             <span className={styles.OptionsText}>
               {(options && options.length != 0) &&
-                <div>
+                <div className={ !extended && styles.OptionsWrap}>
                   <b>
                     {"Options: "}
                   </b>
@@ -85,12 +84,12 @@ const Dish = (props: IEditableDishProps) => {
             </div>
             {/*TODO: change allergens to products list*/}
             {extended && <AllergenTags dishAllergens={dishAllergens}/>}
-            <p className={styles.JustificationPrint}>
-              {extended ? dishDescription : shortenedDescription}
+            <p className={ extended ? styles.JustificationPrintExtended : styles.JustificationPrint}>
+              {dishDescription}
             </p>
             <span className={styles.OptionsText}>
               {(options && options.length != 0) &&
-                <div>
+                <div className={!extended && styles.OptionsWrap}>
                   <b>
                     {"Options: "}
                   </b>

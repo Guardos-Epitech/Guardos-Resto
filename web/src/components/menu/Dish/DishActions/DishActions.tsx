@@ -2,19 +2,27 @@ import React  from "react";
 import { IconButton, ListItemIcon, ListItemText, Menu, MenuItem } from "@mui/material";
 
 import styles from "@src/components/menu/Dish/DishActions/DishActions.module.scss";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { NavigateTo } from "@src/utils/NavigateTo";
 import { useNavigate } from "react-router-dom";
 
+interface IAction {
+  actionName: string,
+  actionIcon: any,
+  actionRedirect: string
+}
+
 interface IDishActionsProps {
-  onClick: any
+  actionList?: IAction[],
+  onClick: any,
+  className?: any
 }
 
 const DishActions = (props: IDishActionsProps) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const { actionList } = props;
   const navigate = useNavigate();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -26,7 +34,7 @@ const DishActions = (props: IDishActionsProps) => {
   };
 
   return (
-    <div onClick={props.onClick}>
+    <div className={props.className} onClick={props.onClick}>
       <IconButton
         className={styles.ButtonSize}
         aria-label="more"
@@ -47,12 +55,14 @@ const DishActions = (props: IDishActionsProps) => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={() => NavigateTo("/editDish", navigate)}>
-          <ListItemIcon>
-            <EditIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Edit</ListItemText>
-        </MenuItem>
+        { (actionList && actionList.length != 0) && actionList.map((action) => (
+          <MenuItem key={action.actionName} onClick={() => NavigateTo(action.actionRedirect, navigate)}>
+            <ListItemIcon>
+              <action.actionIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>{action.actionName}</ListItemText>
+          </MenuItem>
+        )) }
         <MenuItem>
           <ListItemIcon>
             <DeleteIcon fontSize="small" />
