@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "@src/components/RestaurantForm/RestaurantForm.module.scss";
+import styles from "@src/components/forms/RestaurantForm/RestaurantForm.module.scss";
 import {
   Box, Button,
   FormControl,
@@ -55,8 +55,8 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
   const imageSrc = props.imageSrc && props.imageSrc.length != 0 ? props.imageSrc : placeholderImg;
 
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', }}>
-      <Grid className={styles.GridSpaceTop} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+    <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+      <Grid className={styles.GridSpaceTop} container columns={{ xs: 4, sm: 8, md: 12 }}>
         <Grid item xs={4} sm={2} md={3}>
           <img className={styles.ImageDimensions} src={imageSrc} alt="Resto Img" />
           <div className={styles.FormControlMargin}>
@@ -64,6 +64,10 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
               <ThemeProvider theme={PageBtn()}>
                 <Button className={styles.FormControlMargin} variant="outlined" component="label">
                   Change Image
+                  <input hidden accept="image/*" multiple type="file" />
+                </Button>
+                <Button className={styles.FormControlMargin} variant="text" component="label">
+                  Delete Image
                   <input hidden accept="image/*" multiple type="file" />
                 </Button>
               </ThemeProvider>

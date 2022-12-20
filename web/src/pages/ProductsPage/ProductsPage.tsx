@@ -1,11 +1,11 @@
-import React from "react";
-import Header from "@src/components/Header/Header";
+import React  from "react";
+import Header from "@src/components/dumpComponents/Header/Header";
 import styles from "@src/pages/ProductsPage/ProductsPage.module.scss";
-import { Container, Grid, Paper } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
-import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
-import FixedBtn from "@src/components/FixedBtn/FixedBtn";
-import SuccessAlert from "@src/components/SuccessAlert/SuccessAlert";
+import { Grid } from "@mui/material";
+import FixedBtn from "@src/components/dumpComponents/buttons/FixedBtn/FixedBtn";
+import SuccessAlert from "@src/components/dumpComponents/SuccessAlert/SuccessAlert";
+import Layout from "@src/components/dumpComponents/Layout/Layout";
+import ProductCard from "@src/components/ProductCard/ProductCard";
 
 interface IProduct {
   name: string,
@@ -77,29 +77,20 @@ const products : IProduct[] = [
 ]
 
 const ProductsPage = () => {
+
   return (
-      <div className="test">
+      <div>
         <Header />
         <div className={styles.RectOnImg}>
           <span className={styles.TitleSearch}>My products</span>
         </div>
-        <Container className={styles.ContainerSpace} maxWidth={"lg"}>
-          <Grid container justifyContent={"space-between"}>
-            {/*display grid item for each element in products*/}
-            {products.map((product, index) => (
-                <Grid item xs={6} key={index}>
-                  <Paper className={styles.Product} elevation={3} sx={{ m: 2 }}>
-                    <h3 className={styles.ProductTitle}>{product.name}</h3>
-                    <AllergenTags dishAllergens={product.allergens} titleVisible={false}/>
-                    <div className={styles.ProductInfo}>
-                      <span className={styles.IngredientList}>{"Ingredients: " + product.ingredients.join(", ")}</span>
-                      <DeleteIcon className={styles.ProductDeleteBtn} />
-                    </div>
-                  </Paper>
-                </Grid>
-            ))}
-          </Grid>
-        </Container>
+        <Layout>
+            <Grid container spacing={{ xs: 1, sm: 2, md: 3 }} justifyContent={"space-between"}>
+              {products.map((product, index) => (
+                <ProductCard key={index} index={index} product={product} />
+              ))}
+            </Grid>
+        </Layout>
         <FixedBtn title={"Add product"} redirect={"/addProduct"}/>
         <SuccessAlert />
       </div>

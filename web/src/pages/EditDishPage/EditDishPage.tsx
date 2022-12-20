@@ -1,15 +1,15 @@
 import React from "react";
-import Header from "@src/components/Header/Header";
+import Header from "@src/components/dumpComponents/Header/Header";
 import styles from "@src/pages/EditDishPage/EditDishPage.module.scss";
-import Layout from "../../components/Layout/Layout";
-import DishForm from "@src/components/DishForm/DishForm";
+import Layout from "../../components/dumpComponents/Layout/Layout";
+import DishForm from "@src/components/forms/DishForm/DishForm";
 
 const EditDishPage = () => {
   return (
     <div className="test">
       <Header />
       <div className={styles.RectOnImg}>
-        <span className={styles.TitleSearch}>Edit restaurant</span>
+        <span className={styles.TitleSearch}>Edit dish</span>
       </div>
       <Layout>
         <DishForm dishName={"Fish soup"} dishProducts={["Fish soup seasoning", "Flour", "Butter"]} dishDescription={"Some description ".repeat(20)} price={10} />

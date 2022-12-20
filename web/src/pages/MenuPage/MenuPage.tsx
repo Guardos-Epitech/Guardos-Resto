@@ -4,8 +4,8 @@ import styles from "@src/pages/MenuPage/MenuPage.module.scss";
 
 import Dish from "@src/components/menu/Dish/Dish";
 import Category from "@src/components/menu/Category/Category";
-import Layout from "@src/components/Layout/Layout";
-import Header from "@src/components/Header/Header";
+import Layout from "@src/components/dumpComponents/Layout/Layout";
+import Header from "@src/components/dumpComponents/Header/Header";
 import PlaceIcon from "@mui/icons-material/Place";
 import {List, ListItem} from "@mui/material";
 import {createTheme, ThemeProvider} from "@mui/material/styles";

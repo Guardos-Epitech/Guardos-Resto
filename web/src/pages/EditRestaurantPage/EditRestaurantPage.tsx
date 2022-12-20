@@ -1,15 +1,15 @@
 import React from "react";
-import Header from "@src/components/Header/Header";
+import Header from "@src/components/dumpComponents/Header/Header";
 import styles from "@src/pages/EditRestaurantPage/EditRestaurantPage.module.scss";
-import Layout from "../../components/Layout/Layout";
-import RestaurantForm from "@src/components/RestaurantForm/RestaurantForm";
+import Layout from "../../components/dumpComponents/Layout/Layout";
+import RestaurantForm from "@src/components/forms/RestaurantForm/RestaurantForm";
 
 const EditRestaurantPage = () => {
   return (
     <div className="test">
       <Header />
       <div className={styles.RectOnImg}>
-        <span className={styles.TitleSearch}>My new restaurant</span>
+        <span className={styles.TitleSearch}>Edit restaurant</span>
       </div>
       <Layout>
         <RestaurantForm
