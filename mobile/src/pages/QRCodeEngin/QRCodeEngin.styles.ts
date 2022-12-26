@@ -23,28 +23,27 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat_500Medium",
     fontSize: 32,
     marginTop: 20,
-
   },
   ButtonNo: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 4,
     elevation: 3,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     marginRight: 50,
     borderColor: "#6D071A",
     borderWidth: 1,
   },
   ButtonYes: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 4,
     elevation: 3,
-    backgroundColor: '#6D071A',
+    backgroundColor: "#6D071A",
   },
   DivButton: {
     backgroundColor: "#FFFFFF",
@@ -52,8 +51,8 @@ const styles = StyleSheet.create({
     height: 170,
     borderRadius: 10,
     marginTop: 20,
-    shadowColor: '#000000',
-    shadowOffset: {width: 0, height: 4},
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.25,
     shadowRadius: 5,
   },
@@ -61,10 +60,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginLeft: 20,
     marginRight: 20,
-    marginTop:20,
+    marginTop: 20,
     marginBottom: 30,
     fontWeight: "bold",
-  }
+  },
 });
 
 export default styles;

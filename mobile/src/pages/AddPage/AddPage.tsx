@@ -1,8 +1,10 @@
 import React, { useEffect, useCallback, useState } from "react";
-import { Text, View, Image } from "react-native";
+import { Text, View, Image, ScrollView } from "react-native";
 import styles from "./AddPage.styles";
 import Icon from "react-native-vector-icons/AntDesign";
+import Trash from "react-native-vector-icons/FontAwesome";
 import * as SplashScreen from "expo-splash-screen";
+import axios from "axios";
 
 SplashScreen.preventAutoHideAsync(); // Keep the splash screen visible while we fetch resources
 
@@ -28,7 +30,11 @@ import {
   Montserrat_900Black_Italic,
 } from "@expo-google-fonts/montserrat";
 
-const AddPage = ({navigation}: {navigation: any}) => {
+interface Ingr {
+  name: string;
+}
+
+const AddPage = ({ navigation }: { navigation: any }) => {
   let [fontsLoaded] = useFonts({
     Montserrat_100Thin,
     Montserrat_100Thin_Italic,
@@ -66,6 +72,7 @@ const AddPage = ({navigation}: {navigation: any}) => {
 
     prepare();
   }, []);
+  const [IngrValue, setIngrValue] = useState<[Ingr]>();
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
@@ -78,8 +85,34 @@ const AddPage = ({navigation}: {navigation: any}) => {
   }
 
   function GoToQRCode() {
-    navigation.navigate('QRCodeEngin')
+    navigation.navigate("QRCodeEngin");
   }
+
+  async function getIngr() {
+    try {
+      const response = await axios({
+        method: "get",
+        url: "http://172.20.10.2:8082/get",
+      });
+      setIngrValue(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  async function deleteIngr(body: string) {
+    try {
+      const response = await axios({
+        method: "delete",
+        url: "http://172.20.10.2:8082/delete",
+        data: { name: body },
+      });
+      if (response.status == 200) console.log("DELETE");
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  getIngr();
 
   return (
     <View onLayout={onLayoutRootView}>
@@ -92,9 +125,29 @@ const AddPage = ({navigation}: {navigation: any}) => {
       <View style={styles.DivTitleIngr}>
         <Text style={styles.TitleIngr}>Ingredients</Text>
       </View>
+      <ScrollView style={styles.test}>
+        {IngrValue?.map((ingr) => (
+          <View style={styles.RectIngr} key={ingr.name}>
+            <Text style={styles.TitleIngrList}>{ingr.name}</Text>
+            <Trash
+              name="trash"
+              size={20}
+              color="#6D071A"
+              onPress={() => {
+                deleteIngr(ingr.name);
+              }}
+            />
+          </View>
+        ))}
+      </ScrollView>
       <View style={styles.ViewIcon}>
         <View style={styles.ButtonBottom}>
-          <Icon name="pluscircle" size={50} color="#6D071A" onPress={GoToQRCode} />
+          <Icon
+            name="pluscircle"
+            size={50}
+            color="#6D071A"
+            onPress={GoToQRCode}
+          />
         </View>
         <Icon name="checkcircle" size={50} color="#6D071A" />
       </View>

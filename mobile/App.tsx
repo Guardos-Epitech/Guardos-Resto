@@ -1,11 +1,8 @@
 import React from "react";
-import MyStack from "./Router"
+import MyStack from "./Router";
 
 const App = () => {
-  return (
-      <MyStack />
-  );
-
+  return <MyStack />;
 };
 
 export default App;

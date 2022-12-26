@@ -16,6 +16,7 @@
     "@react-navigation/native-stack": "^6.9.6",
     "@types/react": "~18.0.24",
     "@types/react-native": "~0.70.6",
+    "axios": "^1.2.1",
     "expo": "~47.0.8",
     "expo-app-loading": "^2.1.1",
     "expo-barcode-scanner": "^12.1.0",
