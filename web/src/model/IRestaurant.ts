@@ -17,11 +17,11 @@ export interface ICategories {
   dishes: [IDishFE];
 }
 
-interface IDishFE {
+export interface IDishFE {
   name: string;
   description: string;
   price: number;
-  allergens: string;
+  products: string;
   category: ICategoryFE;
 }
 

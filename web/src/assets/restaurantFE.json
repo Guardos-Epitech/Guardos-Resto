@@ -14,7 +14,7 @@
             "name": "Juicy Burger",
             "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
             "price": 10,
-            "allergens": "Gluten,Lactose,Nuts,Sesame,Tree nuts",
+            "products": "Bread,Cheese,Salad,Tomato,Onion,Mayonnaise",
             "category": {
               "foodGroup": "burger",
               "extraGroup": "cheese, olives"
@@ -24,7 +24,7 @@
             "name": "Juicy Burger",
             "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
             "price": 10,
-            "allergens": "Gluten,Lactose,Nuts,Sesame,Tree nuts",
+            "products": "Bread,Cheese,Salad,Tomato,Onion,Mayonnaise",
             "category": {
               "foodGroup": "burger",
               "extraGroup": "cheese, olives"
@@ -40,7 +40,7 @@
               "name": "Juicy Burger",
               "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
               "price": 10,
-              "allergens": "Gluten,Lactose,Nuts,Sesame,Tree nuts",
+              "products": "Bread,Cheese,Salad,Tomato,Onion,Mayonnaise",
               "category": {
               "foodGroup": "burger",
               "extraGroup": "cheese, olives"
@@ -50,7 +50,7 @@
               "name": "Juicy Burger",
               "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
               "price": 10,
-              "allergens": "Gluten,Lactose,Nuts,Sesame,Tree nuts",
+              "products": "Bread,Cheese,Salad,Tomato,Onion,Mayonnaise",
               "category": {
               "foodGroup": "burger",
               "extraGroup": "cheese, olives"
@@ -60,7 +60,7 @@
             "name": "Juicy Burger",
             "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
             "price": 10,
-            "allergens": "Gluten,Lactose,Nuts,Sesame,Tree nuts",
+            "products": "Bread,Cheese,Salad,Tomato,Onion,Mayonnaise",
             "category": {
               "foodGroup": "burger",
               "extraGroup": "cheese, olives"
@@ -70,7 +70,7 @@
               "name": "Juicy Burger",
               "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
               "price": 10,
-              "allergens": "Gluten,Lactose,Nuts,Sesame,Tree nuts",
+              "products": "Gluten,Lactose,Nuts,Sesame,Tree nuts",
               "category": {
               "foodGroup": "burger",
               "extraGroup": "cheese, olives"
@@ -86,7 +86,7 @@
             "name": "BurgerMega Sunday Ice",
             "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
             "price": 12,
-            "allergens": "lactose,nuts",
+            "products": "lactose,nuts",
             "category": {
               "foodGroup": "ice cream",
               "extraGroup": ""
@@ -119,7 +119,7 @@
             "name": "Monster Salad",
             "description": "bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla ",
             "price": 10,
-            "allergens": "sesame,tree nuts",
+            "products": "sesame,tree nuts",
             "category": {
               "foodGroup": "burger",
               "extraGroup": "cheese, olives"
@@ -140,7 +140,7 @@
             "name": "BurgerMega Sunday Ice",
             "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
             "price": 12,
-            "allergens": "sugar,gluten,lactose,nuts",
+            "products": "sugar,gluten,lactose,nuts",
             "category": {
               "foodGroup": "burger",
               "extraGroup": "cheese, olives"
@@ -173,7 +173,7 @@
             "name": "Big Sunday ice",
             "description": "bla bla",
             "price": 12,
-            "allergens": "milk,sugar",
+            "products": "milk,sugar",
             "category": {
               "foodGroup": "burger, ice",
               "extraGroup": "cheese, olives"
@@ -183,7 +183,7 @@
             "name": "Big Big Mac",
             "description": "the real big mc",
             "price": 5,
-            "allergens": "cheese,salat",
+            "products": "cheese,salat",
             "category": {
               "foodGroup": "burger,salad",
               "extraGroup": "cheese, olives"
@@ -226,7 +226,7 @@
             "name": "Big Mac",
             "description": "the real mc",
             "price": 21,
-            "allergens": "cheese,salat",
+            "products": "cheese,salat",
             "category": {
               "foodGroup": "burger,salad",
               "extraGroup": "cheese, olives"
@@ -242,7 +242,7 @@
             "name": "McSunday",
             "description": "bla bla",
             "price": 13,
-            "allergens": "milk,sugar",
+            "products": "milk,sugar",
             "category": {
               "foodGroup": "ice,burger",
               "extraGroup": "cheese, olives"

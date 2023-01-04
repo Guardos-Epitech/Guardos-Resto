@@ -68,10 +68,7 @@ const MenuPage = () => {
                   return (
                     <Dish
                       key={dish.name + index}
-                      dishName={dish.name}
-                      dishDescription={dish.description}
-                      price={dish.price}
-                      dishAllergens={dish.allergens.split(",")}
+                      dish={dish}
                       imageSrc={getImg(index)}
                     />
                   );
