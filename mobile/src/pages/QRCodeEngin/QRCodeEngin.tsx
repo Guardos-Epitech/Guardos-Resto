@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button, Pressable } from "react-native";
+import { Text, View, StyleSheet, Button, Pressable, ImageBackground } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import IconBack from "react-native-vector-icons/AntDesign";
 import IconUser from "react-native-vector-icons/FontAwesome";
 import styles from "./QRCodeEngin.styles";
 import axios from "axios";
+import { API_URL } from '@env';
 
 const QRCodeEngin = ({ navigation }: { navigation: any }) => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -41,9 +42,10 @@ const QRCodeEngin = ({ navigation }: { navigation: any }) => {
     try {
       const response = await axios({
         method: "post",
-        url: "http://172.20.10.2:8082/post",
+        url: API_URL + "/post",
         data: { name: body },
       });
+      console.log(response.status)
       if (response.status == 200) GoToAddPage();
     } catch (err) {
       console.log(err);
@@ -51,24 +53,27 @@ const QRCodeEngin = ({ navigation }: { navigation: any }) => {
   }
 
   return (
-    <View style={{ marginTop: 60 }}>
-      <View style={styles.DivTop}>
+    <View style={{flex:1}}>
+    <ImageBackground source={require('../../assets/background.png')} resizeMode="cover" style={styles.image}>
+    <View style={{marginTop: 50, alignItems: "center"}}>
+    <View style={styles.DivTop2}>
         <IconBack
           style={styles.IconBack}
           name="left"
           size={40}
-          color="#6D071A"
+          color="#4D4D4D"
           onPress={GoToAddPage}
-        />
+          />
+        <Text style={styles.CategorieTitle}>Add Ingredients</Text>
         <IconUser
           style={styles.IconUser}
           name="user"
           size={40}
-          color="#6D071A"
-        />
+          color="#4D4D4D"
+          />
       </View>
       <View style={styles.DivTop}>
-        <Text style={styles.TitleIngr}>Adding Ingredient</Text>
+        <Text style={styles.TitleIngr}>Scan Ingredient</Text>
         <Text>Please scan the barcode of the product you wan’t to add</Text>
         <View style={styles.container}>
           <BarCodeScanner
@@ -108,6 +113,9 @@ const QRCodeEngin = ({ navigation }: { navigation: any }) => {
         )}
       </View>
     </View>
+    </ImageBackground>
+    </View>
+
   );
 };
 

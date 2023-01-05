@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AddPage from "./src/pages/AddPage/AddPage";
 import QRCodeEngin from "./src/pages/QRCodeEngin/QRCodeEngin";
 
+
 const Stack = createNativeStackNavigator();
 
 const MyStack = () => {

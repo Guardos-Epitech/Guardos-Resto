@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
+const gap = Platform.OS === 'ios' ? 70 : 55;
+
 
 const styles = StyleSheet.create({
   container: {
@@ -13,16 +15,20 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "center",
   },
-  IconBack: {
-    marginLeft: 0,
-  },
   IconUser: {
-    marginLeft: 320,
+    marginHorizontal: gap / 2,
+  },
+  IconBack: {
+    marginHorizontal: gap / 2,
   },
   TitleIngr: {
-    fontFamily: "Montserrat_500Medium",
-    fontSize: 32,
     marginTop: 20,
+    marginBottom: 20,
+    fontFamily: "Montserrat_700Bold",
+    fontSize: 32,
+    lineHeight: 39,
+    textAlign: "center",
+    color: "#56885E",
   },
   ButtonNo: {
     alignItems: "center",
@@ -33,7 +39,7 @@ const styles = StyleSheet.create({
     elevation: 3,
     backgroundColor: "white",
     marginRight: 50,
-    borderColor: "#6D071A",
+    borderColor: "#56885E",
     borderWidth: 1,
   },
   ButtonYes: {
@@ -43,7 +49,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     borderRadius: 4,
     elevation: 3,
-    backgroundColor: "#6D071A",
+    backgroundColor: "#56885E",
   },
   DivButton: {
     backgroundColor: "#FFFFFF",
@@ -63,6 +69,22 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 30,
     fontWeight: "bold",
+  },
+  image: {
+    flex: 1,
+  },
+  CategorieTitle: {
+    color: "#4D4D4D",
+    fontFamily: "Montserrat_700Bold",
+    fontSize: 23,
+    marginHorizontal: gap / 2,
+  },
+  DivTop2: {
+    marginTop: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingRight: 10,
+    paddingHorizontal: (gap / -2),
   },
 });
 
