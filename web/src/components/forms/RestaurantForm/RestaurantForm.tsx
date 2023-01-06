@@ -1,11 +1,13 @@
 import React from "react";
 import styles from "@src/components/forms/RestaurantForm/RestaurantForm.module.scss";
 import {
-  Box, Button,
+  Box,
+  Button,
   FormControl,
   Grid,
   InputLabel,
-  OutlinedInput, TextField
+  OutlinedInput,
+  TextField,
 } from "@mui/material";
 import placeholderImg from "@src/assets/profile-placeholder.png";
 import { NavigateTo } from "@src/utils/NavigateTo";
@@ -39,34 +41,63 @@ const PageBtn = () => {
 };
 
 interface IRestaurantFormProps {
-  restaurantName?: string,
-  street?: string,
-  streetNumber?: number,
-  postalCode?: string,
-  country?: string,
-  description?: string,
-  imageSrc?: string,
-  phone?: string,
+  restaurantName?: string;
+  street?: string;
+  streetNumber?: number;
+  postalCode?: string;
+  city?: string;
+  country?: string;
+  description?: string;
+  imageSrc?: string;
+  phone?: string;
 }
 
 const RestaurantForm = (props: IRestaurantFormProps) => {
   const navigate = useNavigate();
-  const {restaurantName, street, streetNumber, postalCode, country, description, phone } = props;
-  const imageSrc = props.imageSrc && props.imageSrc.length != 0 ? props.imageSrc : placeholderImg;
+  const {
+    restaurantName,
+    street,
+    streetNumber,
+    postalCode,
+    city,
+    country,
+    description,
+    phone,
+  } = props;
+  const imageSrc =
+    props.imageSrc && props.imageSrc.length != 0
+      ? props.imageSrc
+      : placeholderImg;
 
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-      <Grid className={styles.GridSpaceTop} container columns={{ xs: 4, sm: 8, md: 12 }}>
+    <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+      <Grid
+        className={styles.GridSpaceTop}
+        container
+        columns={{ xs: 4, sm: 8, md: 12 }}
+      >
         <Grid item xs={4} sm={2} md={3}>
-          <img className={styles.ImageDimensions} src={imageSrc} alt="Resto Img" />
+          <img
+            className={styles.ImageDimensions}
+            src={imageSrc}
+            alt="Resto Img"
+          />
           <div className={styles.FormControlMargin}>
             <FormControl className={styles.ImageFlex}>
               <ThemeProvider theme={PageBtn()}>
-                <Button className={styles.FormControlMargin} variant="outlined" component="label">
+                <Button
+                  className={styles.FormControlMargin}
+                  variant="outlined"
+                  component="label"
+                >
                   Change Image
                   <input hidden accept="image/*" multiple type="file" />
                 </Button>
-                <Button className={styles.FormControlMargin} variant="text" component="label">
+                <Button
+                  className={styles.FormControlMargin}
+                  variant="text"
+                  component="label"
+                >
                   Delete Image
                   <input hidden accept="image/*" multiple type="file" />
                 </Button>
@@ -76,7 +107,11 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
         </Grid>
 
         <Grid className={styles.TextNextToImageField} item xs={4} sm={6} md={9}>
-          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+          <Grid
+            container
+            spacing={{ xs: 2, md: 3 }}
+            columns={{ xs: 4, sm: 8, md: 12 }}
+          >
             <Grid item xs={4} sm={5} md={8} className={styles.FieldMarginRight}>
               <FormControl fullWidth>
                 <InputLabel htmlFor="component-outlined">Name</InputLabel>
@@ -89,7 +124,9 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
             </Grid>
             <Grid item xs={4} sm={3} md={4} className={styles.FieldMarginLeft}>
               <FormControl fullWidth>
-                <InputLabel htmlFor="component-outlined">Phone number</InputLabel>
+                <InputLabel htmlFor="component-outlined">
+                  Phone number
+                </InputLabel>
                 <OutlinedInput
                   id="component-outlined"
                   defaultValue={phone}
@@ -99,7 +136,9 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
             </Grid>
             <Grid item xs={3} sm={7} md={10}>
               <FormControl fullWidth>
-                <InputLabel htmlFor="component-outlined">Street name</InputLabel>
+                <InputLabel htmlFor="component-outlined">
+                  Street name
+                </InputLabel>
                 <OutlinedInput
                   id="component-outlined"
                   defaultValue={street}
@@ -109,7 +148,9 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
             </Grid>
             <Grid item xs={1} sm={1} md={2}>
               <FormControl fullWidth>
-                <InputLabel htmlFor="component-outlined">Street number</InputLabel>
+                <InputLabel htmlFor="component-outlined">
+                  Street number
+                </InputLabel>
                 <OutlinedInput
                   id="component-outlined"
                   defaultValue={streetNumber}
@@ -119,7 +160,9 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
             </Grid>
             <Grid item xs={4} sm={8} md={12}>
               <FormControl fullWidth>
-                <InputLabel htmlFor="component-outlined">Postal code</InputLabel>
+                <InputLabel htmlFor="component-outlined">
+                  Postal code
+                </InputLabel>
                 <OutlinedInput
                   id="component-outlined"
                   defaultValue={postalCode}
@@ -127,7 +170,17 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
                 />
               </FormControl>
             </Grid>
-            <Grid item xs={4} sm={8} md={12}>
+            <Grid item xs={2} sm={4} md={6}>
+              <FormControl fullWidth>
+                <InputLabel htmlFor="component-outlined">City</InputLabel>
+                <OutlinedInput
+                  id="component-outlined"
+                  defaultValue={city}
+                  label="City"
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={2} sm={4} md={6}>
               <FormControl fullWidth>
                 <InputLabel htmlFor="component-outlined">Country</InputLabel>
                 <OutlinedInput
@@ -155,7 +208,7 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
           className={styles.SaveBtn}
           variant="contained"
           sx={{ width: "12.13rem" }}
-          onClick={() => NavigateTo("/", navigate, { successfulForm : true })}
+          onClick={() => NavigateTo("/", navigate, { successfulForm: true })}
         >
           Save
         </Button>

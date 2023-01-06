@@ -6,22 +6,26 @@ import styles from "@src/components/menu/Dish/Dish.module.scss";
 import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
 import placeholderImg from "@src/assets/placeholder.png";
 import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
+import EditIcon from "@mui/icons-material/Edit";
+import { IDishFE } from "@src/model/IRestaurant";
 
 interface IEditableDishProps {
-  dishName: string,
-  dishAllergens: string[],
-  dishDescription: string,
-  options?: string,
-  imageSrc?: string,
-  price: number,
-  editable?: boolean
+  dish: IDishFE;
+  options?: string;
+  imageSrc?: string;
+  editable?: boolean;
 }
 
 const Dish = (props: IEditableDishProps) => {
   const [extended, setExtended] = useState(false);
-  const {dishName, dishAllergens, dishDescription, options, price, editable } = props;
-  const imageSrc = props.imageSrc && props.imageSrc.length != 0 ? props.imageSrc : placeholderImg;
+  const { dish, options, editable } = props;
+  const { name, products, description, price } = dish;
+  const imageSrc =
+    props.imageSrc && props.imageSrc.length != 0
+      ? props.imageSrc
+      : placeholderImg;
   const priceStr = `${price.toFixed(2)} €`;
+  console.log(dish);
 
   const handleChildClick = (e: any) => {
     e.stopPropagation();
@@ -29,86 +33,119 @@ const Dish = (props: IEditableDishProps) => {
 
   const handleClick = () => {
     setExtended(!extended);
-  }
+  };
 
   return (
     <Paper className={styles.DishBox} elevation={3} onClick={handleClick}>
       {/*mobile version of dish element*/}
       <div className={styles.MobileVersion}>
         <Grid container justifyContent={"space-between"}>
-          <Grid item className={extended ? styles.GridItem : styles.FlexGridItem}>
+          <Grid
+            item
+            className={extended ? styles.GridItem : styles.FlexGridItem}
+          >
             <div className={styles.FlexParent}>
-              <h3 className={styles.DishTitle}>
-                {dishName}
-              </h3>
-              { editable && <DishActions onClick={handleChildClick} /> }
+              <h3 className={styles.DishTitle}>{name}</h3>
+              {editable && (
+                <DishActions
+                  actionList={[
+                    {
+                      actionName: "Edit",
+                      actionIcon: EditIcon,
+                      actionRedirect: "/editDish",
+                      redirectProps: {
+                        dish: dish,
+                      },
+                    },
+                  ]}
+                  onClick={handleChildClick}
+                />
+              )}
             </div>
-            {/*TODO: change allergens to products list*/}
-            {extended && <AllergenTags dishAllergens={dishAllergens}/>}
+            {extended && <AllergenTags dishAllergens={products.split(",")} />}
           </Grid>
           <Grid item className={styles.FlexParent}>
-            <img src={imageSrc} className={styles.ImageDimensions} alt={dishName} />
+            <img src={imageSrc} className={styles.ImageDimensions} alt={name} />
           </Grid>
           <Grid item xs={12} className={styles.GridItemDescription}>
-            <p className={extended ? styles.JustificationPrintExtended : styles.JustificationPrint}>
-              {dishDescription}
+            <p
+              className={
+                extended
+                  ? styles.JustificationPrintExtended
+                  : styles.JustificationPrint
+              }
+            >
+              {description}
             </p>
             <span className={styles.OptionsText}>
-              {(options && options.length != 0) &&
-                <div className={ !extended && styles.OptionsWrap}>
-                  <b>
-                    {"Options: "}
-                  </b>
+              {options && options.length != 0 && (
+                <div className={!extended && styles.OptionsWrap}>
+                  <b>{"Options: "}</b>
                   {options}
                 </div>
-              }
+              )}
             </span>
-            <h3>
-              {`${price.toFixed(2)} €`}
-            </h3>
+            <h3>{`${price.toFixed(2)} €`}</h3>
           </Grid>
         </Grid>
       </div>
-
 
       {/*web version of dish element*/}
       <div className={styles.WebVersion}>
         <Grid container>
-
-          <Grid item xs={10}  className={styles.GridItem}>
+          <Grid item xs={10} className={styles.GridItem}>
             <div className={styles.FlexParent}>
-              <h3 className={styles.DishTitle}>
-                {dishName}
-              </h3>
-              { editable && <DishActions onClick={handleChildClick} /> }
+              <h3 className={styles.DishTitle}>{name}</h3>
+              {editable && (
+                <DishActions
+                  actionList={[
+                    {
+                      actionName: "Edit",
+                      actionIcon: EditIcon,
+                      actionRedirect: "/editDish",
+                      redirectProps: {
+                        dish: dish,
+                      },
+                    },
+                  ]}
+                  onClick={handleChildClick}
+                />
+              )}
             </div>
-            {/*TODO: change allergens to products list*/}
-            {extended && <AllergenTags dishAllergens={dishAllergens}/>}
-            <p className={ extended ? styles.JustificationPrintExtended : styles.JustificationPrint}>
-              {dishDescription}
+            {extended && <AllergenTags dishAllergens={products.split(",")} />}
+            <p
+              className={
+                extended
+                  ? styles.JustificationPrintExtended
+                  : styles.JustificationPrint
+              }
+            >
+              {description}
             </p>
             <span className={styles.OptionsText}>
-              {(options && options.length != 0) &&
+              {options && options.length != 0 && (
                 <div className={!extended && styles.OptionsWrap}>
-                  <b>
-                    {"Options: "}
-                  </b>
+                  <b>{"Options: "}</b>
                   {options}
                 </div>
-              }
+              )}
             </span>
-            <h3 className={styles.DishPrice}>
-              {priceStr}
-            </h3>
+            <h3 className={styles.DishPrice}>{priceStr}</h3>
           </Grid>
 
           <Grid item xs={2} className={styles.GridItemImage}>
-            {imageSrc && <img src={imageSrc} alt={dishName} className={styles.ImageDimensions}/>}
+            {imageSrc && (
+              <img
+                src={imageSrc}
+                alt={name}
+                className={styles.ImageDimensions}
+              />
+            )}
           </Grid>
         </Grid>
       </div>
     </Paper>
-  )
-}
+  );
+};
 
 export default Dish;

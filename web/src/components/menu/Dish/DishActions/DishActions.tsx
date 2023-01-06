@@ -10,7 +10,8 @@ import { useNavigate } from "react-router-dom";
 interface IAction {
   actionName: string,
   actionIcon: any,
-  actionRedirect: string
+  actionRedirect: string,
+  redirectProps?: any
 }
 
 interface IDishActionsProps {
@@ -56,7 +57,7 @@ const DishActions = (props: IDishActionsProps) => {
         }}
       >
         { (actionList && actionList.length != 0) && actionList.map((action) => (
-          <MenuItem key={action.actionName} onClick={() => NavigateTo(action.actionRedirect, navigate)}>
+          <MenuItem key={action.actionName} onClick={() => NavigateTo(action.actionRedirect, navigate, action.redirectProps)}>
             <ListItemIcon>
               <action.actionIcon fontSize="small" />
             </ListItemIcon>

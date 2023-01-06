@@ -7,66 +7,79 @@ import Category from "@src/components/menu/Category/Category";
 import Layout from "@src/components/dumpComponents/Layout/Layout";
 import Header from "@src/components/dumpComponents/Header/Header";
 import PlaceIcon from "@mui/icons-material/Place";
-import {List, ListItem} from "@mui/material";
-import {createTheme, ThemeProvider} from "@mui/material/styles";
+import { List, ListItem } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import burgerImg from "@src/assets/dishImages/burger.jpg";
 import pizzaImg from "@src/assets/dishImages/pizza.jpg";
+import { ICategories } from "@src/model/IRestaurant";
+import { useLocation } from "react-router-dom";
 
 const theme = createTheme({
-    palette: {
-        primary: {
-            main: "#FAFAFA",
-        },
+  palette: {
+    primary: {
+      main: "#FAFAFA",
     },
+  },
 });
 
-const MenuPage = () => {
-    const restaurantName = "Restaurant Name";
-    const restaurantAddress = "Zinnowitzer Straße 5, Berlin 10115";
-    const dishName = "Juicy Burger";
-    const dishAllergens: string[] = ["Gluten", "Lactose", "Nuts", "Sesame", "Tree nuts"];
-    const dishDescription = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n" +
-        "Why do we use it?\n";
-    const price = 10.00;
+interface IMenuPageProps {
+  menu: [ICategories];
+  restoName: string;
+  address: string;
+}
 
-    return (
-        <>
-            <Header/>
-            <div className={styles.RectOnImg}>
-                <List>
-                    <ListItem>
-                        <h2 className={styles.RestaurantTitle}>{restaurantName}</h2>
-                    </ListItem>
-                    <ListItem>
-                        <div className={styles.Address}>
-                            <ThemeProvider theme={theme}>
-                                <PlaceIcon color={"primary"}/>
-                            </ThemeProvider>
-                            <span className={styles.RestaurantAddress}>{restaurantAddress}</span>
-                        </div>
-                    </ListItem>
-                </List>
+const MenuPage = () => {
+  const { menu, restoName, address } = useLocation().state as IMenuPageProps;
+
+  const getImg = (index: number) => {
+    if (index % 3 === 0) {
+      return burgerImg;
+    } else if (index % 3 === 1) {
+      return pizzaImg;
+    } else {
+      return "";
+    }
+  };
+
+  return (
+    <>
+      <Header />
+      <div className={styles.RectOnImg}>
+        <List>
+          <ListItem>
+            <h2 className={styles.RestaurantTitle}>{restoName}</h2>
+          </ListItem>
+          <ListItem>
+            <div className={styles.Address}>
+              <ThemeProvider theme={theme}>
+                <PlaceIcon color={"primary"} />
+              </ThemeProvider>
+              <span className={styles.RestaurantAddress}>{address}</span>
             </div>
-            <Layout>
-                <Category title={"Appetizers"}>
-                    <Dish dishName={dishName} dishAllergens={dishAllergens} dishDescription={dishDescription}
-                          imageSrc={burgerImg} price={price}/>
-                    <Dish dishName={dishName} dishAllergens={dishAllergens} dishDescription={dishDescription}
-                          imageSrc={""} price={price}/>
-                </Category>
-                <Category title={"Main Courses"}>
-                    <Dish dishName={dishName} dishAllergens={dishAllergens}
-                          dishDescription={dishDescription + dishDescription} imageSrc={pizzaImg} price={price}/>
-                    <Dish dishName={dishName} dishAllergens={dishAllergens}
-                          dishDescription={dishDescription + dishDescription} imageSrc={""} price={price}/>
-                    <Dish dishName={dishName} dishAllergens={dishAllergens} dishDescription={dishDescription}
-                          imageSrc={burgerImg} price={price}/>
-                    <Dish dishName={dishName} dishAllergens={dishAllergens} dishDescription={dishDescription}
-                          imageSrc={burgerImg} price={price}/>
-                </Category>
-            </Layout>
-        </>
-    );
+          </ListItem>
+        </List>
+      </div>
+      <Layout>
+        {menu.map((category) => {
+          return (
+            category.dishes.length > 0 && (
+              <Category key={category.name} title={category.name}>
+                {category.dishes.map((dish, index) => {
+                  return (
+                    <Dish
+                      key={dish.name + index}
+                      dish={dish}
+                      imageSrc={getImg(index)}
+                    />
+                  );
+                })}
+              </Category>
+            )
+          );
+        })}
+      </Layout>
+    </>
+  );
 };
 
 export default MenuPage;
