@@ -5,6 +5,7 @@ import logger from 'morgan';
 import path = require('path');
 import { connectDataBase, SUCCEED } from './controllers/connectDataBase';
 import basicApiIngredients from './routes/ingredients';
+import dishes from './routes/dishes';
 
 async function main() {
     const app = express();
@@ -25,6 +26,7 @@ async function main() {
     }
 
     app.use('/', basicApiIngredients);
+    app.use('/dishes', dishes);
 
     // catch 404 and forward to error handler
   app.use(function(req: any, res: any, next: any) { /* eslint-disable-line */
