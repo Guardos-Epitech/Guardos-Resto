@@ -8,10 +8,7 @@
     "target": "es5",
     "allowJs": false,
     "moduleResolution": "node",
-    "baseUrl": ".",
-    "paths": {
-      "@src/*": ["src/*"]
-    }
+    "baseUrl": "."
   },
   "extends": "expo/tsconfig.base"
 }

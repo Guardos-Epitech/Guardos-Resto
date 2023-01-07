@@ -1,11 +1,8 @@
-import React from 'react';
-import { Text, View } from 'react-native';
-import styles from './App.styles'
+import React from "react";
+import MyStack from "./Router";
 
-const App = () => (
-  <View style={styles.container}>
-      <Text>Open up  to start working on your app!</Text>
-    </View>
-)
+const App = () => {
+  return <MyStack />;
+};
 
 export default App;
