@@ -26,7 +26,7 @@ async function main() {
     }
 
     app.use('/', basicApiIngredients);
-    app.use('/dishes', dishes);
+    app.use('/api/dishes', dishes);
 
     // catch 404 and forward to error handler
   app.use(function(req: any, res: any, next: any) { /* eslint-disable-line */
