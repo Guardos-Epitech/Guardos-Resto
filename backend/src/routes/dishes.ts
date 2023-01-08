@@ -1,7 +1,9 @@
 import * as express from 'express';
 const router = express.Router();
-import {createNewDish, deleteNewDishByName,
-    getAllDishes, getDishesByRestaurantName}
+import {
+    changeDishByName, createNewDish, deleteNewDishByName,
+    getAllDishes, getDishesByRestaurantName
+}
     from '../controllers/dishesController';
 import {checkIfNameExists} from '../middleware/dishesMiddelWare';
 
@@ -33,6 +35,14 @@ router.delete('/:name',async (req, res) => {
     const dish = await deleteNewDishByName(req.params.name, req.body.name);
     res.status(200)
         .send(dish);
+});
+
+router.post('/change/:name',async (req, res) => {
+    //Error handling is missing
+    const dish = await changeDishByName(req.params.name, req.body);
+    res.status(200)
+        .send(dish);
+
 });
 
 export default router;
