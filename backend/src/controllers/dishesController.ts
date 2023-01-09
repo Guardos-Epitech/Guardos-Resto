@@ -13,7 +13,7 @@ export async function getDishesByRestaurantName(restaurantName: string) {
     return Restaurant.find({name: restaurantName}, 'dishes');
 }
 
-async function getDishByName(restaurantName: string, dishName: string) {
+export async function getDishByName(restaurantName: string, dishName: string) {
     const Restaurant = mongoose.model('Restaurant', restaurantSchema);
     const restaurant = await Restaurant.findOne({ name: restaurantName });
     if (!restaurant) {
@@ -66,7 +66,7 @@ export async function createNewDish(
     return dish;
 }
 
-export async function deleteNewDishByName(
+export async function deleteDishByName(
     restaurantName: string, dishName: string) {
     await deleteDish(restaurantName, dishName);
     return dishName + ' deleted';

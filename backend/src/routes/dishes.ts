@@ -1,48 +1,65 @@
 import * as express from 'express';
 const router = express.Router();
 import {
-    changeDishByName, createNewDish, deleteNewDishByName,
-    getAllDishes, getDishesByRestaurantName
+    changeDishByName, createNewDish, deleteDishByName,
+    getAllDishes, getDishByName, getDishesByRestaurantName
 }
     from '../controllers/dishesController';
 import {checkIfNameExists} from '../middleware/dishesMiddelWare';
+import {checkIfRestaurantExists} from '../middleware/restaurantMiddleWare';
 
 router.get('/',async (req, res) => {
     const dishes = await getAllDishes();
-    res.status(200)
+    return res.status(200)
         .send(dishes);
 });
 
 router.get('/:name',async (req, res) => {
+    if (!await checkIfRestaurantExists(req.params.name)) {
+        return res.status(404)
+            .send('Coudnt find restaurant named ' + req.params.name);
+    }
     const dishes = await getDishesByRestaurantName(req.params.name);
-    res.status(200)
+    return res.status(200)
         .send(dishes);
 });
 
 router.post('/:name',async (req, res) => {
-
+    if (!await checkIfRestaurantExists(req.params.name)) {
+        return res.status(404)
+            .send('Coudnt find restaurant named ' + req.params.name);
+    }
     if (!checkIfNameExists(req.body)) {
-        res.status(400)
+        return res.status(404)
             .send('Name is missing');
     }
     const dish = await createNewDish(req.params.name, req.body);
-    res.status(200)
+    return res.status(200)
         .send(dish);
 });
 
 router.delete('/:name',async (req, res) => {
-    //Error handling is missing
-    const dish = await deleteNewDishByName(req.params.name, req.body.name);
-    res.status(200)
+    if (!await checkIfRestaurantExists(req.params.name)) {
+        return res.status(404)
+            .send('Coudnt find restaurant named ' + req.params.name);
+    }
+    const dish = await deleteDishByName(req.params.name, req.body.name);
+    return res.status(200)
         .send(dish);
 });
 
-router.post('/change/:name',async (req, res) => {
-    //Error handling is missing
+router.put('/:name',async (req, res) => {
+    if (!await checkIfRestaurantExists(req.params.name)) {
+        return res.status(404)
+            .send('Coudnt find restaurant named ' + req.params.name);
+    }
+    if (!await getDishByName(req.params.name, req.body.name)) {
+        return res.status(404)
+            .send('Coundt find dish named ' + req.body.name);
+    }
     const dish = await changeDishByName(req.params.name, req.body);
-    res.status(200)
+    return res.status(200)
         .send(dish);
-
 });
 
 export default router;

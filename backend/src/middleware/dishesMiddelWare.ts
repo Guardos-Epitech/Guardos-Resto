@@ -1,4 +1,5 @@
 import {IdishesCommunication} from '../models/communicationInterfaces';
+
 export function checkIfNameExists(req: IdishesCommunication) {
     if (!req.name) {
         console.log('Missing name');
@@ -6,3 +7,4 @@ export function checkIfNameExists(req: IdishesCommunication) {
     }
     return true;
 }
+
