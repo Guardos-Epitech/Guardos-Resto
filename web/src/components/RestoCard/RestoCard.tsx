@@ -19,10 +19,7 @@ interface IRestoCardProps {
 const RestoCard = (props: IRestoCardProps) => {
   const [extended, setExtended] = useState(false);
   const { resto, editable } = props;
-  const imageSrc =
-    props.imageSrc && props.imageSrc.length != 0
-      ? props.imageSrc
-      : placeholderImg;
+  const imgStr = `${props.resto.pictures[0]}?auto=compress&cs=tinysrgb&h=350`;
   const address =
     `${resto.location.streetName} ${resto.location.streetNumber}` +
     `, ${resto.location.postalCode} ${resto.location.city}, ${resto.location.country}`;
@@ -39,13 +36,13 @@ const RestoCard = (props: IRestoCardProps) => {
     <Paper className={styles.DishBox} elevation={3} onClick={handleClick}>
       <Grid container>
         <Grid item xs={3} className={styles.GridItemImage}>
-          {imageSrc && (
+          {
             <img
-              src={imageSrc}
+              src={imgStr}
               alt={resto.name}
               className={styles.ImageDimensions}
             />
-          )}
+          }
         </Grid>
 
         <Grid item xs={9} className={styles.GridItem}>

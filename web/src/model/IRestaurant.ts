@@ -9,6 +9,7 @@ export interface IRestaurantFrontEnd {
   description: string;
   hitRate: number;
   dishes: any;
+  pictures: [string];
 }
 
 export interface ICategories {
@@ -20,6 +21,7 @@ export interface ICategories {
 export interface IDishFE {
   name: string;
   description: string;
+  pictures: [string];
   price: number;
   products: string;
   category: ICategoryFE;
