@@ -1,2 +1,7 @@
-/node_modules
-.env
+node_modules
+bin
+.idea/*
+.vscode/
+build
+dist
+package-lock.json
