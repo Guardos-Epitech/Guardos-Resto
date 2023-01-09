@@ -1,77 +1,107 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./RestoCard.module.scss";
-import restoimg from "@src/asset/restoimg.jpeg";
+import EditIcon from "@mui/icons-material/Edit";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 import PlaceIcon from "@mui/icons-material/Place";
-import { loremIpsum } from "lorem-ipsum";
-import Button from "@mui/material/Button";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import ratingimg from "@src/asset/ratingimg.png";
-import { useNavigate } from "react-router-dom";
-import { NavigateTo } from "@src/utils/NavigateTo";
+import { Grid, Paper } from "@mui/material";
+import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
+import placeholderImg from "@src/assets/placeholder.png";
 
-const PageBtn = () => {
-  return createTheme({
-    typography: {
-      button: {
-        fontFamily: "Montserrat",
-        textTransform: "none",
-        fontSize: "1.13rem",
-        fontWeight: "500",
-      },
-    },
-    palette: {
-      primary: {
-        main: "#AC2A37",
-        contrastText: "#ffffff",
-      },
-      secondary: {
-        main: "#094067",
-        contrastText: "#ffffff",
-      },
-    },
-    shape: {
-      borderRadius: 5,
-    },
-  });
-};
+import Rating from "@src/components/RestoCard/Rating/Rating";
+import { IRestaurantFrontEnd } from "@src/model/IRestaurant";
 
-const RestoCard = () => {
-  const navigate = useNavigate();
+interface IRestoCardProps {
+  resto: IRestaurantFrontEnd;
+  imageSrc?: string;
+  editable?: boolean;
+}
+
+const RestoCard = (props: IRestoCardProps) => {
+  const [extended, setExtended] = useState(false);
+  const { resto, editable } = props;
+  const imageSrc =
+    props.imageSrc && props.imageSrc.length != 0
+      ? props.imageSrc
+      : placeholderImg;
+  const address =
+    `${resto.location.streetName} ${resto.location.streetNumber}` +
+    `, ${resto.location.postalCode} ${resto.location.city}, ${resto.location.country}`;
+
+  const handleChildClick = (e: any) => {
+    e.stopPropagation();
+  };
+
+  const handleClick = () => {
+    setExtended(!extended);
+  };
+
   return (
-    <div className={styles.RectCard}>
-      <img className={styles.RestoImg} src={restoimg} alt="Resto Img" />
-      <div>
-        <div className={styles.DivTopTitle}>
-          <span className={styles.TitleResto}>Bar & Restaurant Wartesaal</span>
-          <div className={styles.DivRating}>
-            <span className={styles.TitleRating}>Rating:</span>
+    <Paper className={styles.DishBox} elevation={3} onClick={handleClick}>
+      <Grid container>
+        <Grid item xs={3} className={styles.GridItemImage}>
+          {imageSrc && (
             <img
-              className={styles.RatingImg}
-              src={ratingimg}
-              alt="Rating Img"
+              src={imageSrc}
+              alt={resto.name}
+              className={styles.ImageDimensions}
             />
+          )}
+        </Grid>
+
+        <Grid item xs={9} className={styles.GridItem}>
+          <div className={styles.FlexParent}>
+            <h3 className={styles.DishTitle}>{resto.name}</h3>
+            <Rating restoRating={resto.rating} restoRatingsCount={78} />{/*TODO: get ratings count*/}
+            {editable && (
+              <DishActions
+                actionList={[
+                  {
+                    actionName: "Menu",
+                    actionIcon: MenuBookIcon,
+                    actionRedirect: "/menu",
+                    redirectProps: {
+                      menu: resto.categories,
+                      restoName: resto.name,
+                      address: address,
+                    },
+                  },
+                  {
+                    actionName: "Edit",
+                    actionIcon: EditIcon,
+                    actionRedirect: "/editResto",
+                    redirectProps: {
+                      restoName: resto.name,
+                      phone: resto.name,
+                      street: resto.location.streetName,
+                      streetNumber: resto.location.streetNumber,
+                      postalCode: resto.location.postalCode,
+                      city: resto.location.city,
+                      country: resto.location.country,
+                      description: resto.description,
+                    },
+                  },
+                ]}
+                className={styles.ActionMenu}
+                onClick={handleChildClick}
+              />
+            )}
           </div>
-        </div>
-        <div className={styles.DivAddress}>
-          <PlaceIcon />
-          <span>Zinnowitzer Straße 5, Berlin 10115</span>
-        </div>
-        <div className={styles.DivDesc}>
-          <p className={styles.TxtDescription}>{loremIpsum({ count: 6 })}</p>
-          <div className={styles.BtnPage}>
-            <ThemeProvider theme={PageBtn()}>
-              <Button
-                variant="contained"
-                sx={{ width: "12.13rem" }}
-                onClick={() => NavigateTo("/menu", navigate)}
-              >
-                Restaurant page
-              </Button>
-            </ThemeProvider>
+          <div className={styles.FlexParent}>
+            <PlaceIcon />
+            <span className={styles.AddressText}>{address}</span>
           </div>
-        </div>
-      </div>
-    </div>
+          <p
+            className={
+              extended
+                ? styles.JustificationPrintExtended
+                : styles.JustificationPrint
+            }
+          >
+            {resto.description}
+          </p>
+        </Grid>
+      </Grid>
+    </Paper>
   );
 };
 
