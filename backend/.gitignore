@@ -4,3 +4,4 @@ bin
 .vscode/
 build
 dist
+package-lock.json
