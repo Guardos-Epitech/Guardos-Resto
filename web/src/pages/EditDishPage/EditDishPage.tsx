@@ -23,7 +23,7 @@ const EditDishPage = () => {
       <Layout>
         <DishForm
           dishName={name}
-          dishProducts={products.split(",")}
+          dishProducts={products}
           dishDescription={description}
           price={price}
         />

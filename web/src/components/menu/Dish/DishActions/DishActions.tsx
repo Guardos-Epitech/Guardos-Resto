@@ -16,6 +16,7 @@ interface IAction {
 
 interface IDishActionsProps {
   actionList?: IAction[],
+  onDelete: any,
   onClick: any,
   className?: any
 }
@@ -23,7 +24,7 @@ interface IDishActionsProps {
 const DishActions = (props: IDishActionsProps) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const { actionList } = props;
+  const { actionList, onDelete } = props;
   const navigate = useNavigate();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -64,7 +65,7 @@ const DishActions = (props: IDishActionsProps) => {
             <ListItemText>{action.actionName}</ListItemText>
           </MenuItem>
         )) }
-        <MenuItem>
+        <MenuItem onClick={onDelete}>
           <ListItemIcon>
             <DeleteIcon fontSize="small" />
           </ListItemIcon>

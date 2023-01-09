@@ -21,7 +21,7 @@ export interface IDishFE {
   name: string;
   description: string;
   price: number;
-  products: string;
+  products: string[];
   category: ICategoryFE;
 }
 

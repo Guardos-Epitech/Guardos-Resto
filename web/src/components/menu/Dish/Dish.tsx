@@ -8,9 +8,11 @@ import placeholderImg from "@src/assets/placeholder.png";
 import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
 import EditIcon from "@mui/icons-material/Edit";
 import { IDishFE } from "@src/model/IRestaurant";
+import { deleteDish } from "@src/services/dishCalls";
 
 interface IEditableDishProps {
   dish: IDishFE;
+  onUpdate?: Function;
   options?: string;
   imageSrc?: string;
   editable?: boolean;
@@ -18,14 +20,13 @@ interface IEditableDishProps {
 
 const Dish = (props: IEditableDishProps) => {
   const [extended, setExtended] = useState(false);
-  const { dish, options, editable } = props;
+  const { onUpdate, dish, options, editable } = props;
   const { name, products, description, price } = dish;
   const imageSrc =
     props.imageSrc && props.imageSrc.length != 0
       ? props.imageSrc
       : placeholderImg;
   const priceStr = `${price.toFixed(2)} €`;
-  console.log(dish);
 
   const handleChildClick = (e: any) => {
     e.stopPropagation();
@@ -34,6 +35,13 @@ const Dish = (props: IEditableDishProps) => {
   const handleClick = () => {
     setExtended(!extended);
   };
+
+  async function getOnDelete() {
+    await deleteDish("burgerme", name);
+    if (onUpdate) {
+      await onUpdate();
+    }
+  }
 
   return (
     <Paper className={styles.DishBox} elevation={3} onClick={handleClick}>
@@ -58,11 +66,12 @@ const Dish = (props: IEditableDishProps) => {
                       },
                     },
                   ]}
+                  onDelete={getOnDelete}
                   onClick={handleChildClick}
                 />
               )}
             </div>
-            {extended && <AllergenTags dishAllergens={products.split(",")} />}
+            {extended && <AllergenTags dishAllergens={products} />}
           </Grid>
           <Grid item className={styles.FlexParent}>
             <img src={imageSrc} className={styles.ImageDimensions} alt={name} />
@@ -108,11 +117,12 @@ const Dish = (props: IEditableDishProps) => {
                       },
                     },
                   ]}
+                  onDelete={getOnDelete}
                   onClick={handleChildClick}
                 />
               )}
             </div>
-            {extended && <AllergenTags dishAllergens={products.split(",")} />}
+            {extended && <AllergenTags dishAllergens={products} />}
             <p
               className={
                 extended

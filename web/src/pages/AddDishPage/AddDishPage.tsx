@@ -12,7 +12,7 @@ const AddDishPage = () => {
         <span className={styles.TitleSearch}>My new dish</span>
       </div>
       <Layout>
-        <DishForm />
+        <DishForm add />
       </Layout>
     </div>
   );
