@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-import { restaurantSchema} from '../models/restaurantInterfaces';
-import {IdishesCommunication} from '../models/communicationInterfaces';
-import {IDishBE} from '../models/dishInterfaces';
+import { restaurantSchema } from '../models/restaurantInterfaces';
+import { IDishesCommunication } from '../models/communicationInterfaces';
+import { IDishBE } from '../models/dishInterfaces';
 
 export async function getDishesByRestaurantID(restaurantId: number) {
     const Restaurant = mongoose.model('Restaurant', restaurantSchema);
@@ -39,7 +39,7 @@ async function deleteDish(restaurantName: string, dishName: string) {
     );
 }
 
-async function createDish(restaurantName: string, dish: IdishesCommunication) {
+async function createDish(restaurantName: string, dish: IDishesCommunication) {
     const Restaurant = mongoose.model('Restaurant', restaurantSchema);
     return Restaurant.findOneAndUpdate(
         {name: restaurantName},
@@ -48,8 +48,8 @@ async function createDish(restaurantName: string, dish: IdishesCommunication) {
     );
 }
 export async function createNewDish(
-    restaurantName: string, dishCom: IdishesCommunication) {
-    const dish : IdishesCommunication = {
+    restaurantName: string, dishCom: IDishesCommunication) {
+    const dish : IDishesCommunication = {
         name: dishCom.name,
         description: dishCom.description ? dishCom.description : '',
         price: dishCom.price ? dishCom.price : -1,
@@ -83,7 +83,7 @@ export async function updateDish(
 }
 
 export async function changeDishByName(
-    restaurantName: string, dish: IdishesCommunication) {
+    restaurantName: string, dish: IDishesCommunication) {
     const oldDish = await getDishByName(restaurantName, dish.name);
     const newDish: IDishBE = {
         //if the new dish has a property, use it, else use the old one

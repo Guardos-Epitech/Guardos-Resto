@@ -1,4 +1,4 @@
-import {IingredientsCommunication} from '../models/communicationInterfaces';
+import {IIngredientsCommunication} from '../models/communicationInterfaces';
 import mongoose from 'mongoose';
 import {ingredientsSchema} from '../models/ingredientsInterfaces';
 
@@ -11,7 +11,7 @@ export async function checkIfIdExists(id: number) {
         });
     return ingredient;
 }
-export async function checkIfNameAndIdExists(req: IingredientsCommunication) {
+export async function checkIfNameAndIdExists(req: IIngredientsCommunication) {
     const id = req.id;
 
     if (!req.name || !req.id) {

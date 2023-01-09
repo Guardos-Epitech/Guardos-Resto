@@ -1,17 +1,17 @@
 import * as express from 'express';
 const router = express.Router();
-import {createNewIngredient, getAllIngredients, deleteIngredient}
+import { createNewIngredient, getAllIngredients, deleteIngredient }
     from '../controllers/ingredientsController';
-import {checkIfNameAndIdExists, checkIfIdExists}
+import { checkIfNameAndIdExists, checkIfIdExists }
     from '../middleware/ingredientsMiddleWare';
-import {IingredientsCommunication} from '../models/communicationInterfaces';
+import { IIngredientsCommunication } from '../models/communicationInterfaces';
 router.get('/get',async (req, res) => {
     const ingredients = await getAllIngredients();
     res.status(200)
         .send(ingredients);
 });
 router.post('/post', async (req, res) => {
-    if (await checkIfNameAndIdExists(req.body as IingredientsCommunication)) {
+    if (await checkIfNameAndIdExists(req.body as IIngredientsCommunication)) {
         await createNewIngredient(req.body.name, req.body.id);
         res.status(200)
             .send('Ingredient '

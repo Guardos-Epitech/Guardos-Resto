@@ -28,7 +28,7 @@ export interface IRestaurantFrontEnd {
     location: ILocation;
     openingHours: [IOpeningHours];
     pictures: [string];
-    hitRate: number;
+    hitRate?: number;
     rating: number;
     products: [IProducts];
 }

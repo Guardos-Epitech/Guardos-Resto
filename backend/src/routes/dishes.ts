@@ -5,8 +5,8 @@ import {
     getAllDishes, getDishByName, getDishesByRestaurantName
 }
     from '../controllers/dishesController';
-import {checkIfNameExists} from '../middleware/dishesMiddelWare';
-import {checkIfRestaurantExists} from '../middleware/restaurantMiddleWare';
+import { checkIfNameExists } from '../middleware/dishesMiddelWare';
+import { checkIfRestaurantExists } from '../middleware/restaurantMiddleWare';
 
 router.get('/',async (req, res) => {
     const dishes = await getAllDishes();
@@ -32,6 +32,10 @@ router.post('/:name',async (req, res) => {
     if (!checkIfNameExists(req.body)) {
         return res.status(404)
             .send('Name is missing');
+    }
+    if (await getDishByName(req.params.name, req.body.name)) {
+        return res.status(404)
+            .send('There is already a dish with the name ' + req.body.name);
     }
     const dish = await createNewDish(req.params.name, req.body);
     return res.status(200)

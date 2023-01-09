@@ -1,5 +1,3 @@
-import { IRestaurantBackEnd, restaurantSchema }
-    from '../models/restaurantInterfaces';
 import * as process from 'process';
 import * as dotenv from 'dotenv';
 
@@ -29,32 +27,4 @@ export async function connectDataBase() {
         return FAILED;
     }
     return SUCCEED;
-}
-
-export async function createNewRestaurant(obj: IRestaurantBackEnd, id: number) {
-    const RestaurantSchema = mongoose.model('Restaurants', restaurantSchema);
-    const upload = new RestaurantSchema({
-        _id: id,
-        name: obj.name,
-        phoneNumber: obj.phoneNumber,
-        website: obj.website,
-        rating: obj.rating,
-        ratingCount: obj.ratingCount,
-        description: obj.description,
-        dishes: obj.dishes,
-        pictures: obj.pictures,
-        openingHours: obj.openingHours,
-        location: obj.location,
-        mealType: obj.mealType,
-        products: obj.products,
-        extras: obj.extras,
-    });
-    upload.save();
-    console.log('Restaurant ' + obj.name + ' saved ' + ' with id ' + id);
-}
-
-export async function readAndGetAllRestaurants() {
-    console.log('Reading all restaurants');
-    const RestaurantSchema = mongoose.model('Restaurants', restaurantSchema);
-    return await RestaurantSchema.find();
 }
