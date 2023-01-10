@@ -1,6 +1,5 @@
 import {ingredientsSchema} from '../models/ingredientsInterfaces';
 import mongoose from 'mongoose';
-import {restaurantSchema} from "../models/restaurantInterfaces";
 
 export async function createNewIngredient(name: string, id: number) {
     const IngredientSchema = mongoose.model('IngredientsMVP',
@@ -28,7 +27,8 @@ export async function deleteIngredient(name: string, id: number) {
 }
 
 export async function findMaxIndexIngredients() {
-    const IngredientSchema = mongoose.model('IngredientsMVP', ingredientsSchema);
+    const IngredientSchema = mongoose.model('IngredientsMVP',
+        ingredientsSchema);
     const ingredients = await IngredientSchema.find()
         .sort({ _id: -1 })
         .limit(1);

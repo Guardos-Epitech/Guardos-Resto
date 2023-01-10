@@ -1,7 +1,7 @@
 import {IIngredientsCommunication} from '../models/communicationInterfaces';
 import mongoose from 'mongoose';
 import {ingredientsSchema} from '../models/ingredientsInterfaces';
-import {findMaxIndexIngredients} from "../controllers/ingredientsController";
+import {findMaxIndexIngredients} from '../controllers/ingredientsController';
 
 export async function checkIfIdExists(id: number) {
     const IngredientSchema = mongoose.model('IngredientsMVP',

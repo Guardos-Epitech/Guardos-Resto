@@ -1,7 +1,11 @@
 import * as express from 'express';
 const router = express.Router();
-import {createNewIngredient, getAllIngredients, deleteIngredient, findMaxIndexIngredients}
-    from '../controllers/ingredientsController';
+import {
+    createNewIngredient,
+    getAllIngredients,
+    deleteIngredient,
+    findMaxIndexIngredients
+} from '../controllers/ingredientsController';
 import { checkIfNameAndIdExists, checkIfIdExists }
     from '../middleware/ingredientsMiddleWare';
 import { IIngredientsCommunication } from '../models/communicationInterfaces';
@@ -14,7 +18,8 @@ router.get('/get',async (req, res) => {
 });
 router.post('/post', async (req, res) => {
     if (await checkIfNameAndIdExists(req.body as IIngredientsCommunication)) {
-        const id = req.body.id ? req.body.id : (await findMaxIndexIngredients() + 1);
+        const id =
+            req.body.id ? req.body.id : (await findMaxIndexIngredients() + 1);
         await createNewIngredient(req.body.name, id);
         await addRestoProduct(req.body.name);
         res.status(200)

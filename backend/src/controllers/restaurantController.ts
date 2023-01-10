@@ -264,31 +264,31 @@ export async function changeRestaurant(
 }
 
 function getProductObj(productName: string) {
-    if (productName == 'cheese') {
+    if (productName === 'cheese') {
         return {
             name: productName,
             allergens: 'milk',
             ingredients: ['milk', 'cheddar cheese', 'salt']
         };
-    } else if (productName == 'seasoning') {
+    } else if (productName === 'seasoning') {
         return {
             name: productName,
             allergens: 'gluten',
             ingredients: ['wheat', 'herbs', 'salt']
-        }
+        };
     } else {
         return {
             name: productName,
             allergens: '',
             ingredients: []
-        }
+        };
     }
 }
 
 export async function addRestoProduct(productName: string) {
     const Restaurant = mongoose.model('Restaurant', restaurantSchema);
     const restaurants = await Restaurant.find();
-    let restaurantsBE : IRestaurantBackEnd[] = [];
+    const restaurantsBE : IRestaurantBackEnd[] = [];
 
     for (const restaurant of await restaurants) {
         restaurantsBE.push(createBackEndObj({
