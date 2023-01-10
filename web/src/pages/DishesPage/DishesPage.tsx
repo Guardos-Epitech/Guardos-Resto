@@ -4,8 +4,6 @@ import styles from "@src/pages/DishesPage/DishesPage.module.scss";
 import Layout from "../../components/dumpComponents/Layout/Layout";
 import Dish from "../../components/menu/Dish/Dish";
 
-import burgerImg from "@src/assets/dishImages/burger.jpg";
-import pizzaImg from "@src/assets/dishImages/pizza.jpg";
 import FixedBtn from "../../components/dumpComponents/buttons/FixedBtn/FixedBtn";
 import SuccessAlert from "@src/components/dumpComponents/SuccessAlert/SuccessAlert";
 import { IDishFE } from "@src/model/IRestaurant";
@@ -22,14 +20,15 @@ const DishesPage = () => {
     );
   const price = 10.0;
   const dish: IDishFE = {
-    name: dishName,
-    products: "Bread, Meat, Cheese, Sauce, Apple, Sesame",
-    description: dishDescription,
-    price: price,
-    category: {
+      name: dishName,
+      products: "Bread, Meat, Cheese, Sauce, Apple, Sesame",
+      description: dishDescription,
+      price: price,
+      pictures: ["https://bildungsserver.berlin-brandenburg.de/fileadmin/_processed_/4/5/csm_map-g138e26142_640_062325fe80.jpg"],
+      category: {
       foodGroup: "Main",
       extraGroup: "cheese",
-    },
+      },
     // TODO: add fields
     // allergens: dishAllergens,
     // options: dishOptions,
@@ -43,12 +42,12 @@ const DishesPage = () => {
         <span className={styles.TitleSearch}>My dishes</span>
       </div>
       <Layout>
-        <Dish dish={dish} options={dishOptions} imageSrc={burgerImg} editable />
-        <Dish dish={dish} options={null} imageSrc={pizzaImg} editable />
-        <Dish dish={dish} options={dishOptions} imageSrc={burgerImg} editable />
-        <Dish dish={dish} options={""} imageSrc={""} editable />
-        <Dish dish={dish} options={dishOptions} imageSrc={burgerImg} editable />
-        <Dish dish={dish} options={dishOptions} imageSrc={burgerImg} editable />
+        <Dish dish={dish} options={dishOptions} editable />
+        <Dish dish={dish} options={null} editable />
+        <Dish dish={dish} options={dishOptions} editable />
+        <Dish dish={dish} options={""} editable />
+        <Dish dish={dish} options={dishOptions} editable />
+        <Dish dish={dish} options={dishOptions} editable />
       </Layout>
       <FixedBtn title={"Add dish"} redirect={"/addDish"} />
       <SuccessAlert />

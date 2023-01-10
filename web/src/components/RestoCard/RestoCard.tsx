@@ -5,24 +5,19 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import PlaceIcon from "@mui/icons-material/Place";
 import { Grid, Paper } from "@mui/material";
 import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
-import placeholderImg from "@src/assets/placeholder.png";
 
 import Rating from "@src/components/RestoCard/Rating/Rating";
 import { IRestaurantFrontEnd } from "@src/model/IRestaurant";
 
 interface IRestoCardProps {
   resto: IRestaurantFrontEnd;
-  imageSrc?: string;
   editable?: boolean;
 }
 
 const RestoCard = (props: IRestoCardProps) => {
   const [extended, setExtended] = useState(false);
   const { resto, editable } = props;
-  const imageSrc =
-    props.imageSrc && props.imageSrc.length != 0
-      ? props.imageSrc
-      : placeholderImg;
+  const imgStr = `${resto.pictures[0]}?auto=compress&cs=tinysrgb&h=350`;
   const address =
     `${resto.location.streetName} ${resto.location.streetNumber}` +
     `, ${resto.location.postalCode} ${resto.location.city}, ${resto.location.country}`;
@@ -39,13 +34,13 @@ const RestoCard = (props: IRestoCardProps) => {
     <Paper className={styles.DishBox} elevation={3} onClick={handleClick}>
       <Grid container>
         <Grid item xs={3} className={styles.GridItemImage}>
-          {imageSrc && (
+          {
             <img
-              src={imageSrc}
+              src={imgStr}
               alt={resto.name}
               className={styles.ImageDimensions}
             />
-          )}
+          }
         </Grid>
 
         <Grid item xs={9} className={styles.GridItem}>

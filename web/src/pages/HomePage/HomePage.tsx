@@ -7,19 +7,9 @@ import SuccessAlert from "@src/components/dumpComponents/SuccessAlert/SuccessAle
 import Layout from "@src/components/dumpComponents/Layout/Layout";
 import restaurantData from "@src/assets/restaurantFE.json";
 
-import restoImg from "@src/assets/restoimg.jpeg";
 import { IRestaurantFrontEnd } from "@src/model/IRestaurant";
 
 const HomePage = () => {
-
-  const getImg = (index: number) => {
-    if (index % 2 === 0) {
-      return restoImg;
-    } else {
-      return "";
-    }
-  }
-
   return (
     <div>
       <Header />
@@ -34,7 +24,6 @@ const HomePage = () => {
                 <RestoCard
                   key={restaurant.name + index}
                   resto={restaurant as IRestaurantFrontEnd}
-                  imageSrc={getImg(index)}  // TODO: replace with actual data
                   editable
                 />
               );
