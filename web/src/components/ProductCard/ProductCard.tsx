@@ -3,8 +3,9 @@ import styles from "@src/components/ProductCard/ProductCard.module.scss";
 import { Grid, Paper } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
+import { deleteProduct } from "@src/services/productCalls";
 
-interface IProduct {
+export interface IProduct {
   name: string,
   ingredients: string[],
   allergens: string[]
@@ -12,12 +13,21 @@ interface IProduct {
 
 interface IProductCardProps {
   index: number,
-  product: IProduct
+  product: IProduct,
+  onUpdate: Function
 }
 
 const ProductCard = (props: IProductCardProps) => {
   const [extended, setExtended] = useState(false);
-  const { index, product } = props;
+  const { index, product, onUpdate } = props;
+
+  const handleChildClick = async (e: any) => {
+    e.stopPropagation();
+    await deleteProduct(product)
+    if (onUpdate) {
+      await onUpdate();
+    }
+  };
 
   const handleClick = () => {
     setExtended(!extended);
@@ -28,14 +38,17 @@ const ProductCard = (props: IProductCardProps) => {
       <Paper className={styles.Product} elevation={3}>
         <div className={styles.ProductHeader}>
           <h3 className={styles.ProductTitle}>{product.name}</h3>
-          <DeleteIcon className={styles.ProductDeleteBtn} />
+          <DeleteIcon
+            className={styles.ProductDeleteBtn}
+            onClick={handleChildClick}
+          />
         </div>
-        { extended && <AllergenTags dishAllergens={product.allergens}/> }
-        <span className={extended ? styles.IngredientList : styles.IngredientListWrap}>
+        { (extended && product.allergens) && <AllergenTags dishAllergens={product.allergens}/> }
+        {product.ingredients?.length > 0 && <span className={extended ? styles.IngredientList : styles.IngredientListWrap}>
               <b>
                 {"Ingredients: "}
               </b>
-          {product.ingredients.join(", ")}</span>
+          {product.ingredients?.join(", ")}</span>}
       </Paper>
     </Grid>
   );

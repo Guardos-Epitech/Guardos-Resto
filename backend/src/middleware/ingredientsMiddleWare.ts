@@ -1,6 +1,7 @@
 import {IIngredientsCommunication} from '../models/communicationInterfaces';
 import mongoose from 'mongoose';
 import {ingredientsSchema} from '../models/ingredientsInterfaces';
+import {findMaxIndexIngredients} from '../controllers/ingredientsController';
 
 export async function checkIfIdExists(id: number) {
     const IngredientSchema = mongoose.model('IngredientsMVP',
@@ -12,9 +13,9 @@ export async function checkIfIdExists(id: number) {
     return ingredient;
 }
 export async function checkIfNameAndIdExists(req: IIngredientsCommunication) {
-    const id = req.id;
+    const id = req.id ? req.id : (await findMaxIndexIngredients() + 1);
 
-    if (!req.name || !req.id) {
+    if (!req.name || !id) {
         console.log('Missing name or id');
         return false;
     }

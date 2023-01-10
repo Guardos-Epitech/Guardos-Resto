@@ -13,6 +13,7 @@ import placeholderImg from "@src/assets/profile-placeholder.png";
 import { NavigateTo } from "@src/utils/NavigateTo";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import { addNewResto, editResto } from "@src/services/restoCalls";
 
 const PageBtn = () => {
   return createTheme({
@@ -50,11 +51,12 @@ interface IRestaurantFormProps {
   description?: string;
   imageSrc?: string;
   phone?: string;
+  add?: boolean;
 }
 
 const RestaurantForm = (props: IRestaurantFormProps) => {
   const navigate = useNavigate();
-  const {
+  let {
     restaurantName,
     street,
     streetNumber,
@@ -64,10 +66,33 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
     description,
     phone,
   } = props;
+  const origRestoName = restaurantName;
   const imageSrc =
     props.imageSrc && props.imageSrc.length != 0
       ? props.imageSrc
       : placeholderImg;
+
+  async function sendRequestAndGoBack() {
+    const resto = {
+      name: restaurantName,
+      phoneNumber: phone,
+      description: description,
+      location: {
+        streetName: street,
+        streetNumber: streetNumber,
+        postalCode: postalCode,
+        city: city,
+        country: country,
+      }
+    }
+
+    if (props.add) {
+      await addNewResto(resto);
+    } else {
+      await editResto(origRestoName, resto);
+    }
+    return NavigateTo("/", navigate, { successfulForm: true });
+  }
 
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap" }}>
@@ -119,6 +144,7 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
                   id="component-outlined"
                   defaultValue={restaurantName}
                   label="Name"
+                  onChange={(e) => (restaurantName = e.target.value)}
                 />
               </FormControl>
             </Grid>
@@ -131,6 +157,7 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
                   id="component-outlined"
                   defaultValue={phone}
                   label="Phone number"
+                  onChange={(e) => (phone = e.target.value)}
                 />
               </FormControl>
             </Grid>
@@ -143,6 +170,7 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
                   id="component-outlined"
                   defaultValue={street}
                   label="Street name"
+                  onChange={(e) => (street = e.target.value)}
                 />
               </FormControl>
             </Grid>
@@ -155,6 +183,7 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
                   id="component-outlined"
                   defaultValue={streetNumber}
                   label="Street number"
+                  onChange={(e) => (streetNumber = parseInt(e.target.value))}
                 />
               </FormControl>
             </Grid>
@@ -167,6 +196,7 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
                   id="component-outlined"
                   defaultValue={postalCode}
                   label="Postal code"
+                  onChange={(e) => (postalCode = e.target.value)}
                 />
               </FormControl>
             </Grid>
@@ -177,6 +207,7 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
                   id="component-outlined"
                   defaultValue={city}
                   label="City"
+                  onChange={(e) => (city = e.target.value)}
                 />
               </FormControl>
             </Grid>
@@ -187,6 +218,7 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
                   id="component-outlined"
                   defaultValue={country}
                   label="Country"
+                  onChange={(e) => (country = e.target.value)}
                 />
               </FormControl>
             </Grid>
@@ -197,6 +229,7 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
                   defaultValue={description}
                   label="Description"
                   multiline
+                  onChange={(e) => (description = e.target.value)}
                 />
               </FormControl>
             </Grid>
@@ -208,7 +241,7 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
           className={styles.SaveBtn}
           variant="contained"
           sx={{ width: "12.13rem" }}
-          onClick={() => NavigateTo("/", navigate, { successfulForm: true })}
+          onClick={sendRequestAndGoBack}
         >
           Save
         </Button>

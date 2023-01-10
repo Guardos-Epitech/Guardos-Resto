@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@src/components/forms/DishForm/DishForm.module.scss";
 import {
   Autocomplete,
@@ -11,6 +11,9 @@ import placeholderImg from "@src/assets/placeholder.png";
 import { NavigateTo } from "@src/utils/NavigateTo";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import { getAllRestoProducts } from "@src/services/productCalls";
+import { addNewDish, editDish } from "@src/services/dishCalls";
+import { IDishFE } from "@src/model/IRestaurant";
 
 const PageBtn = () => {
   return createTheme({
@@ -44,27 +47,50 @@ interface IDishFormProps {
   dishDescription?: string,
   imageSrc?: string,
   price?: number,
+  add?: boolean
 }
 
 interface IProduct {
   name: string;
-  products: string[];
+  ingredients: string[];
   allergens: string[];
 }
 
 const DishForm = (props: IDishFormProps) => {
   const navigate = useNavigate();
-  const {dishName, dishProducts, dishDescription, price } = props;
+  const restoName = "burgerme";
+  let {dishName, dishProducts, dishDescription, price } = props;
   const imageSrc = props.imageSrc && props.imageSrc.length != 0 ? props.imageSrc : placeholderImg;
+  const [productList, setProductList] = useState<Array<IProduct>>([]);
+  let dishProductsList = [] as IProduct[]
 
-  const products:IProduct[] = [
-    { name: 'Fish soup seasoning', products: ["Fish", "Water", "Salt"], allergens: ["Fish"] },
-    { name: 'Butter', products: ["Butter"], allergens: ["milk"] },
-    { name: 'Flour', products: ["Wheat flour"], allergens: ["gluten"] },
-    { name: 'Tomato', products: ["Tomato"], allergens: [] },
-    { name: 'Peanut butter', products: ["Peanuts", "oil"], allergens: ["nuts"] },
-  ];
-  const dishProductsList = products.filter(product => dishProducts?.includes(product.name));
+  useEffect(() => {
+    getAllRestoProducts("burgerme").then((res) => {
+      setProductList(res);
+      dishProductsList = res.filter((product : IProduct) => dishProducts?.includes(product.name));
+    });
+  }, []);
+
+  async function sendRequestAndGoBack() {
+    const dish : IDishFE = {
+      name: dishName,
+      description: dishDescription,
+      price: price,
+      products: dishProducts,
+      allergens: "milk,gluten,nuts",
+      category: {
+        foodGroup: "Main",
+        extraGroup: "",
+      }
+    }
+
+    if (props.add) {
+      await addNewDish(restoName, dish);
+    } else {
+      await editDish(restoName, dish);
+    }
+    return NavigateTo("/dishes", navigate, { successfulForm: true });
+  }
 
   return (
     <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -96,6 +122,7 @@ const DishForm = (props: IDishFormProps) => {
                   defaultValue={dishName}
                   id="component-outlined"
                   fullWidth
+                  onChange={(e) => {dishName = e.target.value}}
                 />
               </FormControl>
             </Grid>
@@ -106,6 +133,7 @@ const DishForm = (props: IDishFormProps) => {
                   id="outlined-end-adornment"
                   fullWidth
                   defaultValue={price?.toFixed(2)}
+                  onChange={(e) => {price = parseInt(e.target.value)}}
                   InputProps={{
                     endAdornment: <InputAdornment position="end">€</InputAdornment>,
                   }}
@@ -119,6 +147,7 @@ const DishForm = (props: IDishFormProps) => {
                   label="Description"
                   defaultValue={dishDescription}
                   multiline
+                  onChange={(e) => {dishDescription = e.target.value}}
                 />
               </FormControl>
             </Grid>
@@ -126,10 +155,13 @@ const DishForm = (props: IDishFormProps) => {
               <Autocomplete
                 multiple
                 id="tags-outlined"
-                options={products}
+                options={productList}
                 getOptionLabel={(option) => (option ? (option as IProduct).name : "")}
                 defaultValue={dishProductsList}
                 filterSelectedOptions
+                onChange={(e, value) => {
+                  dishProducts = value.map((product: IProduct) => product.name);
+                }}
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -146,7 +178,7 @@ const DishForm = (props: IDishFormProps) => {
           className={styles.SaveBtn}
           variant="contained"
           sx={{ width: "12.13rem" }}
-          onClick={() => NavigateTo("/dishes", navigate, { successfulForm : true })}
+          onClick={sendRequestAndGoBack}
         >
           Save
         </Button>

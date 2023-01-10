@@ -10,6 +10,8 @@ import {
 import { NavigateTo } from "@src/utils/NavigateTo";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import { IProduct } from "@src/components/ProductCard/ProductCard";
+import { addNewProduct } from "@src/services/productCalls";
 
 const PageBtn = () => {
   return createTheme({
@@ -48,7 +50,7 @@ interface IIngredient {
 
 const ProductForm = (props: IDishFormProps) => {
   const navigate = useNavigate();
-  const {productName, productIngredients } = props;
+  let { productName, productIngredients } = props;
 
   const ingredients:IIngredient[] = [
     { name: 'Milk' },
@@ -58,6 +60,17 @@ const ProductForm = (props: IDishFormProps) => {
     { name: 'Salt' },
   ];
   const productIngredientsList = ingredients.filter(product => productIngredients?.includes(product.name));
+
+  async function sendRequestAndGoBack() {
+    const product : IProduct = {
+      name: productName,
+      ingredients: productIngredients,
+      allergens: [],
+    }
+
+    await addNewProduct(product);
+    return NavigateTo("/products", navigate, { successfulForm: true });
+  }
 
   return (
     <Container maxWidth={"md"}>
@@ -70,6 +83,7 @@ const ProductForm = (props: IDishFormProps) => {
                 defaultValue={productName}
                 id="component-outlined"
                 fullWidth
+                onChange={(e) => {productName = e.target.value}}
               />
             </FormControl>
           </Grid>
@@ -81,6 +95,9 @@ const ProductForm = (props: IDishFormProps) => {
               getOptionLabel={(option) => (option ? (option as IIngredient).name : "")}
               defaultValue={productIngredientsList}
               filterSelectedOptions
+              onChange={(e, value) => {
+                productIngredients = value.map((ingredient: IProduct) => ingredient.name);
+              }}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -95,7 +112,7 @@ const ProductForm = (props: IDishFormProps) => {
             className={styles.SaveBtn}
             variant="contained"
             sx={{ width: "12.13rem" }}
-            onClick={() => NavigateTo("/products", navigate, { successfulForm : true })}
+            onClick={sendRequestAndGoBack}
           >
             Save
           </Button>

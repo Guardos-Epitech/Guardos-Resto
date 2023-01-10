@@ -21,9 +21,10 @@ export interface ICategories {
 export interface IDishFE {
   name: string;
   description: string;
-  pictures: [string];
+  pictures?: [string];
+  allergens: string;
   price: number;
-  products: string;
+  products: string[];
   category: ICategoryFE;
 }
 

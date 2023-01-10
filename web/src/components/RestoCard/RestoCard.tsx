@@ -8,15 +8,17 @@ import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
 
 import Rating from "@src/components/RestoCard/Rating/Rating";
 import { IRestaurantFrontEnd } from "@src/model/IRestaurant";
+import { deleteResto } from "@src/services/restoCalls";
 
 interface IRestoCardProps {
   resto: IRestaurantFrontEnd;
+  onUpdate: Function,
   editable?: boolean;
 }
 
 const RestoCard = (props: IRestoCardProps) => {
   const [extended, setExtended] = useState(false);
-  const { resto, editable } = props;
+  const { onUpdate, resto, editable } = props;
   const imgStr = `${resto.pictures[0]}?auto=compress&cs=tinysrgb&h=350`;
   const address =
     `${resto.location.streetName} ${resto.location.streetNumber}` +
@@ -29,6 +31,11 @@ const RestoCard = (props: IRestoCardProps) => {
   const handleClick = () => {
     setExtended(!extended);
   };
+
+  async function getOnDelete() {
+    await deleteResto(resto.name);
+    await onUpdate();
+  }
 
   return (
     <Paper className={styles.DishBox} elevation={3} onClick={handleClick}>
@@ -76,6 +83,7 @@ const RestoCard = (props: IRestoCardProps) => {
                     },
                   },
                 ]}
+                onDelete={getOnDelete}
                 className={styles.ActionMenu}
                 onClick={handleChildClick}
               />

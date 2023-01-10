@@ -25,3 +25,15 @@ export async function deleteIngredient(name: string, id: number) {
     console.log('Ingredient ' + name + ' deleted ' + ' with id ' + id);
 
 }
+
+export async function findMaxIndexIngredients() {
+    const IngredientSchema = mongoose.model('IngredientsMVP',
+        ingredientsSchema);
+    const ingredients = await IngredientSchema.find()
+        .sort({ _id: -1 })
+        .limit(1);
+    if (ingredients.length === 0) {
+        return 0;
+    }
+    return ingredients[0]._id;
+}
