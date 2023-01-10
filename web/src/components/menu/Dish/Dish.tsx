@@ -13,14 +13,14 @@ import { deleteDish } from "@src/services/dishCalls";
 interface IEditableDishProps {
   dish: IDishFE;
   onUpdate?: Function;
-  options?: string;
   imageSrc?: string;
   editable?: boolean;
 }
 
 const Dish = (props: IEditableDishProps) => {
   const [extended, setExtended] = useState(false);
-  const { onUpdate, dish, options, editable } = props;
+  const { onUpdate, dish, editable } = props;
+  const options = dish.category.extraGroup
   const { name, products, description, price } = dish;
   const imageSrc =
     props.imageSrc && props.imageSrc.length != 0

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@src/components/forms/DishForm/DishForm.module.scss";
 import {
   Autocomplete,
@@ -11,7 +11,7 @@ import placeholderImg from "@src/assets/placeholder.png";
 import { NavigateTo } from "@src/utils/NavigateTo";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import { getAllProducts } from "@src/services/productCalls";
+import { getAllRestoProducts } from "@src/services/productCalls";
 import { addNewDish, editDish } from "@src/services/dishCalls";
 import { IDishFE } from "@src/model/IRestaurant";
 
@@ -52,7 +52,7 @@ interface IDishFormProps {
 
 interface IProduct {
   name: string;
-  products: string[];
+  ingredients: string[];
   allergens: string[];
 }
 
@@ -61,24 +61,15 @@ const DishForm = (props: IDishFormProps) => {
   const restoName = "burgerme";
   let {dishName, dishProducts, dishDescription, price } = props;
   const imageSrc = props.imageSrc && props.imageSrc.length != 0 ? props.imageSrc : placeholderImg;
+  const [productList, setProductList] = useState<Array<IProduct>>([]);
+  let dishProductsList = [] as IProduct[]
 
-  const products:IProduct[] = [
-    { name: 'Fish soup seasoning', products: ["Fish", "Water", "Salt"], allergens: ["Fish"] },
-    { name: 'Butter', products: ["Butter"], allergens: ["milk"] },
-    { name: 'Flour', products: ["Wheat flour"], allergens: ["gluten"] },
-    { name: 'Tomato', products: ["Tomato"], allergens: [] },
-    { name: 'Peanut butter', products: ["Peanuts", "oil"], allergens: ["nuts"] },
-  ];
-  // const dishProductsList = products.filter(product => dishProducts?.includes(product.name));
-
-  function getProducts() {
-    let productsList : IProduct[] = [];
-
-    getAllProducts().then((res) => {
-      productsList = res.data;
+  useEffect(() => {
+    getAllRestoProducts("burgerme").then((res) => {
+      setProductList(res);
+      dishProductsList = res.filter((product : IProduct) => dishProducts?.includes(product.name));
     });
-    return productsList;
-  }
+  }, []);
 
   async function sendRequestAndGoBack() {
     const dish : IDishFE = {
@@ -163,9 +154,9 @@ const DishForm = (props: IDishFormProps) => {
               <Autocomplete
                 multiple
                 id="tags-outlined"
-                options={products}
+                options={productList}
                 getOptionLabel={(option) => (option ? (option as IProduct).name : "")}
-                defaultValue={getProducts()}
+                defaultValue={dishProductsList}
                 filterSelectedOptions
                 onChange={(e, value) => {
                   dishProducts = value.map((product: IProduct) => product.name);

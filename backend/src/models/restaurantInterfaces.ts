@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 export interface IProducts {
     name: string;
     allergens: string;
-    ingredients: [string];
+    ingredients: string[];
 }
 
 //0 == Monday, 1 == Tuesday, 2 == Wednesday, 3 == Thursday, 4 == Friday, 5 == Saturday, 6 == Sunday

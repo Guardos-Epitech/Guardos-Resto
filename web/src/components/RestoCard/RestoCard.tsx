@@ -38,8 +38,8 @@ const RestoCard = (props: IRestoCardProps) => {
   };
 
   async function getOnDelete() {
-    await onUpdate();
     await deleteResto(resto.name);
+    await onUpdate();
   }
 
   return (

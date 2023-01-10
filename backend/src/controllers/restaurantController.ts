@@ -262,3 +262,64 @@ export async function changeRestaurant(
     await updateRestaurantByName(newRest, restaurantName);
     return newRest;
 }
+
+function getProductObj(productName: string) {
+    if (productName == 'cheese') {
+        return {
+            name: productName,
+            allergens: 'milk',
+            ingredients: ['milk', 'cheddar cheese', 'salt']
+        };
+    } else if (productName == 'seasoning') {
+        return {
+            name: productName,
+            allergens: 'gluten',
+            ingredients: ['wheat', 'herbs', 'salt']
+        }
+    } else {
+        return {
+            name: productName,
+            allergens: '',
+            ingredients: []
+        }
+    }
+}
+
+export async function addRestoProduct(productName: string) {
+    const Restaurant = mongoose.model('Restaurant', restaurantSchema);
+    const restaurants = await Restaurant.find();
+    let restaurantsBE : IRestaurantBackEnd[] = [];
+
+    for (const restaurant of await restaurants) {
+        restaurantsBE.push(createBackEndObj({
+            description: restaurant.description,
+            dishes: restaurant.dishes as [IDishBE],
+            extras: restaurant.extras as [IDishBE],
+            id: 0,
+            location: restaurant.location as ILocation,
+            mealType: restaurant.mealType as [IMealType],
+            name: restaurant.name,
+            openingHours: restaurant.openingHours as [IOpeningHours],
+            phoneNumber: restaurant.phoneNumber,
+            pictures: restaurant.pictures as [string],
+            products: restaurant.products as [IProducts],
+            rating: restaurant.rating,
+            ratingCount: restaurant.ratingCount,
+            website: restaurant.website}
+        ));
+    }
+
+    restaurantsBE.map(async (restaurant) => {
+        restaurant.products.push(getProductObj(productName));
+        await updateRestaurantByName(restaurant, restaurant.name);
+    });
+    return true;
+}
+
+export async function getAllRestoProducts(restoName: string) {
+    const Restaurant = mongoose.model('Restaurant', restaurantSchema);
+    const rest = await Restaurant.findOne({name: restoName});
+    if (!rest)
+        return null;
+    return rest.products;
+}

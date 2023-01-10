@@ -23,10 +23,6 @@ const DishesPage = () => {
       setDishData(res);
     });
   }
-  const dishOptions =
-    "BBQ-Sauce, Apple, gluten-free bread, Sesame, Some more options to exceed one line".repeat(
-      2
-  );
 
   const getImg = (index: number) => {
     if (index % 3 === 0) {
@@ -51,7 +47,6 @@ const DishesPage = () => {
               key={dish.name + index}
               dish={dish}
               onUpdate={updateDishData}
-              options={dishOptions}
               imageSrc={getImg(index)}
               editable
             />

@@ -5,6 +5,7 @@ import logger from 'morgan';
 import path = require('path');
 import { connectDataBase, SUCCEED } from './controllers/connectDataBase';
 import basicApiIngredients from './routes/ingredients';
+import products from './routes/products';
 import dishes from './routes/dishes';
 import restaurants from './routes/restaurants';
 import cors from 'cors';
@@ -29,6 +30,7 @@ async function main() {
     }
 
     app.use('/', basicApiIngredients);
+    app.use('/api/products', products);
     app.use('/api/dishes', dishes);
     app.use('/api/restaurants', restaurants);
 

@@ -44,11 +44,11 @@ const ProductCard = (props: IProductCardProps) => {
           />
         </div>
         { (extended && product.allergens) && <AllergenTags dishAllergens={product.allergens}/> }
-        <span className={extended ? styles.IngredientList : styles.IngredientListWrap}>
+        {product.ingredients?.length > 0 && <span className={extended ? styles.IngredientList : styles.IngredientListWrap}>
               <b>
                 {"Ingredients: "}
               </b>
-          {product.ingredients?.join(", ")}</span>
+          {product.ingredients?.join(", ")}</span>}
       </Paper>
     </Grid>
   );
