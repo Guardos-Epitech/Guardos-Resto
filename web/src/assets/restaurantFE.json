@@ -111,6 +111,7 @@
     "rating" : 4.7,
     "description": "You want freshly prepared burgers, delivered to your home in just 25 minutes? Then burgerme is the right place for you! How about a real classic like our Cheese Burger, with juicy beef, melting cheese, spicy onions, pickles, fresh tomatoes and crisp lettuce, served with the right sauces in a brioche bun? Or would you prefer something fancy, like our Big Angus Teriyaki, the New Yorker or our Hot Crunchy Chicken? Of course, we also have plenty of vegetarian and vegan burgers on offer - and delicious finger food, crisp salads and sweet desserts make the offer perfect!",
     "phoneNumber": "0123091123",
+    "pictures": ["https://m.media-amazon.com/images/I/615WjS1XbEL._AC_SY328_.jpg", "asdfgfds.def"],
     "categories": [
       {
         "name": "appetizer",
@@ -165,6 +166,7 @@
     "rating" : 3.8,
     "description": "Burger King is an American-based multinational chain of hamburger fast food restaurants. Headquartered in Miami-Dade County, Florida, the company was founded in 1953 as Insta-Burger King, a Jacksonville, Florida–based restaurant chain.",
     "phoneNumber": "01232191",
+    "pictures": ["https://amp.wuv.de/var/wuv/storage/images/media/bilder/burger_king_alt/9957518-1-ger-DE/burger_king_alt_gross.jpg", "asdfgfds.def"],
     "categories": [
       {
         "name": "dessert",
@@ -218,6 +220,7 @@
     "rating" : 3.8,
     "description": "McDonald's Corporation is an American multinational fast food chain, founded in 1940 as a restaurant operated by Richard and Maurice McDonald, in San Bernardino, California, United States.",
     "phoneNumber": "0123091",
+    "pictures": ["https://www.ndr.de/fernsehen/sendungen/nordmagazin/bilderaktion/bilderaktionmv1862_v-contentgross.jpg", "asdfgfds.def"],
     "categories": [
       {
         "name": "maindish",

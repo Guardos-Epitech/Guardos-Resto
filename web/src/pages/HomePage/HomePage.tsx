@@ -24,7 +24,6 @@ const HomePage = () => {
                 <RestoCard
                   key={restaurant.name + index}
                   resto={restaurant as IRestaurantFrontEnd}
-                  imageSrc={restaurant.pictures[0]}  // TODO: replace with actual data
                   editable
                 />
               );
