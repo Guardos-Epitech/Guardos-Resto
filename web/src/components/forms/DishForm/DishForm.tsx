@@ -77,6 +77,7 @@ const DishForm = (props: IDishFormProps) => {
       description: dishDescription,
       price: price,
       products: dishProducts,
+      allergens: "milk,gluten,nuts",
       category: {
         foodGroup: "Main",
         extraGroup: "",

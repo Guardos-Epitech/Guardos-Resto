@@ -20,7 +20,7 @@ const Dish = (props: IEditableDishProps) => {
   const [extended, setExtended] = useState(false);
   const { onUpdate, dish, editable } = props;
   const options = dish.category.extraGroup
-  const { name, products, description, price, pictures } = dish;
+  const { name, allergens, description, price, pictures } = dish;
   const imgStr = `${pictures[0]}?auto=compress&cs=tinysrgb&h=350`;
   const priceStr = `${price.toFixed(2)} €`;
 
@@ -67,7 +67,7 @@ const Dish = (props: IEditableDishProps) => {
                 />
               )}
             </div>
-            {extended && <AllergenTags dishAllergens={products} />}
+            {extended && <AllergenTags dishAllergens={allergens.split(',')} />}
           </Grid>
           <Grid item className={styles.FlexParent}>
             <img
@@ -122,7 +122,7 @@ const Dish = (props: IEditableDishProps) => {
                 />
               )}
             </div>
-            {extended && <AllergenTags dishAllergens={products} />}
+            {extended && <AllergenTags dishAllergens={allergens.split(',')} />}
             <p
               className={
                 extended
