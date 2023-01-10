@@ -4,7 +4,6 @@ import { Grid, Paper } from "@mui/material";
 import styles from "@src/components/menu/Dish/Dish.module.scss";
 
 import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
-import placeholderImg from "@src/assets/placeholder.png";
 import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
 import EditIcon from "@mui/icons-material/Edit";
 import { IDishFE } from "@src/model/IRestaurant";
@@ -21,11 +20,8 @@ const Dish = (props: IEditableDishProps) => {
   const [extended, setExtended] = useState(false);
   const { onUpdate, dish, editable } = props;
   const options = dish.category.extraGroup
-  const { name, products, description, price } = dish;
-  const imageSrc =
-    props.imageSrc && props.imageSrc.length != 0
-      ? props.imageSrc
-      : placeholderImg;
+  const { name, products, description, price, pictures } = dish;
+  const imgStr = `${pictures[0]}?auto=compress&cs=tinysrgb&h=350`;
   const priceStr = `${price.toFixed(2)} €`;
 
   const handleChildClick = (e: any) => {
@@ -74,7 +70,11 @@ const Dish = (props: IEditableDishProps) => {
             {extended && <AllergenTags dishAllergens={products} />}
           </Grid>
           <Grid item className={styles.FlexParent}>
-            <img src={imageSrc} className={styles.ImageDimensions} alt={name} />
+            <img
+                src={imgStr}
+                alt="new"
+                className={styles.ImageDimensions}
+            />;
           </Grid>
           <Grid item xs={12} className={styles.GridItemDescription}>
             <p
@@ -144,13 +144,12 @@ const Dish = (props: IEditableDishProps) => {
           </Grid>
 
           <Grid item xs={2} className={styles.GridItemImage}>
-            {imageSrc && (
-              <img
-                src={imageSrc}
-                alt={name}
-                className={styles.ImageDimensions}
+            {
+              <img src={imgStr}
+                   alt="new"
+                   className={styles.ImageDimensions}
               />
-            )}
+            }
           </Grid>
         </Grid>
       </div>

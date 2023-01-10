@@ -4,8 +4,6 @@ import styles from "@src/pages/DishesPage/DishesPage.module.scss";
 import Layout from "../../components/dumpComponents/Layout/Layout";
 import Dish from "../../components/menu/Dish/Dish";
 
-import burgerImg from "@src/assets/dishImages/burger.jpg";
-import pizzaImg from "@src/assets/dishImages/pizza.jpg";
 import FixedBtn from "../../components/dumpComponents/buttons/FixedBtn/FixedBtn";
 import SuccessAlert from "@src/components/dumpComponents/SuccessAlert/SuccessAlert";
 import { IDishFE } from "@src/model/IRestaurant";
@@ -24,16 +22,6 @@ const DishesPage = () => {
     });
   }
 
-  const getImg = (index: number) => {
-    if (index % 3 === 0) {
-      return burgerImg;
-    } else if (index % 3 === 1) {
-      return pizzaImg;
-    } else {
-      return "";
-    }
-  }
-
   return (
     <div className="test">
       <Header />
@@ -47,7 +35,6 @@ const DishesPage = () => {
               key={dish.name + index}
               dish={dish}
               onUpdate={updateDishData}
-              imageSrc={getImg(index)}
               editable
             />
         )})}

@@ -69,7 +69,6 @@ const MenuPage = () => {
                     <Dish
                       key={dish.name + index}
                       dish={dish}
-                      imageSrc={getImg(index)}
                     />
                   );
                 })}
