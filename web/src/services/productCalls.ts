@@ -34,10 +34,10 @@ export const deleteProduct = async (body: any) => {
   const response = await axios({
     url: baseUrl + 'delete',
     method: 'DELETE',
-    data: JSON.stringify(body),
     headers: {
       'Content-Type': 'application/json',
-    }
+    },
+    data: JSON.stringify(body)
   });
   return response.data;
 }
