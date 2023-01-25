@@ -4,7 +4,7 @@ import {
     createNewIngredient,
     getAllIngredients,
     deleteIngredient,
-    findMaxIndexIngredients
+    findMaxIndexIngredients, getIngredientByName
 } from '../controllers/ingredientsController';
 import { checkIfNameAndIdExists, checkIfIdExists }
     from '../middleware/ingredientsMiddleWare';
@@ -31,11 +31,12 @@ router.post('/post', async (req, res) => {
     }
 });
 router.delete('/delete', async (req, res) => {
-    if (await checkIfIdExists(req.body.id)) {
-        await deleteIngredient(req.body.name, req.body.id);
+    const id = req.body.id ? req.body.id : (await getIngredientByName(req.body.name));
+    if (await checkIfIdExists(id)) {
+        await deleteIngredient(req.body.name, id);
         res.status(200)
             .send('Ingredient '
-                + req.body.name + ' deleted ' + ' with id ' + req.body.id);
+                + req.body.name + ' deleted ' + ' with id ' + id);
     } else {
         res.status(400)
             .send('Ingredient not found');

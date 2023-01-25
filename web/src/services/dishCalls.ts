@@ -36,6 +36,9 @@ export const deleteDish = async (restoName: string, dishName: string) => {
   const response = await axios({
     url: baseUrl + restoName,
     method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
     data: JSON.stringify({ name: dishName }),
   });
   return response.data;

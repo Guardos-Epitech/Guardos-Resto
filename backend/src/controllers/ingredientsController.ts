@@ -18,6 +18,13 @@ export async function getAllIngredients() {
     return IngredientSchema.find();
 }
 
+export async function getIngredientByName(name: string) {
+    const IngredientSchema = mongoose.model('IngredientsMVP',
+        ingredientsSchema);
+    return IngredientSchema.find({name: name});
+
+}
+
 export async function deleteIngredient(name: string, id: number) {
     const IngredientSchema = mongoose.model('IngredientsMVP',
         ingredientsSchema);
