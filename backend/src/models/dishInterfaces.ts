@@ -5,7 +5,6 @@ export interface IDishBE {
     id: number;
     description: string;
     price: number;
-    allergensOld: string;
     allergens: [string];
     pictures: [string];
     products: [string];

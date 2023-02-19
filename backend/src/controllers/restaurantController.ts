@@ -54,7 +54,6 @@ function createBackEndObj(restaurant: {
             products: dish.products,
             pictures: dish.pictures,
             price: dish.price,
-            allergensOld: dish.allergensOld,
             allergens: dish.allergens,
             category: dish.category
         };
@@ -80,7 +79,6 @@ function createBackEndObj(restaurant: {
             products: extra.products,
             price: extra.price,
             pictures: extra.pictures,
-            allergensOld: extra.allergensOld,
             allergens: extra.allergens,
             category: extra.category
         };
@@ -129,7 +127,7 @@ function createRestaurantObjFe(
                     description: dish.description,
                     price: dish.price,
                     pictures: dish.pictures,
-                    allergens: [dish.allergensOld],
+                    allergens: dish.allergens,
                     category: {
                         foodGroup: dish.category.foodGroup,
                         extraGroup: dish.category.extraGroup},
@@ -269,19 +267,19 @@ function getProductObj(productName: string) {
     if (productName === 'cheese') {
         return {
             name: productName,
-            allergensOld: ['milk'],
+            allergens: ['milk'],
             ingredients: ['milk', 'cheddar cheese', 'salt']
         };
     } else if (productName === 'seasoning') {
         return {
             name: productName,
-            allergensOld: ['gluten'],
+            allergens: ['gluten'],
             ingredients: ['wheat', 'herbs', 'salt']
         };
     } else {
         return {
             name: productName,
-            allergensOld: [''],
+            allergens: [''],
             ingredients: []
         };
     }

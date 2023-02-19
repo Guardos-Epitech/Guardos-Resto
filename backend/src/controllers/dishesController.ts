@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 import { restaurantSchema } from '../models/restaurantInterfaces';
 import { IDishesCommunication } from '../models/communicationInterfaces';
-import { IDishBE } from '../models/dishInterfaces';
+import {IDishBE, IDishFE} from '../models/dishInterfaces';
+import {ICategoryFE} from '../models/categoryInterfaces';
 
 export async function getDishesByRestaurantID(restaurantId: number) {
     const Restaurant = mongoose.model('Restaurant', restaurantSchema);
@@ -24,23 +25,29 @@ export async function getDishByName(restaurantName: string, dishName: string) {
 
 export async function getAllDishes() {
     const Restaurant = mongoose.model('Restaurant', restaurantSchema);
-    const restaurants = await Restaurant.find({}, 'dishes');
-    const dishes = restaurants.map((restaurant) => restaurant.dishes)
-        .flat();
+    const restaurants = await Restaurant.find();
+    const dishes: IDishFE[] = [];
     for (const rest of restaurants) {
-        let count = 0;
         for (const dish of rest.dishes) {
-            if (dish.allergensOld) {
-                dish.allergens = dish.allergensOld.split(',');
-                dish._id = count;
-                // @ts-ignore
-                const test: IDishBE = dish;
-                console.log(test.name, test.allergens);
-                test.id = count;
-                await updateDish(rest.name, test);
-                createNewDish(rest.name, test);
+            const dishFE: IDishFE = {
+                name: dish.name,
+                description: dish.description,
+                price: dish.price,
+                pictures: [''],
+                allergens: [''],
+                category: {} as ICategoryFE,
+            };
+            dishFE.pictures.pop();
+            dishFE.allergens.pop();
+
+            for (const pict of dish.pictures) {
+                dishFE.pictures.push(pict);
             }
-            count++;
+
+            for (const allergen of dish.allergens) {
+                dishFE.allergens.push(allergen);
+            }
+            dishes.push(dishFE);
         }
     }
     return dishes;
@@ -109,8 +116,6 @@ export async function changeDishByName(
         price: dish.price ? dish.price : oldDish.price,
         products: dish.products ? dish.products : oldDish.products as [string],
         pictures: dish.pictures ? dish.pictures : oldDish.pictures as [string],
-        allergensOld: dish.allergens ? dish.allergens[0]:
-            oldDish.allergensOld, //TODO: change this
         allergens: dish.allergens ? dish.allergens as [string] :
             oldDish.allergens as [string],
         category: dish.category ? dish.category : oldDish.category as {
