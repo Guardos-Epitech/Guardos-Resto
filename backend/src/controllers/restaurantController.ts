@@ -54,6 +54,7 @@ function createBackEndObj(restaurant: {
             products: dish.products,
             pictures: dish.pictures,
             price: dish.price,
+            allergensOld: dish.allergensOld,
             allergens: dish.allergens,
             category: dish.category
         };
@@ -79,6 +80,7 @@ function createBackEndObj(restaurant: {
             products: extra.products,
             price: extra.price,
             pictures: extra.pictures,
+            allergensOld: extra.allergensOld,
             allergens: extra.allergens,
             category: extra.category
         };
@@ -127,7 +129,7 @@ function createRestaurantObjFe(
                     description: dish.description,
                     price: dish.price,
                     pictures: dish.pictures,
-                    allergens: dish.allergens,
+                    allergens: [dish.allergensOld],
                     category: {
                         foodGroup: dish.category.foodGroup,
                         extraGroup: dish.category.extraGroup},
@@ -149,7 +151,7 @@ export async function getRestaurantByName(restaurantName: string) {
     const restaurantBE = createBackEndObj({
         description: rest.description,
         dishes: rest.dishes as [IDishBE],
-        extras: rest.extras as [IDishBE],
+        extras: rest.extras as unknown as [IDishBE],
         id: rest.id,
         location: rest.location as ILocation,
         mealType: rest.mealType as [IMealType],
@@ -175,7 +177,7 @@ export async function getAllRestaurants() {
         const restaurantBE = createBackEndObj({
             description: restaurant.description,
             dishes: restaurant.dishes as [IDishBE],
-            extras: restaurant.extras as [IDishBE],
+            extras: restaurant.extras as unknown as [IDishBE],
             id: 0,
             location: restaurant.location as ILocation,
             mealType: restaurant.mealType as [IMealType],
@@ -267,19 +269,19 @@ function getProductObj(productName: string) {
     if (productName === 'cheese') {
         return {
             name: productName,
-            allergens: ['milk'],
+            allergensOld: ['milk'],
             ingredients: ['milk', 'cheddar cheese', 'salt']
         };
     } else if (productName === 'seasoning') {
         return {
             name: productName,
-            allergens: ['gluten'],
+            allergensOld: ['gluten'],
             ingredients: ['wheat', 'herbs', 'salt']
         };
     } else {
         return {
             name: productName,
-            allergens: [''],
+            allergensOld: [''],
             ingredients: []
         };
     }
@@ -294,7 +296,7 @@ export async function addRestoProduct(productName: string) {
         restaurantsBE.push(createBackEndObj({
             description: restaurant.description,
             dishes: restaurant.dishes as [IDishBE],
-            extras: restaurant.extras as [IDishBE],
+            extras: restaurant.extras as unknown as [IDishBE],
             id: 0,
             location: restaurant.location as ILocation,
             mealType: restaurant.mealType as [IMealType],

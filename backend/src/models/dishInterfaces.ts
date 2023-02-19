@@ -5,6 +5,7 @@ export interface IDishBE {
     id: number;
     description: string;
     price: number;
+    allergensOld: string;
     allergens: [string];
     pictures: [string];
     products: [string];
@@ -28,7 +29,7 @@ export const dishSchema = new mongoose.Schema({
     products: [String],
     pictures: [String],
     price: Number,
-    allergens: String,
+    allergensOld: String,
     category: {
         menuGroup: String,
         foodGroup: String,

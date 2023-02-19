@@ -30,14 +30,15 @@ export async function getAllDishes() {
     for (const rest of restaurants) {
         let count = 0;
         for (const dish of rest.dishes) {
-            if (dish.allergens.length === 1
-                && dish.allergens[0].includes(',')) {
-                dish.allergens = dish.allergens[0].split(',');
+            if (dish.allergensOld) {
+                dish.allergens = dish.allergensOld.split(',');
                 dish._id = count;
                 // @ts-ignore
                 const test: IDishBE = dish;
+                console.log(test.name, test.allergens);
                 test.id = count;
-                console.log(await updateDish((await rest).name, test));
+                await updateDish(rest.name, test);
+                createNewDish(rest.name, test);
             }
             count++;
         }
@@ -108,7 +109,9 @@ export async function changeDishByName(
         price: dish.price ? dish.price : oldDish.price,
         products: dish.products ? dish.products : oldDish.products as [string],
         pictures: dish.pictures ? dish.pictures : oldDish.pictures as [string],
-        allergens: dish.allergens ? dish.allergens :
+        allergensOld: dish.allergens ? dish.allergens[0]:
+            oldDish.allergensOld, //TODO: change this
+        allergens: dish.allergens ? dish.allergens as [string] :
             oldDish.allergens as [string],
         category: dish.category ? dish.category : oldDish.category as {
             menuGroup: string;
