@@ -51,7 +51,7 @@ export interface IRestaurantBackEnd {
 }
 
 //Database structure for restaurants
-export const restaurantSchema = new mongoose.Schema({
+const restaurantSchema = new mongoose.Schema({
     _id: Number,
     name: String,
     phoneNumber: String,
@@ -111,3 +111,4 @@ export const restaurantSchema = new mongoose.Schema({
         ingredients: [String],
     }],
 });
+export const Restaurant =  mongoose.model('Restaurant', restaurantSchema);

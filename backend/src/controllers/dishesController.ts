@@ -1,20 +1,16 @@
-import mongoose from 'mongoose';
-import { restaurantSchema } from '../models/restaurantInterfaces';
+import { Restaurant } from '../models/restaurantInterfaces';
 import { IDishesCommunication } from '../models/communicationInterfaces';
 import { IDishBE } from '../models/dishInterfaces';
 
 export async function getDishesByRestaurantID(restaurantId: number) {
-    const Restaurant = mongoose.model('Restaurant', restaurantSchema);
     return Restaurant.find({_id: restaurantId}, 'dishes');
 }
 
 export async function getDishesByRestaurantName(restaurantName: string) {
-    const Restaurant = mongoose.model('Restaurant', restaurantSchema);
     return Restaurant.find({name: restaurantName}, 'dishes');
 }
 
 export async function getDishByName(restaurantName: string, dishName: string) {
-    const Restaurant = mongoose.model('Restaurant', restaurantSchema);
     const restaurant = await Restaurant.findOne({ name: restaurantName });
     if (!restaurant) {
         return null;
@@ -23,7 +19,6 @@ export async function getDishByName(restaurantName: string, dishName: string) {
 }
 
 export async function getAllDishes() {
-    const Restaurant = mongoose.model('Restaurant', restaurantSchema);
     const restaurants = await Restaurant.find({}, 'dishes');
     const dishes = restaurants.map((restaurant) => restaurant.dishes)
         .flat();
@@ -31,7 +26,6 @@ export async function getAllDishes() {
 }
 
 async function deleteDish(restaurantName: string, dishName: string) {
-    const Restaurant = mongoose.model('Restaurant', restaurantSchema);
     return Restaurant.findOneAndUpdate(
         {name: restaurantName},
         {$pull: { dishes: { name: dishName}}},
@@ -40,7 +34,6 @@ async function deleteDish(restaurantName: string, dishName: string) {
 }
 
 async function createDish(restaurantName: string, dish: IDishesCommunication) {
-    const Restaurant = mongoose.model('Restaurant', restaurantSchema);
     return Restaurant.findOneAndUpdate(
         {name: restaurantName},
         {$push: {dishes: dish}},
@@ -74,7 +67,6 @@ export async function deleteDishByName(
 
 export async function updateDish(
     restaurantName: string, dish: IDishBE) {
-    const Restaurant = mongoose.model('Restaurant', restaurantSchema);
     return Restaurant.findOneAndUpdate(
         {name: restaurantName, 'dishes.name': dish.name},
         {$set: {'dishes.$': dish}},
