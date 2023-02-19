@@ -27,6 +27,21 @@ export async function getAllDishes() {
     const restaurants = await Restaurant.find({}, 'dishes');
     const dishes = restaurants.map((restaurant) => restaurant.dishes)
         .flat();
+    for (const rest of restaurants) {
+        let count = 0;
+        for (const dish of rest.dishes) {
+            if (dish.allergens.length === 1
+                && dish.allergens[0].includes(',')) {
+                dish.allergens = dish.allergens[0].split(',');
+                dish._id = count;
+                // @ts-ignore
+                const test: IDishBE = dish;
+                test.id = count;
+                console.log(await updateDish((await rest).name, test));
+            }
+            count++;
+        }
+    }
     return dishes;
 }
 
@@ -55,7 +70,7 @@ export async function createNewDish(
         price: dishCom.price ? dishCom.price : -1,
         products: dishCom.products ? dishCom.products : [''],
         pictures: dishCom.pictures ? dishCom.pictures : [''],
-        allergens: dishCom.allergens ? dishCom.allergens : '',
+        allergens: dishCom.allergens ? dishCom.allergens : [''],
         category: dishCom.category ? dishCom.category : {
             menuGroup: '',
             foodGroup: '',
@@ -93,7 +108,8 @@ export async function changeDishByName(
         price: dish.price ? dish.price : oldDish.price,
         products: dish.products ? dish.products : oldDish.products as [string],
         pictures: dish.pictures ? dish.pictures : oldDish.pictures as [string],
-        allergens: dish.allergens ? dish.allergens : oldDish.allergens,
+        allergens: dish.allergens ? dish.allergens :
+            oldDish.allergens as [string],
         category: dish.category ? dish.category : oldDish.category as {
             menuGroup: string;
             foodGroup: string;

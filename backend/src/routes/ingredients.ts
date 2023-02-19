@@ -31,7 +31,8 @@ router.post('/post', async (req, res) => {
     }
 });
 router.delete('/delete', async (req, res) => {
-    const id = req.body.id ? req.body.id : (await getIngredientByName(req.body.name));
+    const id = req.body.id ? req.body.id :
+        (await getIngredientByName(req.body.name));
     if (await checkIfIdExists(id)) {
         await deleteIngredient(req.body.name, id);
         res.status(200)

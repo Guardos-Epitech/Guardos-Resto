@@ -267,19 +267,19 @@ function getProductObj(productName: string) {
     if (productName === 'cheese') {
         return {
             name: productName,
-            allergens: 'milk',
+            allergens: ['milk'],
             ingredients: ['milk', 'cheddar cheese', 'salt']
         };
     } else if (productName === 'seasoning') {
         return {
             name: productName,
-            allergens: 'gluten',
+            allergens: ['gluten'],
             ingredients: ['wheat', 'herbs', 'salt']
         };
     } else {
         return {
             name: productName,
-            allergens: '',
+            allergens: [''],
             ingredients: []
         };
     }

@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 
 export interface IProducts {
     name: string;
-    allergens: string;
+    allergens: string[];
     ingredients: string[];
 }
 
@@ -72,7 +72,7 @@ export const restaurantSchema = new mongoose.Schema({
         products: [String],
         pictures: [String],
         price: Number,
-        allergens: String,
+        allergens: [String],
         category: {
             menuGroup: String,
             foodGroup: String,
@@ -97,7 +97,7 @@ export const restaurantSchema = new mongoose.Schema({
         description: String,
         price: Number,
         pictures: [String],
-        allergens: String,
+        allergens: [String],
         products: [String],
         category: {
             menuGroup: String,
@@ -107,7 +107,7 @@ export const restaurantSchema = new mongoose.Schema({
     }],
     products: [{
         name: String,
-        allergens: String,
+        allergens: [String],
         ingredients: [String],
     }],
 });
