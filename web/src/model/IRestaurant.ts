@@ -40,3 +40,9 @@ interface ILocation {
   country: string;
   city: string;
 }
+
+export interface IProduct {
+  name: string,
+  ingredients: string[],
+  allergens: string[]
+}
