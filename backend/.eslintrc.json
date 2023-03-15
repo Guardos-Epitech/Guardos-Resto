@@ -24,7 +24,7 @@
         "semi": [2, "always"],
         "camelcase": [2, { "properties": "always" }],
         "no-var": "error",
-        "indent": ["error", 4],
+        "indent": ["error", 2],
         "no-irregular-whitespace": "error",
         "max-len": ["error", { "code": 80, "ignoreUrls": true, "ignoreComments": true }],
         "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }],
