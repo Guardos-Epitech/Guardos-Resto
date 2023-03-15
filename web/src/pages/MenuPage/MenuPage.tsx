@@ -1,18 +1,19 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { List, ListItem } from "@mui/material";
+import PlaceIcon from "@mui/icons-material/Place";
+
+import Category from "@src/components/menu/Category/Category";
+import Dish from "@src/components/menu/Dish/Dish";
+import Header from "@src/components/dumpComponents/Header/Header";
+import { ICategories } from "@src/model/IRestaurant";
+import Layout from "@src/components/dumpComponents/Layout/Layout";
 import styles from "@src/pages/MenuPage/MenuPage.module.scss";
 
-import Dish from "@src/components/menu/Dish/Dish";
-import Category from "@src/components/menu/Category/Category";
-import Layout from "@src/components/dumpComponents/Layout/Layout";
-import Header from "@src/components/dumpComponents/Header/Header";
-import PlaceIcon from "@mui/icons-material/Place";
-import { List, ListItem } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import burgerImg from "@src/assets/dishImages/burger.jpg";
 import pizzaImg from "@src/assets/dishImages/pizza.jpg";
-import { ICategories } from "@src/model/IRestaurant";
-import { useLocation } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -52,7 +53,7 @@ const MenuPage = () => {
           <ListItem>
             <div className={styles.Address}>
               <ThemeProvider theme={theme}>
-                <PlaceIcon color={"primary"} />
+                <PlaceIcon color="primary" />
               </ThemeProvider>
               <span className={styles.RestaurantAddress}>{address}</span>
             </div>

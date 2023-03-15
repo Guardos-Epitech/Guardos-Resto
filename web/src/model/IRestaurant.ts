@@ -5,7 +5,7 @@ export interface IRestaurantFrontEnd {
   categories: [ICategories];
   location: ILocation;
   rating: number;
-  range: number
+  range: number;
   description: string;
   hitRate: number;
   dishes: any;

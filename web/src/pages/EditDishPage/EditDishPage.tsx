@@ -1,10 +1,11 @@
 import React from "react";
-import Header from "@src/components/dumpComponents/Header/Header";
-import styles from "@src/pages/EditDishPage/EditDishPage.module.scss";
-import Layout from "../../components/dumpComponents/Layout/Layout";
+
 import DishForm from "@src/components/forms/DishForm/DishForm";
-import { useLocation } from "react-router-dom";
+import Header from "@src/components/dumpComponents/Header/Header";
 import { IDishFE } from "@src/model/IRestaurant";
+import Layout from "../../components/dumpComponents/Layout/Layout";
+import styles from "@src/pages/EditDishPage/EditDishPage.module.scss";
+import { useLocation } from "react-router-dom";
 
 interface IEditDishPageProps {
   dish: IDishFE;

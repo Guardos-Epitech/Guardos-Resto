@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import styles from "@src/components/ProductCard/ProductCard.module.scss";
+
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Grid, Paper } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
+
 import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
 import { deleteProduct } from "@src/services/productCalls";
+import styles from "@src/components/ProductCard/ProductCard.module.scss";
 
 export interface IProduct {
   name: string,
@@ -23,7 +25,7 @@ const ProductCard = (props: IProductCardProps) => {
 
   const handleChildClick = async (e: any) => {
     e.stopPropagation();
-    await deleteProduct(product)
+    await deleteProduct(product);
     if (onUpdate) {
       await onUpdate();
     }
@@ -43,12 +45,15 @@ const ProductCard = (props: IProductCardProps) => {
             onClick={handleChildClick}
           />
         </div>
-        { (extended && product.allergens) && <AllergenTags dishAllergens={product.allergens}/> }
-        {product.ingredients?.length > 0 && <span className={extended ? styles.IngredientList : styles.IngredientListWrap}>
-              <b>
-                {"Ingredients: "}
-              </b>
-          {product.ingredients?.join(", ")}</span>}
+        {(extended && product.allergens) &&
+          <AllergenTags dishAllergens={product.allergens} />}
+        {product.ingredients?.length > 0 &&
+          <span className={extended ?
+            styles.IngredientList : styles.IngredientListWrap}>
+            <b>
+              {"Ingredients: "}
+            </b>
+            {product.ingredients?.join(", ")}</span>}
       </Paper>
     </Grid>
   );

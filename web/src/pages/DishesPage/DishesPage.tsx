@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Header from "@src/components/dumpComponents/Header/Header";
-import styles from "@src/pages/DishesPage/DishesPage.module.scss";
-import Layout from "../../components/dumpComponents/Layout/Layout";
-import Dish from "../../components/menu/Dish/Dish";
 
-import FixedBtn from "../../components/dumpComponents/buttons/FixedBtn/FixedBtn";
-import SuccessAlert from "@src/components/dumpComponents/SuccessAlert/SuccessAlert";
-import { IDishFE } from "@src/model/IRestaurant";
+import Dish from "../../components/menu/Dish/Dish";
+import FixedBtn
+  from "../../components/dumpComponents/buttons/FixedBtn/FixedBtn";
 import { getAllDishes } from "@src/services/dishCalls";
+import Header from "@src/components/dumpComponents/Header/Header";
+import { IDishFE } from "@src/model/IRestaurant";
+import Layout from "../../components/dumpComponents/Layout/Layout";
+import styles from "@src/pages/DishesPage/DishesPage.module.scss";
+import SuccessAlert
+  from "@src/components/dumpComponents/SuccessAlert/SuccessAlert";
 
 const DishesPage = () => {
   const [dishData, setDishData] = useState<Array<IDishFE>>([]);
@@ -17,10 +19,11 @@ const DishesPage = () => {
   }, []);
 
   const updateDishData = () => {
-    getAllDishes().then((res) => {
-      setDishData(res);
-    });
-  }
+    getAllDishes()
+      .then((res) => {
+        setDishData(res);
+      });
+  };
 
   return (
     <div className="test">
@@ -37,9 +40,10 @@ const DishesPage = () => {
               onUpdate={updateDishData}
               editable
             />
-        )})}
+          );
+        })}
       </Layout>
-      <FixedBtn title={"Add dish"} redirect={"/addDish"} />
+      <FixedBtn title="Add dish" redirect="/addDish" />
       <SuccessAlert />
     </div>
   );

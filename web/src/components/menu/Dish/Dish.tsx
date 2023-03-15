@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Grid, Paper } from "@mui/material";
 
-import styles from "@src/components/menu/Dish/Dish.module.scss";
+import { Grid, Paper } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 
 import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
-import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
-import EditIcon from "@mui/icons-material/Edit";
-import { IDishFE } from "@src/model/IRestaurant";
 import { deleteDish } from "@src/services/dishCalls";
+import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
+import { IDishFE } from "@src/model/IRestaurant";
+import styles from "@src/components/menu/Dish/Dish.module.scss";
 
 interface IEditableDishProps {
   dish: IDishFE;
@@ -19,7 +19,7 @@ interface IEditableDishProps {
 const Dish = (props: IEditableDishProps) => {
   const [extended, setExtended] = useState(false);
   const { onUpdate, dish, editable } = props;
-  const options = dish.category.extraGroup
+  const options = dish.category.extraGroup;
   const { name, allergens, description, price, pictures } = dish;
   const imgStr = `${pictures[0]}?auto=compress&cs=tinysrgb&h=350`;
   const priceStr = `${price.toFixed(2)} €`;
@@ -43,7 +43,7 @@ const Dish = (props: IEditableDishProps) => {
     <Paper className={styles.DishBox} elevation={3} onClick={handleClick}>
       {/*mobile version of dish element*/}
       <div className={styles.MobileVersion}>
-        <Grid container justifyContent={"space-between"}>
+        <Grid container justifyContent="space-between">
           <Grid
             item
             className={extended ? styles.GridItem : styles.FlexGridItem}
@@ -58,9 +58,9 @@ const Dish = (props: IEditableDishProps) => {
                       actionIcon: EditIcon,
                       actionRedirect: "/editDish",
                       redirectProps: {
-                        dish: dish,
-                      },
-                    },
+                        dish: dish
+                      }
+                    }
                   ]}
                   onDelete={getOnDelete}
                   onClick={handleChildClick}
@@ -71,9 +71,9 @@ const Dish = (props: IEditableDishProps) => {
           </Grid>
           <Grid item className={styles.FlexParent}>
             <img
-                src={imgStr}
-                alt="new"
-                className={styles.ImageDimensions}
+              src={imgStr}
+              alt="new"
+              className={styles.ImageDimensions}
             />;
           </Grid>
           <Grid item xs={12} className={styles.GridItemDescription}>
@@ -87,7 +87,7 @@ const Dish = (props: IEditableDishProps) => {
               {description}
             </p>
             <span className={styles.OptionsText}>
-              {options && options.length != 0 && (
+              {options && options.length !== 0 && (
                 <div className={!extended && styles.OptionsWrap}>
                   <b>{"Options: "}</b>
                   {options}
@@ -113,9 +113,9 @@ const Dish = (props: IEditableDishProps) => {
                       actionIcon: EditIcon,
                       actionRedirect: "/editDish",
                       redirectProps: {
-                        dish: dish,
-                      },
-                    },
+                        dish: dish
+                      }
+                    }
                   ]}
                   onDelete={getOnDelete}
                   onClick={handleChildClick}
@@ -133,7 +133,7 @@ const Dish = (props: IEditableDishProps) => {
               {description}
             </p>
             <span className={styles.OptionsText}>
-              {options && options.length != 0 && (
+              {options && options.length !== 0 && (
                 <div className={!extended && styles.OptionsWrap}>
                   <b>{"Options: "}</b>
                   {options}
@@ -146,8 +146,8 @@ const Dish = (props: IEditableDishProps) => {
           <Grid item xs={2} className={styles.GridItemImage}>
             {
               <img src={imgStr}
-                   alt="new"
-                   className={styles.ImageDimensions}
+                alt="new"
+                className={styles.ImageDimensions}
               />
             }
           </Grid>

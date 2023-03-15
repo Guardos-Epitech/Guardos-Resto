@@ -1,9 +1,12 @@
 import React from "react";
-import Header from "@src/components/dumpComponents/Header/Header";
-import styles from "@src/pages/EditRestaurantPage/EditRestaurantPage.module.scss";
-import Layout from "../../components/dumpComponents/Layout/Layout";
-import RestaurantForm from "@src/components/forms/RestaurantForm/RestaurantForm";
 import { useLocation } from "react-router-dom";
+
+import Header from "@src/components/dumpComponents/Header/Header";
+import Layout from "../../components/dumpComponents/Layout/Layout";
+import RestaurantForm
+  from "@src/components/forms/RestaurantForm/RestaurantForm";
+import styles
+  from "@src/pages/EditRestaurantPage/EditRestaurantPage.module.scss";
 
 interface IEditRestaurantPageProps {
   restoName: string;
@@ -25,7 +28,7 @@ const EditRestaurantPage = () => {
     postalCode,
     city,
     country,
-    description,
+    description
   } = useLocation().state as IEditRestaurantPageProps;
 
   return (

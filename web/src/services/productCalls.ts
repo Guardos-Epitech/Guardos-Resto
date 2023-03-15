@@ -6,18 +6,18 @@ const baseUrl = 'http://localhost:8082/';
 export const getAllRestoProducts = async (restoName: string) => {
   const response = await axios({
     method: 'GET',
-    url: baseUrl + 'api/products/' + restoName,
+    url: baseUrl + 'api/products/' + restoName
   });
   return response.data;
-}
+};
 
 export const getAllProducts = async () => {
   const response = await axios({
     method: 'GET',
-    url: baseUrl + 'get',
+    url: baseUrl + 'get'
   });
   return response.data;
-}
+};
 
 export const addNewProduct = async (product: IProduct, restoName: string) => {
   const response = await axios({
@@ -27,23 +27,23 @@ export const addNewProduct = async (product: IProduct, restoName: string) => {
       name: product.name,
       ingredients: product.ingredients,
       allergens: product.allergens,
-      resto: restoName,
+      resto: restoName
     }),
     headers: {
-      'Content-Type': 'application/json',
-    },
+      'Content-Type': 'application/json'
+    }
   });
   return response.data;
-}
+};
 
 export const deleteProduct = async (product: any) => {
   const response = await axios({
     url: baseUrl + 'delete',
     method: 'DELETE',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
-    data: JSON.stringify(product),
+    data: JSON.stringify(product)
   });
   return response.data;
-}
+};

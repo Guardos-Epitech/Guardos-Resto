@@ -1,8 +1,9 @@
 import React from "react";
-import Header from "@src/components/dumpComponents/Header/Header";
-import styles from "@src/pages/AddDishPage/AddDishPage.module.scss";
-import Layout from "../../components/dumpComponents/Layout/Layout";
+
 import DishForm from "@src/components/forms/DishForm/DishForm";
+import Header from "@src/components/dumpComponents/Header/Header";
+import Layout from "../../components/dumpComponents/Layout/Layout";
+import styles from "@src/pages/AddDishPage/AddDishPage.module.scss";
 
 const AddDishPage = () => {
   return (

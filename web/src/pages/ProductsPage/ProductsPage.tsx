@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Header from "@src/components/dumpComponents/Header/Header";
-import styles from "@src/pages/ProductsPage/ProductsPage.module.scss";
+
 import { Grid } from "@mui/material";
+
 import FixedBtn from "@src/components/dumpComponents/buttons/FixedBtn/FixedBtn";
-import SuccessAlert from "@src/components/dumpComponents/SuccessAlert/SuccessAlert";
+import { getAllProducts } from "@src/services/productCalls";
+import Header from "@src/components/dumpComponents/Header/Header";
 import Layout from "@src/components/dumpComponents/Layout/Layout";
 import ProductCard from "@src/components/ProductCard/ProductCard";
-import { getAllProducts } from "@src/services/productCalls";
+import styles from "@src/pages/ProductsPage/ProductsPage.module.scss";
+import SuccessAlert
+  from "@src/components/dumpComponents/SuccessAlert/SuccessAlert";
 
 interface IProduct {
   name: string,
@@ -22,32 +25,37 @@ const ProductsPage = () => {
   }, []);
 
   const updateProductData = () => {
-    getAllProducts().then((res) => {
-      setProductData(res);
-    });
-  }
+    getAllProducts()
+      .then((res) => {
+        setProductData(res);
+      });
+  };
 
   return (
-      <div>
-        <Header />
-        <div className={styles.RectOnImg}>
-          <span className={styles.TitleSearch}>My products</span>
-        </div>
-        <Layout>
-            <Grid container spacing={{ xs: 1, sm: 2, md: 3 }} justifyContent={"space-between"}>
-              {productData.map((product, index) => (
-                <ProductCard
-                  key={index}
-                  index={index}
-                  product={product}
-                  onUpdate={updateProductData}
-                />
-              ))}
-            </Grid>
-        </Layout>
-        <FixedBtn title={"Add product"} redirect={"/addProduct"}/>
-        <SuccessAlert />
+    <div>
+      <Header />
+      <div className={styles.RectOnImg}>
+        <span className={styles.TitleSearch}>My products</span>
       </div>
+      <Layout>
+        <Grid
+          container
+          spacing={{ xs: 1, sm: 2, md: 3 }}
+          justifyContent="space-between"
+        >
+          {productData.map((product, index) => (
+            <ProductCard
+              key={index}
+              index={index}
+              product={product}
+              onUpdate={updateProductData}
+            />
+          ))}
+        </Grid>
+      </Layout>
+      <FixedBtn title="Add product" redirect="/addProduct" />
+      <SuccessAlert />
+    </div>
   );
 };
 

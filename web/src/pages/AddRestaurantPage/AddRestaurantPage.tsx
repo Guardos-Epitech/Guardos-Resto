@@ -1,8 +1,10 @@
 import React from "react";
+
 import Header from "@src/components/dumpComponents/Header/Header";
-import styles from "@src/pages/AddRestaurantPage/AddRestaurantPage.module.scss";
 import Layout from "../../components/dumpComponents/Layout/Layout";
-import RestaurantForm from "@src/components/forms/RestaurantForm/RestaurantForm";
+import RestaurantForm
+  from "@src/components/forms/RestaurantForm/RestaurantForm";
+import styles from "@src/pages/AddRestaurantPage/AddRestaurantPage.module.scss";
 
 const AddRestaurantPage = () => {
 

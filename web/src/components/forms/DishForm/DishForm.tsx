@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import styles from "@src/components/forms/DishForm/DishForm.module.scss";
+import { useNavigate } from "react-router-dom";
+
 import {
   Autocomplete,
   Box, Button,
@@ -7,13 +8,14 @@ import {
   Grid, InputAdornment,
   TextField
 } from "@mui/material";
-import placeholderImg from "@src/assets/placeholder.png";
-import { NavigateTo } from "@src/utils/NavigateTo";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
-import { getAllRestoProducts } from "@src/services/productCalls";
+
 import { addNewDish, editDish } from "@src/services/dishCalls";
+import { getAllRestoProducts } from "@src/services/productCalls";
 import { IDishFE } from "@src/model/IRestaurant";
+import { NavigateTo } from "@src/utils/NavigateTo";
+import placeholderImg from "@src/assets/placeholder.png";
+import styles from "@src/components/forms/DishForm/DishForm.module.scss";
 
 const PageBtn = () => {
   return createTheme({
@@ -36,8 +38,8 @@ const PageBtn = () => {
       },
     },
     shape: {
-      borderRadius: 5,
-    },
+      borderRadius: 5
+    }
   });
 };
 
@@ -59,20 +61,23 @@ interface IProduct {
 const DishForm = (props: IDishFormProps) => {
   const navigate = useNavigate();
   const restoName = "burgerme";
-  let {dishName, dishProducts, dishDescription, price } = props;
-  const imageSrc = props.imageSrc && props.imageSrc.length != 0 ? props.imageSrc : placeholderImg;
+  let { dishName, dishProducts, dishDescription, price } = props;
+  const imageSrc = props.imageSrc &&
+  props.imageSrc.length !== 0 ? props.imageSrc : placeholderImg;
   const [productList, setProductList] = useState<Array<IProduct>>([]);
-  let dishProductsList = [] as IProduct[]
+  let dishProductsList = [] as IProduct[];
 
   useEffect(() => {
-    getAllRestoProducts("burgerme").then((res) => {
-      setProductList(res);
-      dishProductsList = res.filter((product : IProduct) => dishProducts?.includes(product.name));
-    });
+    getAllRestoProducts("burgerme")
+      .then((res) => {
+        setProductList(res);
+        dishProductsList = res.filter((
+          product: IProduct) => dishProducts?.includes(product.name));
+      });
   }, []);
 
   async function sendRequestAndGoBack() {
-    const dish : IDishFE = {
+    const dish: IDishFE = {
       name: dishName,
       description: dishDescription,
       price: price,
@@ -82,7 +87,7 @@ const DishForm = (props: IDishFormProps) => {
         foodGroup: "Main",
         extraGroup: "",
       }
-    }
+    };
 
     if (props.add) {
       await addNewDish(restoName, dish);
@@ -94,17 +99,33 @@ const DishForm = (props: IDishFormProps) => {
 
   return (
     <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-      <Grid className={styles.GridSpaceTop} container columns={{ xs: 4, sm: 8, md: 12 }}>
+      <Grid
+        className={styles.GridSpaceTop}
+        container
+        columns={{ xs: 4, sm: 8, md: 12 }}
+      >
         <Grid item xs={4} sm={2} md={3}>
-          <img className={styles.ImageDimensions} src={imageSrc} alt="Resto Img" />
+          <img
+            className={styles.ImageDimensions}
+            src={imageSrc}
+            alt="Resto Img"
+          />
           <div className={styles.FormControlMargin}>
             <FormControl className={styles.ImageFlex}>
               <ThemeProvider theme={PageBtn()}>
-                <Button className={styles.FormControlMargin} variant="outlined" component="label">
+                <Button
+                  className={styles.FormControlMargin}
+                  variant="outlined"
+                  component="label"
+                >
                   Change Image
                   <input hidden accept="image/*" multiple type="file" />
                 </Button>
-                <Button className={styles.FormControlMargin} variant="text" component="label">
+                <Button
+                  className={styles.FormControlMargin}
+                  variant="text"
+                  component="label"
+                >
                   Delete Image
                   <input hidden accept="image/*" multiple type="file" />
                 </Button>
@@ -114,7 +135,11 @@ const DishForm = (props: IDishFormProps) => {
         </Grid>
 
         <Grid className={styles.TextNextToImageField} item xs={4} sm={6} md={9}>
-          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+          <Grid
+            container
+            spacing={{ xs: 2, md: 3 }}
+            columns={{ xs: 4, sm: 8, md: 12 }}
+          >
             <Grid item xs={4} sm={5} md={8} className={styles.FieldMarginRight}>
               <FormControl fullWidth>
                 <TextField
@@ -122,7 +147,9 @@ const DishForm = (props: IDishFormProps) => {
                   defaultValue={dishName}
                   id="component-outlined"
                   fullWidth
-                  onChange={(e) => {dishName = e.target.value}}
+                  onChange={(e) => {
+                    dishName = e.target.value;
+                  }}
                 />
               </FormControl>
             </Grid>
@@ -133,9 +160,14 @@ const DishForm = (props: IDishFormProps) => {
                   id="outlined-end-adornment"
                   fullWidth
                   defaultValue={price?.toFixed(2)}
-                  onChange={(e) => {price = parseInt(e.target.value)}}
+                  onChange={(e) => {
+                    price = parseInt(e.target.value);
+                  }}
                   InputProps={{
-                    endAdornment: <InputAdornment position="end">€</InputAdornment>,
+                    endAdornment:
+                      <InputAdornment position="end">
+                        €
+                      </InputAdornment>
                   }}
                 />
               </FormControl>
@@ -147,7 +179,9 @@ const DishForm = (props: IDishFormProps) => {
                   label="Description"
                   defaultValue={dishDescription}
                   multiline
-                  onChange={(e) => {dishDescription = e.target.value}}
+                  onChange={(e) => {
+                    dishDescription = e.target.value;
+                  }}
                 />
               </FormControl>
             </Grid>
@@ -156,7 +190,8 @@ const DishForm = (props: IDishFormProps) => {
                 multiple
                 id="tags-outlined"
                 options={productList}
-                getOptionLabel={(option) => (option ? (option as IProduct).name : "")}
+                getOptionLabel={(option) =>
+                  (option ? (option as IProduct).name : "")}
                 defaultValue={dishProductsList}
                 filterSelectedOptions
                 onChange={(e, value) => {
