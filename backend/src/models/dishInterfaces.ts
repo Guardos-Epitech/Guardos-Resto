@@ -6,8 +6,8 @@ export interface IDishBE {
     description: string;
     price: number;
     allergens: [string];
-    pictures: [string];
-    products: [string];
+    pictures: string[];
+    products: string[];
     category: ICategoryBE;
 }
 
@@ -16,7 +16,7 @@ export interface IDishFE {
     description: string;
     price: number;
     allergens: [string];
-    pictures: [string];
+    pictures: string[];
     category: ICategoryFE;
     //products [IProducts]; //WIP create IProducts
 }
