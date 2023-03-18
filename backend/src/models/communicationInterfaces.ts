@@ -18,7 +18,7 @@ export interface IDishesCommunication {
     category?: {
         menuGroup: string,
         foodGroup: string,
-        extraGroup: string,
+        extraGroup: [string],
     },
 }
 

@@ -82,7 +82,7 @@ export async function createNewDish(
         category: dishCom.category ? dishCom.category : {
             menuGroup: '',
             foodGroup: '',
-            extraGroup: '',
+            extraGroup: [''],
         },
     };
     await createDish(restaurantName, dish);
@@ -121,7 +121,7 @@ export async function changeDishByName(
         category: dish.category ? dish.category : oldDish.category as {
             menuGroup: string;
             foodGroup: string;
-            extraGroup: string;
+            extraGroup: [string];
         }
     };
     await updateDish(restaurantName, newDish);

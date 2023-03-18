@@ -76,7 +76,7 @@ export const restaurantSchema = new mongoose.Schema({
         category: {
             menuGroup: String,
             foodGroup: String,
-            extraGroup: String,
+            extraGroup: [String],
         },
     }],
     location: {
@@ -97,7 +97,7 @@ export const restaurantSchema = new mongoose.Schema({
         description: String,
         price: Number,
         pictures: [String],
-        allergensOld: [String],
+        allergens: [String],
         products: [String],
         category: {
             menuGroup: String,
