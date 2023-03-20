@@ -1,16 +1,15 @@
 import * as express from 'express';
 const router = express.Router();
 import {
-    changeDishByName, createNewDish, deleteDishByName,
-    getAllDishes, getDishByName, getDishesByRestaurantName,
-    updateDishes,
+    changeDishByName, createNewDish, deleteDishByName, getAllDishes,
+    getDishByName, getDishesByRestaurantName,
 }
     from '../controllers/dishesController';
 import { checkIfNameExists } from '../middleware/dishesMiddelWare';
 import { checkIfRestaurantExists } from '../middleware/restaurantMiddleWare';
 
 router.get('/',async (req, res) => {
-    const dishes = await updateDishes();
+    const dishes = await getAllDishes();
     return res.status(200)
         .send(dishes);
 });
