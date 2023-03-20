@@ -46,3 +46,14 @@ export interface IProduct {
   ingredients: string[],
   allergens: string[]
 }
+
+export interface IIngredient {
+  name: string;
+}
+
+export interface IAction {
+  actionName: string,
+  actionIcon: any,
+  actionRedirect: string,
+  redirectProps?: any
+}

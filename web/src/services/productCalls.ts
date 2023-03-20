@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IProduct } from '@src/components/ProductCard/ProductCard';
+import { IProduct } from "@src/model/IRestaurant";
 
 const baseUrl = 'http://localhost:8082/';
 

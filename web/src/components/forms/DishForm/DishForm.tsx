@@ -13,7 +13,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { getAllRestoProducts } from "@src/services/productCalls";
 import { addNewDish, editDish } from "@src/services/dishCalls";
-import { IDishFE } from "@src/model/IRestaurant";
+import { IDishFE, IProduct } from "@src/model/IRestaurant";
 
 const PageBtn = () => {
   return createTheme({
@@ -50,16 +50,10 @@ interface IDishFormProps {
   add?: boolean
 }
 
-interface IProduct {
-  name: string;
-  ingredients: string[];
-  allergens: string[];
-}
-
 const DishForm = (props: IDishFormProps) => {
   const navigate = useNavigate();
   const restoName = "burgerme";
-  let {dishName, dishProducts, dishDescription, price } = props;
+  let { dishName, dishProducts, dishDescription, price } = props;
   const imageSrc = props.imageSrc && props.imageSrc.length != 0 ? props.imageSrc : placeholderImg;
   const [productList, setProductList] = useState<Array<IProduct>>([]);
   let dishProductsList = [] as IProduct[]
@@ -67,12 +61,12 @@ const DishForm = (props: IDishFormProps) => {
   useEffect(() => {
     getAllRestoProducts("burgerme").then((res) => {
       setProductList(res);
-      dishProductsList = res.filter((product : IProduct) => dishProducts?.includes(product.name));
+      dishProductsList = res.filter((product: IProduct) => dishProducts?.includes(product.name));
     });
   }, []);
 
   async function sendRequestAndGoBack() {
-    const dish : IDishFE = {
+    const dish: IDishFE = {
       name: dishName,
       description: dishDescription,
       price: price,
@@ -122,7 +116,7 @@ const DishForm = (props: IDishFormProps) => {
                   defaultValue={dishName}
                   id="component-outlined"
                   fullWidth
-                  onChange={(e) => {dishName = e.target.value}}
+                  onChange={(e) => { dishName = e.target.value }}
                 />
               </FormControl>
             </Grid>
@@ -133,7 +127,7 @@ const DishForm = (props: IDishFormProps) => {
                   id="outlined-end-adornment"
                   fullWidth
                   defaultValue={price?.toFixed(2)}
-                  onChange={(e) => {price = parseInt(e.target.value)}}
+                  onChange={(e) => { price = parseInt(e.target.value) }}
                   InputProps={{
                     endAdornment: <InputAdornment position="end">€</InputAdornment>,
                   }}
@@ -147,7 +141,7 @@ const DishForm = (props: IDishFormProps) => {
                   label="Description"
                   defaultValue={dishDescription}
                   multiline
-                  onChange={(e) => {dishDescription = e.target.value}}
+                  onChange={(e) => { dishDescription = e.target.value }}
                 />
               </FormControl>
             </Grid>

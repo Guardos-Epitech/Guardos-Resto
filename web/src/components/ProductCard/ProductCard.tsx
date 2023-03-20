@@ -4,12 +4,7 @@ import { Grid, Paper } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
 import { deleteProduct } from "@src/services/productCalls";
-
-export interface IProduct {
-  name: string,
-  ingredients: string[],
-  allergens: string[]
-}
+import { IProduct } from "@src/model/IRestaurant";
 
 interface IProductCardProps {
   index: number,
@@ -43,11 +38,11 @@ const ProductCard = (props: IProductCardProps) => {
             onClick={handleChildClick}
           />
         </div>
-        { (extended && product.allergens) && <AllergenTags dishAllergens={product.allergens}/> }
+        {(extended && product.allergens) && <AllergenTags dishAllergens={product.allergens} />}
         {product.ingredients?.length > 0 && <span className={extended ? styles.IngredientList : styles.IngredientListWrap}>
-              <b>
-                {"Ingredients: "}
-              </b>
+          <b>
+            {"Ingredients: "}
+          </b>
           {product.ingredients?.join(", ")}</span>}
       </Paper>
     </Grid>

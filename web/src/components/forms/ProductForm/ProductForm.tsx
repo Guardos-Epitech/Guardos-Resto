@@ -10,8 +10,8 @@ import {
 import { NavigateTo } from "@src/utils/NavigateTo";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import { IProduct } from "@src/components/ProductCard/ProductCard";
 import { addNewProduct } from "@src/services/productCalls";
+import { IIngredient, IProduct } from "@src/model/IRestaurant";
 
 const PageBtn = () => {
   return createTheme({
@@ -44,15 +44,11 @@ interface IDishFormProps {
   productIngredients?: string[],
 }
 
-interface IIngredient {
-  name: string;
-}
-
 const ProductForm = (props: IDishFormProps) => {
   const navigate = useNavigate();
   let { productName, productIngredients } = props;
 
-  const ingredients:IIngredient[] = [
+  const ingredients: IIngredient[] = [
     { name: 'Milk' },
     { name: 'Wheat' },
     { name: 'Egg' },
@@ -62,7 +58,7 @@ const ProductForm = (props: IDishFormProps) => {
   const productIngredientsList = ingredients.filter(product => productIngredients?.includes(product.name));
 
   async function sendRequestAndGoBack() {
-    const product : IProduct = {
+    const product: IProduct = {
       name: productName,
       ingredients: productIngredients,
       allergens: [],
@@ -83,7 +79,7 @@ const ProductForm = (props: IDishFormProps) => {
                 defaultValue={productName}
                 id="component-outlined"
                 fullWidth
-                onChange={(e) => {productName = e.target.value}}
+                onChange={(e) => { productName = e.target.value }}
               />
             </FormControl>
           </Grid>
