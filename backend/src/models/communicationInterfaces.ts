@@ -1,11 +1,11 @@
-import { IDishBE } from './dishInterfaces';
-import { ILocation } from './locationInterfaces';
-import { IMealType } from './mealTypeInterfaces';
-import { IOpeningHours, IProducts } from './restaurantInterfaces';
+import {IDishBE} from './dishInterfaces';
+import {ILocation} from './locationInterfaces';
+import {IMealType} from './mealTypeInterfaces';
+import {IOpeningHours, IProducts} from './restaurantInterfaces';
 
 export interface IIngredientsCommunication {
-    name?: string;
-    id?: number;
+  name?: string;
+  id?: number;
 }
 
 export interface IDishesCommunication {
@@ -23,15 +23,15 @@ export interface IDishesCommunication {
 }
 
 export interface IRestaurantCommunication {
-    name: string;
-    phoneNumber?: string;
-    website?: string;
-    openingHours?: [IOpeningHours];
-    pictures?: [string];
-    description?: string;
-    dishes?: [IDishBE];
-    location?: ILocation;
-    mealType?: [IMealType];
-    extras?: [IDishBE];
-    products?: [IProducts];
+  name: string;
+  phoneNumber?: string;
+  website?: string;
+  openingHours?: [IOpeningHours];
+  pictures?: [string];
+  description?: string;
+  dishes?: [IDishBE];
+  location?: ILocation;
+  mealType?: [IMealType];
+  extras?: [IDishBE];
+  products?: [IProducts];
 }
