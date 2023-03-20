@@ -68,7 +68,7 @@ const ProductForm = (props: IDishFormProps) => {
       allergens: [],
     }
 
-    await addNewProduct(product);
+    await addNewProduct(product, "burgerme"); // TODO: replace with resto group someday
     return NavigateTo("/products", navigate, { successfulForm: true });
   }
 
