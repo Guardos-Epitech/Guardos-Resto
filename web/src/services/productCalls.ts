@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { IProduct } from '@src/components/ProductCard/ProductCard';
 
 const baseUrl = 'http://localhost:8082/';
 
@@ -18,11 +19,16 @@ export const getAllProducts = async () => {
   return response.data;
 }
 
-export const addNewProduct = async (body: any) => {
+export const addNewProduct = async (product: IProduct, restoName: string) => {
   const response = await axios({
     url: baseUrl + 'post',
     method: 'POST',
-    data: JSON.stringify(body),
+    data: JSON.stringify({
+      name: product.name,
+      ingredients: product.ingredients,
+      allergens: product.allergens,
+      resto: restoName,
+    }),
     headers: {
       'Content-Type': 'application/json',
     },
@@ -30,14 +36,14 @@ export const addNewProduct = async (body: any) => {
   return response.data;
 }
 
-export const deleteProduct = async (body: any) => {
+export const deleteProduct = async (product: any) => {
   const response = await axios({
     url: baseUrl + 'delete',
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
-    data: JSON.stringify(body)
+    data: JSON.stringify(product),
   });
   return response.data;
 }
