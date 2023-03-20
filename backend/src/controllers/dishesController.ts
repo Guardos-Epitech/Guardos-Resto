@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
 
-import {IDishBE} from '../models/dishInterfaces';
+import {IDishBE, IDishFE} from '../models/dishInterfaces';
 import {IDishesCommunication} from '../models/communicationInterfaces';
 import {restaurantSchema} from '../models/restaurantInterfaces';
+import {ICategoryFE} from '../models/categoryInterfaces';
 
 export async function getDishesByRestaurantID(restaurantId: number) {
   const Restaurant = mongoose.model('Restaurant', restaurantSchema);
@@ -22,35 +23,35 @@ export async function getDishByName(restaurantName: string, dishName: string) {
 }
 
 export async function getAllDishes() {
-    const Restaurant = mongoose.model('Restaurant', restaurantSchema);
-    const restaurants = await Restaurant.find();
-    const dishes: IDishFE[] = [];
-    for (const rest of restaurants) {
-        for (const dish of rest.dishes) {
-            const dishFE: IDishFE = {
-                name: dish.name,
-                description: dish.description,
-                price: dish.price,
-                pictures: [''],
-                allergens: [''],
-                category: {} as ICategoryFE,
-            };
-            dishFE.pictures.pop();
-            dishFE.allergens.pop();
-            dishFE.category.foodGroup = dish.category.foodGroup;
-            dishFE.category.extraGroup = dish.category.extraGroup;
-            for (const pict of dish.pictures) {
-                dishFE.pictures.push(pict);
-            }
+  const Restaurant = mongoose.model('Restaurant', restaurantSchema);
+  const restaurants = await Restaurant.find();
+  const dishes: IDishFE[] = [];
+  for (const rest of restaurants) {
+    for (const dish of rest.dishes) {
+      const dishFE: IDishFE = {
+        name: dish.name,
+        description: dish.description,
+        price: dish.price,
+        pictures: [''],
+        allergens: [''],
+        category: {} as ICategoryFE,
+      };
+      dishFE.pictures.pop();
+      dishFE.allergens.pop();
+      dishFE.category.foodGroup = dish.category.foodGroup;
+      dishFE.category.extraGroup = dish.category.extraGroup;
+      for (const pict of dish.pictures) {
+        dishFE.pictures.push(pict);
+      }
 
-            for (const allergen of dish.allergens) {
-                dishFE.allergens.push(allergen);
-            }
+      for (const allergen of dish.allergens) {
+        dishFE.allergens.push(allergen);
+      }
 
-            dishes.push(dishFE);
-        }
+      dishes.push(dishFE);
     }
-    return dishes;
+  }
+  return dishes;
 }
 
 async function deleteDish(restaurantName: string, dishName: string) {
