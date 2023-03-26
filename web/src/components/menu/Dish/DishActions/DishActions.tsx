@@ -6,7 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { NavigateTo } from "@src/utils/NavigateTo";
 import { useNavigate } from "react-router-dom";
-import { IAction } from "@src/model/IRestaurant";
+import { IAction } from "@src/model/restaurantInterfaces";
 
 interface IDishActionsProps {
   actionList?: IAction[],

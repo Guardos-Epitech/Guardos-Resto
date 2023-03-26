@@ -4,7 +4,7 @@ import { Grid, Paper } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
 import { deleteProduct } from "@src/services/productCalls";
-import { IProduct } from "@src/model/IRestaurant";
+import { IProduct } from "@src/model/restaurantInterfaces";
 
 interface IProductCardProps {
   index: number,

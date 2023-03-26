@@ -11,7 +11,7 @@ import { NavigateTo } from "@src/utils/NavigateTo";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { addNewProduct } from "@src/services/productCalls";
-import { IIngredient, IProduct } from "@src/model/IRestaurant";
+import { IIngredient, IProduct } from "@src/model/restaurantInterfaces";
 
 const PageBtn = () => {
   return createTheme({

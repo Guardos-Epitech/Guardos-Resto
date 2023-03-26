@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IProduct } from "@src/model/IRestaurant";
+import { IProduct } from "@src/model/restaurantInterfaces";
 
 const baseUrl = 'http://localhost:8082/';
 

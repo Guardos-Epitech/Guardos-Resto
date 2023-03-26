@@ -7,7 +7,7 @@ import SuccessAlert from "@src/components/dumpComponents/SuccessAlert/SuccessAle
 import Layout from "@src/components/dumpComponents/Layout/Layout";
 import ProductCard from "@src/components/ProductCard/ProductCard";
 import { getAllProducts } from "@src/services/productCalls";
-import { IProduct } from "@src/model/IRestaurant";
+import { IProduct } from "@src/model/restaurantInterfaces";
 
 const ProductsPage = () => {
   const [productData, setProductData] = useState<Array<IProduct>>([]);
