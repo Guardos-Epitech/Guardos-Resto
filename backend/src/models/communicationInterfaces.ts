@@ -6,6 +6,7 @@ import {IOpeningHours, IProducts} from './restaurantInterfaces';
 export interface IIngredientsCommunication {
   name?: string;
   id?: number;
+  allergens?: string[];
 }
 
 export interface IDishesCommunication {
