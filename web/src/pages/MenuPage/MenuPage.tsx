@@ -11,7 +11,7 @@ import { List, ListItem } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import burgerImg from "@src/assets/dishImages/burger.jpg";
 import pizzaImg from "@src/assets/dishImages/pizza.jpg";
-import { ICategories } from "@src/model/restaurantInterfaces";
+import { ICategories } from "@src/model/categoryinterfaces";
 import { useLocation } from "react-router-dom";
 
 const theme = createTheme({

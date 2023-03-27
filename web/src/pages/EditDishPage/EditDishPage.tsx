@@ -4,7 +4,7 @@ import styles from "@src/pages/EditDishPage/EditDishPage.module.scss";
 import Layout from "../../components/dumpComponents/Layout/Layout";
 import DishForm from "@src/components/forms/DishForm/DishForm";
 import { useLocation } from "react-router-dom";
-import { IDishFE } from "@src/model/restaurantInterfaces";
+import { IDishFE } from "@src/model/dishInterfaces";
 
 interface IEditDishPageProps {
   dish: IDishFE;

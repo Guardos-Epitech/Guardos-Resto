@@ -1,3 +1,6 @@
+import { ICategories } from '@src/model/categoryinterfaces'
+import { ILocation } from '@src/model/locationInterfaces';
+
 export interface IRestaurantFrontEnd {
   id: number;
   name: string;
@@ -10,35 +13,6 @@ export interface IRestaurantFrontEnd {
   hitRate: number;
   dishes: any;
   pictures: [string];
-}
-
-export interface ICategories {
-  name: string;
-  hitRate: number;
-  dishes: [IDishFE];
-}
-
-export interface IDishFE {
-  name: string;
-  description: string;
-  pictures?: [string];
-  allergens: string;
-  price: number;
-  products: string[];
-  category: ICategoryFE;
-}
-
-interface ICategoryFE {
-  foodGroup: string,
-  extraGroup: string
-}
-
-interface ILocation {
-  streetName: string,
-  streetNumber: string,
-  postalCode: string,
-  country: string;
-  city: string;
 }
 
 export interface IProduct {

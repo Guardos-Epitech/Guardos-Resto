@@ -6,7 +6,7 @@ import styles from "@src/components/menu/Dish/Dish.module.scss";
 import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
 import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
 import EditIcon from "@mui/icons-material/Edit";
-import { IDishFE } from "@src/model/restaurantInterfaces";
+import { IDishFE } from "@src/model/dishInterfaces";
 import { deleteDish } from "@src/services/dishCalls";
 
 interface IEditableDishProps {

@@ -13,7 +13,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { getAllRestoProducts } from "@src/services/productCalls";
 import { addNewDish, editDish } from "@src/services/dishCalls";
-import { IDishFE, IProduct } from "@src/model/restaurantInterfaces";
+import { IProduct } from "@src/model/restaurantInterfaces";
+import { IDishFE } from "@src/model/dishInterfaces";
 
 const PageBtn = () => {
   return createTheme({
