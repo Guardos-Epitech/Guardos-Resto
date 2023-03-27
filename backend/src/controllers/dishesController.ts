@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
 
-import {IDishBE} from '../models/dishInterfaces';
+import {IDishBE, IDishFE} from '../models/dishInterfaces';
 import {IDishesCommunication} from '../models/communicationInterfaces';
 import {restaurantSchema} from '../models/restaurantInterfaces';
+import {ICategoryFE} from '../models/categoryInterfaces';
 
 export async function getDishesByRestaurantID(restaurantId: number) {
   const Restaurant = mongoose.model('Restaurant', restaurantSchema);
@@ -23,10 +24,33 @@ export async function getDishByName(restaurantName: string, dishName: string) {
 
 export async function getAllDishes() {
   const Restaurant = mongoose.model('Restaurant', restaurantSchema);
-  const restaurants = await Restaurant.find({}, 'dishes');
-  const dishes = restaurants
-    .map((restaurant) => restaurant.dishes)
-    .flat();
+  const restaurants = await Restaurant.find();
+  const dishes: IDishFE[] = [];
+  for (const rest of restaurants) {
+    for (const dish of rest.dishes) {
+      const dishFE: IDishFE = {
+        name: dish.name,
+        description: dish.description,
+        price: dish.price,
+        pictures: [''],
+        allergens: [''],
+        category: {} as ICategoryFE,
+      };
+      dishFE.pictures.pop();
+      dishFE.allergens.pop();
+      dishFE.category.foodGroup = dish.category.foodGroup;
+      dishFE.category.extraGroup = dish.category.extraGroup;
+      for (const pict of dish.pictures) {
+        dishFE.pictures.push(pict);
+      }
+
+      for (const allergen of dish.allergens) {
+        dishFE.allergens.push(allergen);
+      }
+
+      dishes.push(dishFE);
+    }
+  }
   return dishes;
 }
 
@@ -56,11 +80,11 @@ export async function createNewDish(
     price: dishCom.price ? dishCom.price : -1,
     products: dishCom.products ? dishCom.products : [''],
     pictures: dishCom.pictures ? dishCom.pictures : [''],
-    allergens: dishCom.allergens ? dishCom.allergens : '',
+    allergens: dishCom.allergens ? dishCom.allergens : [''],
     category: dishCom.category ? dishCom.category : {
       menuGroup: '',
       foodGroup: '',
-      extraGroup: '',
+      extraGroup: [''],
     },
   };
   await createDish(restaurantName, dish);
@@ -94,11 +118,12 @@ export async function changeDishByName(
     price: dish.price ? dish.price : oldDish.price,
     products: dish.products ? dish.products : oldDish.products as [string],
     pictures: dish.pictures ? dish.pictures : oldDish.pictures as [string],
-    allergens: dish.allergens ? dish.allergens : oldDish.allergens,
+    allergens: dish.allergens ? dish.allergens as [string] :
+        oldDish.allergens as [string],
     category: dish.category ? dish.category : oldDish.category as {
       menuGroup: string;
       foodGroup: string;
-      extraGroup: string;
+      extraGroup: [string];
     }
   };
   await updateDish(restaurantName, newDish);
