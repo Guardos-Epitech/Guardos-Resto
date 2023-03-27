@@ -13,7 +13,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { getAllRestoProducts, getAllProducts } from "@src/services/productCalls";
 import { addNewDish, editDish } from "@src/services/dishCalls";
-import { IDishFE, IRestaurantFrontEnd } from "@src/model/IRestaurant";
+import { IDishFE, IRestaurantFrontEnd, IRestoName } from "@src/model/IRestaurant";
 import { getAllResto } from "@src/services/restoCalls";
 
 const PageBtn = () => {
@@ -55,10 +55,6 @@ interface IProduct {
   name: string;
   ingredients: string[];
   allergens: string[];
-}
-
-interface IRestoName {
-  name: string;
 }
 
 const DishForm = (props: IDishFormProps) => {
@@ -169,6 +165,25 @@ const DishForm = (props: IDishFormProps) => {
               <Autocomplete
                 multiple
                 id="tags-outlined"
+                options={productList}
+                getOptionLabel={(option) => (option ? (option as IProduct).name : "")}
+                defaultValue={dishProductsList}
+                filterSelectedOptions
+                onChange={(e, value) => {
+                  dishProducts = value.map((product: IProduct) => product.name);
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Products"
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={12}>
+              <Autocomplete
+                multiple
+                id="tags-outlined"
                 options={restoList}
                 getOptionLabel={(option) => (option ? (option as IRestoName).name : "")}
                 defaultValue={restoNameList}
@@ -181,25 +196,6 @@ const DishForm = (props: IDishFormProps) => {
                   <TextField
                     {...params}
                     label="Restaurant"
-                  />
-                )}
-              />
-            </Grid>
-            <Grid item xs={4} sm={8} md={12}>
-              <Autocomplete
-                multiple
-                id="tags-outlined"
-                options={productList}
-                getOptionLabel={(option) => (option ? (option as IProduct).name : "")}
-                defaultValue={dishProductsList}
-                filterSelectedOptions
-                onChange={(e, value) => {
-                  dishProducts = value.map((product: IProduct) => product.name);
-                }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Products"
                   />
                 )}
               />
