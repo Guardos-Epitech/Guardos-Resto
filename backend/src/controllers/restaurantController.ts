@@ -137,7 +137,7 @@ export async function getRestaurantByName(restaurantName: string) {
   const restaurantBE = createBackEndObj({
     description: rest.description,
     dishes: rest.dishes as [IDishBE],
-    extras: rest.extras as [IDishBE],
+    extras: rest.extras as unknown as [IDishBE],
     id: rest.id,
     location: rest.location as ILocation,
     mealType: rest.mealType as [IMealType],
@@ -163,7 +163,7 @@ export async function getAllRestaurants() {
     const restaurantBE = createBackEndObj({
       description: restaurant.description,
       dishes: restaurant.dishes as [IDishBE],
-      extras: restaurant.extras as [IDishBE],
+      extras: restaurant.extras as unknown as [IDishBE],
       id: 0,
       location: restaurant.location as ILocation,
       mealType: restaurant.mealType as [IMealType],

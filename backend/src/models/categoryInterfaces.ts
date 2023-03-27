@@ -2,7 +2,7 @@ import {IDishFE} from './dishInterfaces';
 
 export interface ICategoryFE {
   foodGroup: string,
-  extraGroup: string
+  extraGroup: string[]
 }
 
 export interface ICategories {
@@ -14,5 +14,5 @@ export interface ICategories {
 export interface ICategoryBE {
   menuGroup: string,
   foodGroup: string,
-  extraGroup: string
+  extraGroup: string[]
 }
