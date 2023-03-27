@@ -11,9 +11,10 @@ import placeholderImg from "@src/assets/placeholder.png";
 import { NavigateTo } from "@src/utils/NavigateTo";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import { getAllRestoProducts } from "@src/services/productCalls";
+import { getAllRestoProducts, getAllProducts } from "@src/services/productCalls";
 import { addNewDish, editDish } from "@src/services/dishCalls";
-import { IDishFE } from "@src/model/IRestaurant";
+import { IDishFE, IRestaurantFrontEnd } from "@src/model/IRestaurant";
+import { getAllResto } from "@src/services/restoCalls";
 
 const PageBtn = () => {
   return createTheme({
@@ -56,23 +57,37 @@ interface IProduct {
   allergens: string[];
 }
 
+interface IRestoName {
+  name: string;
+}
+
 const DishForm = (props: IDishFormProps) => {
   const navigate = useNavigate();
-  const restoName = "burgerme";
-  let {dishName, dishProducts, dishDescription, price } = props;
+  let restoName = "" as string;
+  let { dishName, dishProducts, dishDescription, price } = props;
   const imageSrc = props.imageSrc && props.imageSrc.length != 0 ? props.imageSrc : placeholderImg;
   const [productList, setProductList] = useState<Array<IProduct>>([]);
-  let dishProductsList = [] as IProduct[]
+  const [restoList, setRestoList] = useState<Array<IRestaurantFrontEnd>>([]);
+  let dishProductsList = [] as IProduct[];
+  let restoNameList = [] as IRestoName[];
+  let restotmp: string[] = [];
 
   useEffect(() => {
-    getAllRestoProducts("burgerme").then((res) => {
+    getAllProducts().then((res) => {
       setProductList(res);
-      dishProductsList = res.filter((product : IProduct) => dishProducts?.includes(product.name));
+      dishProductsList = res.filter((product: IProduct) => dishProducts?.includes(product.name));
+    });
+  }, []);
+
+  useEffect(() => {
+    getAllResto().then((res) => {
+      setRestoList(res);
+      restoNameList = restoList.map((restaurant) => ({ name: restaurant.name }));
     });
   }, []);
 
   async function sendRequestAndGoBack() {
-    const dish : IDishFE = {
+    const dish: IDishFE = {
       name: dishName,
       description: dishDescription,
       price: price,
@@ -112,7 +127,6 @@ const DishForm = (props: IDishFormProps) => {
             </FormControl>
           </div>
         </Grid>
-
         <Grid className={styles.TextNextToImageField} item xs={4} sm={6} md={9}>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid item xs={4} sm={5} md={8} className={styles.FieldMarginRight}>
@@ -122,7 +136,7 @@ const DishForm = (props: IDishFormProps) => {
                   defaultValue={dishName}
                   id="component-outlined"
                   fullWidth
-                  onChange={(e) => {dishName = e.target.value}}
+                  onChange={(e) => { dishName = e.target.value }}
                 />
               </FormControl>
             </Grid>
@@ -133,7 +147,7 @@ const DishForm = (props: IDishFormProps) => {
                   id="outlined-end-adornment"
                   fullWidth
                   defaultValue={price?.toFixed(2)}
-                  onChange={(e) => {price = parseInt(e.target.value)}}
+                  onChange={(e) => { price = parseInt(e.target.value) }}
                   InputProps={{
                     endAdornment: <InputAdornment position="end">€</InputAdornment>,
                   }}
@@ -147,9 +161,29 @@ const DishForm = (props: IDishFormProps) => {
                   label="Description"
                   defaultValue={dishDescription}
                   multiline
-                  onChange={(e) => {dishDescription = e.target.value}}
+                  onChange={(e) => { dishDescription = e.target.value }}
                 />
               </FormControl>
+            </Grid>
+            <Grid item xs={4} sm={8} md={12}>
+              <Autocomplete
+                multiple
+                id="tags-outlined"
+                options={restoList}
+                getOptionLabel={(option) => (option ? (option as IRestoName).name : "")}
+                defaultValue={restoNameList}
+                filterSelectedOptions
+                onChange={(e, value) => {
+                  restotmp = value.map((restoNameVar: IRestoName) => restoNameVar.name);
+                  restoName = restotmp[0];
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Restaurant"
+                  />
+                )}
+              />
             </Grid>
             <Grid item xs={4} sm={8} md={12}>
               <Autocomplete
