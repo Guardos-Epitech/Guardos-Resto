@@ -8,7 +8,7 @@ import axios from "axios";
 import { API_URL } from '@env';
 import IconBack from "react-native-vector-icons/AntDesign";
 import IconUser from "react-native-vector-icons/FontAwesome";
-import { Ingr } from "src/models/IResstaurant";
+import { IIngredients } from "src/models/ingedientsInterfaces";
 
 console.log(API_URL)
 
@@ -53,7 +53,7 @@ const AddPage = ({ navigation }: { navigation: any }) => {
 
     prepare();
   }, []);
-  const [IngrValue, setIngrValue] = useState<[Ingr]>();
+  const [IngrValue, setIngrValue] = useState<[IIngredients]>();
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {

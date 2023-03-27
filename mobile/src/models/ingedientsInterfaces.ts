@@ -1,3 +1,3 @@
-export interface Ingr {
+export interface IIngredients {
     name: string;
 }
