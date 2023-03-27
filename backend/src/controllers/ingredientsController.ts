@@ -2,12 +2,14 @@ import mongoose from 'mongoose';
 
 import {ingredientsSchema} from '../models/ingredientsInterfaces';
 
-export async function createNewIngredient(name: string, id: number) {
+export async function createNewIngredient(name: string, id: number,
+  allergens: string[]) {
   const IngredientSchema = mongoose.model('IngredientsMVP',
     ingredientsSchema);
   const upload = new IngredientSchema({
     _id: id,
     name: name,
+    allergens: allergens,
   });
   await upload.save();
   console.log('Ingredient ' + name + ' saved ' + ' with id ' + id);
