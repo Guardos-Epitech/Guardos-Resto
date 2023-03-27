@@ -48,8 +48,8 @@ const DishActions = (props: IDishActionsProps) => {
         className={styles.ButtonSize}
         aria-label="more"
         id="long-button"
-        aria-controls={open ? 'long-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
+        aria-controls={open ? "long-menu" : undefined}
+        aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
         onClick={handleClick}
       >
@@ -61,7 +61,7 @@ const DishActions = (props: IDishActionsProps) => {
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button'
+          "aria-labelledby": "basic-button"
         }}
       >
         {(actionList && actionList.length !== 0) && actionList.map((action) => (

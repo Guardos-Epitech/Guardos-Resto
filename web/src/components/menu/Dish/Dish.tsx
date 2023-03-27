@@ -52,29 +52,25 @@ const Dish = (props: IEditableDishProps) => {
               <h3 className={styles.DishTitle}>{name}</h3>
               {editable && (
                 <DishActions
-                  actionList={[
-                    {
-                      actionName: "Edit",
-                      actionIcon: EditIcon,
-                      actionRedirect: "/editDish",
-                      redirectProps: {
-                        dish: dish
-                      }
-                    }
-                  ]}
+                  actionList={[{
+                    actionName: "Edit",
+                    actionIcon: EditIcon,
+                    actionRedirect: "/editDish",
+                    redirectProps: { dish: dish }
+                  }]}
                   onDelete={getOnDelete}
                   onClick={handleChildClick}
                 />
               )}
             </div>
-            {extended && <AllergenTags dishAllergens={allergens.split(',')} />}
+            {extended && <AllergenTags dishAllergens={allergens.split(",")} />}
           </Grid>
           <Grid item className={styles.FlexParent}>
             <img
               src={imgStr}
               alt="new"
               className={styles.ImageDimensions}
-            />;
+            />
           </Grid>
           <Grid item xs={12} className={styles.GridItemDescription}>
             <p
@@ -107,22 +103,18 @@ const Dish = (props: IEditableDishProps) => {
               <h3 className={styles.DishTitle}>{name}</h3>
               {editable && (
                 <DishActions
-                  actionList={[
-                    {
-                      actionName: "Edit",
-                      actionIcon: EditIcon,
-                      actionRedirect: "/editDish",
-                      redirectProps: {
-                        dish: dish
-                      }
-                    }
-                  ]}
+                  actionList={[{
+                    actionName: "Edit",
+                    actionIcon: EditIcon,
+                    actionRedirect: "/editDish",
+                    redirectProps: { dish: dish }
+                  }]}
                   onDelete={getOnDelete}
                   onClick={handleChildClick}
                 />
               )}
             </div>
-            {extended && <AllergenTags dishAllergens={allergens.split(',')} />}
+            {extended && <AllergenTags dishAllergens={allergens.split(",")} />}
             <p
               className={
                 extended

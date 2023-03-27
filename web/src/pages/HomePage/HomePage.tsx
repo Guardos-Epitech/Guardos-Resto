@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import FixedBtn
-  from "../../components/dumpComponents/buttons/FixedBtn/FixedBtn";
+  from "@src/components/dumpComponents/buttons/FixedBtn/FixedBtn";
 import { getAllResto } from "@src/services/restoCalls";
 import Header from "@src/components/dumpComponents/Header/Header";
 import { IRestaurantFrontEnd } from "@src/model/IRestaurant";

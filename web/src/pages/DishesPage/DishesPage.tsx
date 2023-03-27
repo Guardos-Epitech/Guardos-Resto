@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import Dish from "../../components/menu/Dish/Dish";
+import Dish from "@src/components/menu/Dish/Dish";
 import FixedBtn
-  from "../../components/dumpComponents/buttons/FixedBtn/FixedBtn";
+  from "@src/components/dumpComponents/buttons/FixedBtn/FixedBtn";
 import { getAllDishes } from "@src/services/dishCalls";
 import Header from "@src/components/dumpComponents/Header/Header";
 import { IDishFE } from "@src/model/IRestaurant";
-import Layout from "../../components/dumpComponents/Layout/Layout";
+import Layout from "@src/components/dumpComponents/Layout/Layout";
 import styles from "@src/pages/DishesPage/DishesPage.module.scss";
 import SuccessAlert
   from "@src/components/dumpComponents/SuccessAlert/SuccessAlert";
@@ -26,7 +26,7 @@ const DishesPage = () => {
   };
 
   return (
-    <div className="test">
+    <div>
       <Header />
       <div className={styles.RectOnImg}>
         <span className={styles.TitleSearch}>My dishes</span>
