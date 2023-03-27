@@ -6,7 +6,7 @@ import logger from 'morgan';
 import path = require('path');
 
 import basicApiIngredients from './routes/ingredients';
-import {connectDataBase, SUCCEED} from './controllers/connectDataBase';
+import { connectDataBase, SUCCEED } from './controllers/connectDataBase';
 import dishes from './routes/dishes';
 import products from './routes/products';
 import restaurants from './routes/restaurants';
@@ -17,10 +17,10 @@ async function main() {
 
   app.use(logger('dev'));
   app.use(express.json());
-  app.use(express.urlencoded({extended: false}));
+  app.use(express.urlencoded({ extended: false }));
   app.use(cookieParser());
   app.use(express.static(path.join(__dirname, 'public')));
-  app.use(cors({origin: String('http://localhost:8080/')}));
+  app.use(cors({ origin: String('http://localhost:8080') }));
 
   const dbStatus = await connectDataBase();
 
