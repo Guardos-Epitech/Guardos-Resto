@@ -54,7 +54,7 @@ interface IDishFormProps {
 
 const DishForm = (props: IDishFormProps) => {
   const navigate = useNavigate();
-  let restoName = "" as string;
+  let restoName: string[] = [];
   let { dishName, dishProducts, dishDescription, price } = props;
   const imageSrc = props.imageSrc && props.imageSrc.length != 0 ? props.imageSrc : placeholderImg;
   const [productList, setProductList] = useState<Array<IProduct>>([]);
@@ -91,9 +91,13 @@ const DishForm = (props: IDishFormProps) => {
     }
 
     if (props.add) {
-      await addNewDish(restoName, dish);
+      for (let i = 0; i < restotmp.length; i++) {
+        await addNewDish(restotmp[i], dish);
+      }
     } else {
-      await editDish(restoName, dish);
+      for (let i = 0; i < restotmp.length; i++) {
+        await editDish(restotmp[i], dish);
+      }
     }
     return NavigateTo("/dishes", navigate, { successfulForm: true });
   }
@@ -183,9 +187,8 @@ const DishForm = (props: IDishFormProps) => {
                 getOptionLabel={(option) => (option ? (option as IRestoName).name : "")}
                 defaultValue={restoNameList}
                 filterSelectedOptions
-                onChange={(e, value) => {
+                onChange={(e, value: IRestoName[]) => {
                   restotmp = value.map((restoNameVar: IRestoName) => restoNameVar.name);
-                  restoName = restotmp[0];
                 }}
                 renderInput={(params) => (
                   <TextField

@@ -52,6 +52,7 @@ const ProductForm = (props: IDishFormProps) => {
   const [restoList, setRestoList] = useState<Array<IRestaurantFrontEnd>>([]);
   let restoNameList = [] as IRestoName[];
   let restotmp: string[] = [];
+  const [selectedResto, setSelectedResto] = useState([] as IRestoName[]);
 
   useEffect(() => {
     getAllResto().then((res) => {
@@ -76,7 +77,9 @@ const ProductForm = (props: IDishFormProps) => {
       allergens: [],
     }
 
-    await addNewProduct(product, restoName); // TODO: replace with resto group someday
+    for (let i = 0; i < restotmp.length; i++) {
+      await addNewProduct(product, restotmp[i]); // TODO: replace with resto group someday
+    }
     return NavigateTo("/products", navigate, { successfulForm: true });
   }
 
@@ -124,7 +127,6 @@ const ProductForm = (props: IDishFormProps) => {
               filterSelectedOptions
               onChange={(e, value) => {
                 restotmp = value.map((restoNameVar: IRestoName) => restoNameVar.name);
-                restoName = restotmp[0];
               }}
               renderInput={(params) => (
                 <TextField
