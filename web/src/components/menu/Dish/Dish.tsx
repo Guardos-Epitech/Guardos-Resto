@@ -43,6 +43,7 @@ const Dish = (props: IEditableDishProps) => {
     await deleteDish("burgerme", name);
     if (onUpdate) {
       await onUpdate();
+      setShowPopup(false);
     }
   }
 
@@ -83,14 +84,14 @@ const Dish = (props: IEditableDishProps) => {
                 </>
               )}
             </div>
-            {extended && <AllergenTags dishAllergens={allergens.split(',')} />}
+            {/* {extended && <AllergenTags dishAllergens={allergens.split(',')} />} */}
           </Grid>
           <Grid item className={styles.FlexParent}>
             <img
               src={imgStr}
               alt="new"
               className={styles.ImageDimensions}
-            />;
+            />
           </Grid>
           <Grid item xs={12} className={styles.GridItemDescription}>
             <p
@@ -147,7 +148,7 @@ const Dish = (props: IEditableDishProps) => {
                 </>
               )}
             </div>
-            {extended && <AllergenTags dishAllergens={allergens.split(',')} />}
+            {/* {extended && <AllergenTags dishAllergens={allergens.split(',')} />} */}
             <p
               className={
                 extended
