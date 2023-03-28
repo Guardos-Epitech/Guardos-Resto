@@ -6,7 +6,7 @@ import styles from "@src/components/menu/Dish/Dish.module.scss";
 import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
 import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
 import EditIcon from "@mui/icons-material/Edit";
-import { IDishFE } from "@src/model/IRestaurant";
+import { IDishFE } from "@src/model/dishInterfaces";
 import { deleteDish } from "@src/services/dishCalls";
 
 interface IEditableDishProps {
@@ -71,9 +71,9 @@ const Dish = (props: IEditableDishProps) => {
           </Grid>
           <Grid item className={styles.FlexParent}>
             <img
-                src={imgStr}
-                alt="new"
-                className={styles.ImageDimensions}
+              src={imgStr}
+              alt="new"
+              className={styles.ImageDimensions}
             />;
           </Grid>
           <Grid item xs={12} className={styles.GridItemDescription}>
@@ -146,8 +146,8 @@ const Dish = (props: IEditableDishProps) => {
           <Grid item xs={2} className={styles.GridItemImage}>
             {
               <img src={imgStr}
-                   alt="new"
-                   className={styles.ImageDimensions}
+                alt="new"
+                className={styles.ImageDimensions}
               />
             }
           </Grid>
