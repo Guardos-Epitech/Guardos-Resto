@@ -5,12 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
 import { deleteProduct } from "@src/services/productCalls";
 import { Popup } from "@src/components/dumpComponents/popup/Popup";
-
-export interface IProduct {
-  name: string,
-  ingredients: string[],
-  allergens: string[]
-}
+import { IProduct } from "@src/model/restaurantInterfaces";
 
 interface IProductCardProps {
   index: number,

@@ -27,7 +27,9 @@ export const editDish = async (restoName: string, body: any) => {
     url: baseUrl + restoName,
     method: 'PUT',
     data: JSON.stringify(body),
-    headers: { 'content-type': 'application/json' },
+    headers: {
+      'content-type': 'application/json',
+    },
   });
   return response.data;
 }

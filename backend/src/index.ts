@@ -26,7 +26,7 @@ async function main() {
 
   if (dbStatus === SUCCEED) {
     app.listen(port, () => {
-      return console.log(`RestaurantBE is listening at http://localhost:${port}`);
+      return console.log(`RestaurantBE listening at http://localhost:${port}`);
     });
   }
 
