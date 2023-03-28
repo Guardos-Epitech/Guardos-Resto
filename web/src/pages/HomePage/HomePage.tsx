@@ -6,21 +6,21 @@ import FixedBtn from "../../components/dumpComponents/buttons/FixedBtn/FixedBtn"
 import SuccessAlert from "@src/components/dumpComponents/SuccessAlert/SuccessAlert";
 import Layout from "@src/components/dumpComponents/Layout/Layout";
 
-import { IRestaurantFrontEnd } from "@src/model/IRestaurant";
+import { IRestaurantFrontEnd } from "@src/model/restaurantInterfaces";
 import { getAllResto } from "@src/services/restoCalls";
 
 const HomePage = () => {
-   const [restoData, setRestoData] = useState<Array<IRestaurantFrontEnd>>([]);
+  const [restoData, setRestoData] = useState<Array<IRestaurantFrontEnd>>([]);
 
-   useEffect(() => {
-      updateRestoData();
-   }, []);
+  useEffect(() => {
+    updateRestoData();
+  }, []);
 
-   const updateRestoData = () => {
-     getAllResto().then((res) => {
-       setRestoData(res);
-     });
-   }
+  const updateRestoData = () => {
+    getAllResto().then((res) => {
+      setRestoData(res);
+    });
+  }
 
   return (
     <div>
@@ -44,7 +44,7 @@ const HomePage = () => {
           </div>
         </div>
       </Layout>
-      <FixedBtn title={"Add Restaurant"} redirect={"/addResto"}/>
+      <FixedBtn title={"Add Restaurant"} redirect={"/addResto"} />
       <SuccessAlert />
     </div>
   );

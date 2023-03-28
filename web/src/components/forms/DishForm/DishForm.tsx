@@ -13,7 +13,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { getAllRestoProducts, getAllProducts } from "@src/services/productCalls";
 import { addNewDish, editDish } from "@src/services/dishCalls";
-import { IDishFE, IRestaurantFrontEnd, IRestoName } from "@src/model/IRestaurant";
+import { IProduct } from "@src/model/restaurantInterfaces";
+import { IDishFE, IRestaurantFrontEnd, IRestoName } from "@src/model/dishInterfaces";
 import { getAllResto } from "@src/services/restoCalls";
 
 const PageBtn = () => {
@@ -49,12 +50,6 @@ interface IDishFormProps {
   imageSrc?: string,
   price?: number,
   add?: boolean
-}
-
-interface IProduct {
-  name: string;
-  ingredients: string[];
-  allergens: string[];
 }
 
 const DishForm = (props: IDishFormProps) => {

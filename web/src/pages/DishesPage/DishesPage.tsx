@@ -6,7 +6,7 @@ import Dish from "../../components/menu/Dish/Dish";
 
 import FixedBtn from "../../components/dumpComponents/buttons/FixedBtn/FixedBtn";
 import SuccessAlert from "@src/components/dumpComponents/SuccessAlert/SuccessAlert";
-import { IDishFE } from "@src/model/IRestaurant";
+import { IDishFE } from "@src/model/dishInterfaces";
 import { getAllDishes } from "@src/services/dishCalls";
 
 const DishesPage = () => {
@@ -37,7 +37,8 @@ const DishesPage = () => {
               onUpdate={updateDishData}
               editable
             />
-        )})}
+          )
+        })}
       </Layout>
       <FixedBtn title={"Add dish"} redirect={"/addDish"} />
       <SuccessAlert />

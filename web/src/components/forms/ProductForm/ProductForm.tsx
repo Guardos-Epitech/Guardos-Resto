@@ -10,10 +10,8 @@ import {
 import { NavigateTo } from "@src/utils/NavigateTo";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import { IProduct } from "@src/components/ProductCard/ProductCard";
-import { IRestaurantFrontEnd, IRestoName } from "@src/model/IRestaurant";
 import { addNewProduct } from "@src/services/productCalls";
-import { getAllResto } from "@src/services/restoCalls";
+import { IIngredient, IProduct } from "@src/model/restaurantInterfaces";
 
 const PageBtn = () => {
   return createTheme({
@@ -44,10 +42,6 @@ const PageBtn = () => {
 interface IDishFormProps {
   productName?: string,
   productIngredients?: string[],
-}
-
-interface IIngredient {
-  name: string;
 }
 
 const ProductForm = (props: IDishFormProps) => {

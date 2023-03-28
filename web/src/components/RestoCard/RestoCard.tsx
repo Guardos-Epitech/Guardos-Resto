@@ -7,7 +7,7 @@ import { Grid, Paper } from "@mui/material";
 import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
 
 import Rating from "@src/components/RestoCard/Rating/Rating";
-import { IRestaurantFrontEnd } from "@src/model/IRestaurant";
+import { IRestaurantFrontEnd } from "@src/model/restaurantInterfaces";
 import { deleteResto } from "@src/services/restoCalls";
 
 interface IRestoCardProps {
