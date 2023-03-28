@@ -8,6 +8,7 @@ import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
 import EditIcon from "@mui/icons-material/Edit";
 import { IDishFE } from "@src/model/dishInterfaces";
 import { deleteDish } from "@src/services/dishCalls";
+import { Popup } from "@src/components/dumpComponents/popup/Popup";
 
 interface IEditableDishProps {
   dish: IDishFE;
@@ -18,6 +19,7 @@ interface IEditableDishProps {
 
 const Dish = (props: IEditableDishProps) => {
   const [extended, setExtended] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const { onUpdate, dish, editable } = props;
   const options = dish.category.extraGroup
   const { name, allergens, description, price, pictures } = dish;
@@ -32,10 +34,16 @@ const Dish = (props: IEditableDishProps) => {
     setExtended(!extended);
   };
 
+  const handleDeleteClick = (e: any) => {
+    e.stopPropagation();
+    setShowPopup(true);
+  };
+
   async function getOnDelete() {
     await deleteDish("burgerme", name);
     if (onUpdate) {
       await onUpdate();
+      setShowPopup(false);
     }
   }
 
@@ -51,30 +59,39 @@ const Dish = (props: IEditableDishProps) => {
             <div className={styles.FlexParent}>
               <h3 className={styles.DishTitle}>{name}</h3>
               {editable && (
-                <DishActions
-                  actionList={[
-                    {
-                      actionName: "Edit",
-                      actionIcon: EditIcon,
-                      actionRedirect: "/editDish",
-                      redirectProps: {
-                        dish: dish,
+                <>
+                  <DishActions
+                    actionList={[
+                      {
+                        actionName: "Edit",
+                        actionIcon: EditIcon,
+                        actionRedirect: "/editDish",
+                        redirectProps: {
+                          dish: dish,
+                        },
                       },
-                    },
-                  ]}
-                  onDelete={getOnDelete}
-                  onClick={handleChildClick}
-                />
+                    ]}
+                    onDelete={handleDeleteClick}
+                    onClick={handleChildClick}
+                  />
+                  {showPopup && (
+                    <Popup
+                      message={`Are you sure you want to delete ${dish.name}?`}
+                      onConfirm={getOnDelete}
+                      onCancel={() => setShowPopup(false)}
+                    />
+                  )}
+                </>
               )}
             </div>
-            {extended && <AllergenTags dishAllergens={allergens.split(',')} />}
+            {/* {extended && <AllergenTags dishAllergens={allergens.split(',')} />} */}
           </Grid>
           <Grid item className={styles.FlexParent}>
             <img
               src={imgStr}
               alt="new"
               className={styles.ImageDimensions}
-            />;
+            />
           </Grid>
           <Grid item xs={12} className={styles.GridItemDescription}>
             <p
@@ -106,23 +123,32 @@ const Dish = (props: IEditableDishProps) => {
             <div className={styles.FlexParent}>
               <h3 className={styles.DishTitle}>{name}</h3>
               {editable && (
-                <DishActions
-                  actionList={[
-                    {
-                      actionName: "Edit",
-                      actionIcon: EditIcon,
-                      actionRedirect: "/editDish",
-                      redirectProps: {
-                        dish: dish,
+                <>
+                  <DishActions
+                    actionList={[
+                      {
+                        actionName: "Edit",
+                        actionIcon: EditIcon,
+                        actionRedirect: "/editDish",
+                        redirectProps: {
+                          dish: dish,
+                        },
                       },
-                    },
-                  ]}
-                  onDelete={getOnDelete}
-                  onClick={handleChildClick}
-                />
+                    ]}
+                    onDelete={handleDeleteClick}
+                    onClick={handleChildClick}
+                  />
+                  {showPopup && (
+                    <Popup
+                      message={`Are you sure you want to delete ${dish.name}?`}
+                      onConfirm={getOnDelete}
+                      onCancel={() => setShowPopup(false)}
+                    />
+                  )}
+                </>
               )}
             </div>
-            {extended && <AllergenTags dishAllergens={allergens.split(',')} />}
+            {/* {extended && <AllergenTags dishAllergens={allergens.split(',')} />} */}
             <p
               className={
                 extended
