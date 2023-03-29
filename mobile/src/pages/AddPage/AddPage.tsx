@@ -8,6 +8,7 @@ import axios from "axios";
 import { API_URL } from '@env';
 import IconBack from "react-native-vector-icons/AntDesign";
 import IconUser from "react-native-vector-icons/FontAwesome";
+import { IIngredients } from "src/models/ingedientsInterfaces";
 
 console.log(API_URL)
 
@@ -16,49 +17,24 @@ SplashScreen.preventAutoHideAsync(); // Keep the splash screen visible while we 
 import {
   useFonts,
   Montserrat_100Thin,
-  Montserrat_100Thin_Italic,
-  Montserrat_200ExtraLight,
-  Montserrat_200ExtraLight_Italic,
   Montserrat_300Light,
-  Montserrat_300Light_Italic,
   Montserrat_400Regular,
-  Montserrat_400Regular_Italic,
   Montserrat_500Medium,
-  Montserrat_500Medium_Italic,
   Montserrat_600SemiBold,
-  Montserrat_600SemiBold_Italic,
   Montserrat_700Bold,
-  Montserrat_700Bold_Italic,
-  Montserrat_800ExtraBold,
-  Montserrat_800ExtraBold_Italic,
-  Montserrat_900Black,
-  Montserrat_900Black_Italic,
 } from "@expo-google-fonts/montserrat";
 
-interface Ingr {
-  name: string;
-}
+
 
 const AddPage = ({ navigation }: { navigation: any }) => {
   let [fontsLoaded] = useFonts({
     Montserrat_100Thin,
-    Montserrat_100Thin_Italic,
-    Montserrat_200ExtraLight,
-    Montserrat_200ExtraLight_Italic,
     Montserrat_300Light,
-    Montserrat_300Light_Italic,
     Montserrat_400Regular,
-    Montserrat_400Regular_Italic,
     Montserrat_500Medium,
-    Montserrat_500Medium_Italic,
     Montserrat_600SemiBold,
-    Montserrat_600SemiBold_Italic,
     Montserrat_700Bold,
-    Montserrat_700Bold_Italic,
-    Montserrat_800ExtraBold,
-    Montserrat_800ExtraBold_Italic,
-    Montserrat_900Black,
-    Montserrat_900Black_Italic,
+
   });
   const [appIsReady, setAppIsReady] = useState(false);
 
@@ -77,7 +53,7 @@ const AddPage = ({ navigation }: { navigation: any }) => {
 
     prepare();
   }, []);
-  const [IngrValue, setIngrValue] = useState<[Ingr]>();
+  const [IngrValue, setIngrValue] = useState<[IIngredients]>();
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
@@ -120,55 +96,55 @@ const AddPage = ({ navigation }: { navigation: any }) => {
   getIngr();
 
   return (
-    <View style={{flex:1}}>
-    <ImageBackground source={require('../../assets/background.png')} resizeMode="cover" style={styles.image}>
-    <View onLayout={onLayoutRootView} style={{alignItems: "center"}}>
-      <View style={styles.DivTop}>
-        <IconBack
-          style={styles.IconBack}
-          name="left"
-          size={40}
-          color="#4D4D4D"
-          />
-        <Text style={styles.CategorieTitle}>Ingredients</Text>
-        <IconUser
-          style={styles.IconUser}
-          name="user"
-          size={40}
-          color="#4D4D4D"
-          />
-      </View>
-      <View style={styles.DivTitleIngr}>
-        <Text style={styles.TitleIngr}>My Ingredients</Text>
-      </View>
-      <ScrollView style={styles.ScrollView}>
-        {IngrValue?.map((ingr) => (
-          <View style={{alignItems: "center"}} key={ingr.name}>
-          <View style={styles.RectIngr} key={ingr.name}>
-            <Text style={styles.TitleIngrList}>{ingr.name}</Text>
-            <Trash
-              style={styles.TrashIcon}
-              name="trash"
-              size={30}
-              color="#6D071A"
-              onPress={() => {
-                deleteIngr(ingr.name);
-              }}
-              />
+    <View style={{ flex: 1 }}>
+      <ImageBackground source={require('../../assets/background.png')} resizeMode="cover" style={styles.image}>
+        <View onLayout={onLayoutRootView} style={{ alignItems: "center" }}>
+          <View style={styles.DivTop}>
+            <IconBack
+              style={styles.IconBack}
+              name="left"
+              size={40}
+              color="#4D4D4D"
+            />
+            <Text style={styles.CategorieTitle}>Ingredients</Text>
+            <IconUser
+              style={styles.IconUser}
+              name="user"
+              size={40}
+              color="#4D4D4D"
+            />
           </View>
+          <View style={styles.DivTitleIngr}>
+            <Text style={styles.TitleIngr}>My Ingredients</Text>
+          </View>
+          <ScrollView style={styles.ScrollView}>
+            {IngrValue?.map((ingr) => (
+              <View style={{ alignItems: "center" }} key={ingr.name}>
+                <View style={styles.RectIngr} key={ingr.name}>
+                  <Text style={styles.TitleIngrList}>{ingr.name}</Text>
+                  <Trash
+                    style={styles.TrashIcon}
+                    name="trash"
+                    size={30}
+                    color="#6D071A"
+                    onPress={() => {
+                      deleteIngr(ingr.name);
+                    }}
+                  />
+                </View>
               </View>
-        ))}
-      </ScrollView>
-      <TouchableOpacity style={styles.ViewIcon} onPress={GoToQRCode}>
-        <Icon
-          name="plus"
-          size={30}
-          color="#fff"
-          />
-        <Text style={styles.TitleAddIngr}>Add Ingredients</Text>
-      </TouchableOpacity>
-          </View>
-          </ImageBackground>
+            ))}
+          </ScrollView>
+          <TouchableOpacity style={styles.ViewIcon} onPress={GoToQRCode}>
+            <Icon
+              name="plus"
+              size={30}
+              color="#fff"
+            />
+            <Text style={styles.TitleAddIngr}>Add Ingredients</Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
     </View>
   );
 };

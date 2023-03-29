@@ -10,12 +10,7 @@ import ProductCard from "@src/components/ProductCard/ProductCard";
 import styles from "@src/pages/ProductsPage/ProductsPage.module.scss";
 import SuccessAlert
   from "@src/components/dumpComponents/SuccessAlert/SuccessAlert";
-
-interface IProduct {
-  name: string,
-  ingredients: string[],
-  allergens: string[]
-}
+import { IProduct } from "@src/model/restaurantInterfaces";
 
 const ProductsPage = () => {
   const [productData, setProductData] = useState<Array<IProduct>>([]);

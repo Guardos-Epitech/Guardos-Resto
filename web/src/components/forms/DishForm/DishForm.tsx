@@ -11,8 +11,9 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { addNewDish, editDish } from "@src/services/dishCalls";
+import { IProduct } from "@src/model/restaurantInterfaces";
+import { IDishFE } from "@src/model/dishInterfaces";
 import { getAllRestoProducts } from "@src/services/productCalls";
-import { IDishFE } from "@src/model/IRestaurant";
 import { NavigateTo } from "@src/utils/NavigateTo";
 import placeholderImg from "@src/assets/placeholder.png";
 import styles from "@src/components/forms/DishForm/DishForm.module.scss";
@@ -50,12 +51,6 @@ interface IDishFormProps {
   imageSrc?: string,
   price?: number,
   add?: boolean
-}
-
-interface IProduct {
-  name: string;
-  ingredients: string[];
-  allergens: string[];
 }
 
 const DishForm = (props: IDishFormProps) => {

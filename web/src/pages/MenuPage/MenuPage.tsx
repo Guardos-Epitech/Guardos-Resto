@@ -8,12 +8,12 @@ import PlaceIcon from "@mui/icons-material/Place";
 import Category from "@src/components/menu/Category/Category";
 import Dish from "@src/components/menu/Dish/Dish";
 import Header from "@src/components/dumpComponents/Header/Header";
-import { ICategories } from "@src/model/IRestaurant";
 import Layout from "@src/components/dumpComponents/Layout/Layout";
 import styles from "@src/pages/MenuPage/MenuPage.module.scss";
 
 import burgerImg from "@src/assets/dishImages/burger.jpg";
 import pizzaImg from "@src/assets/dishImages/pizza.jpg";
+import { ICategories } from "@src/model/categoryinterfaces";
 
 const theme = createTheme({
   palette: {

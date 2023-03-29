@@ -11,7 +11,7 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { addNewProduct } from "@src/services/productCalls";
-import { IProduct } from "@src/components/ProductCard/ProductCard";
+import { IIngredient, IProduct } from "@src/model/restaurantInterfaces";
 import { NavigateTo } from "@src/utils/NavigateTo";
 import styles from "@src/components/forms/ProductForm/ProductForm.module.scss";
 
@@ -44,10 +44,6 @@ const PageBtn = () => {
 interface IDishFormProps {
   productName?: string,
   productIngredients?: string[],
-}
-
-interface IIngredient {
-  name: string;
 }
 
 const ProductForm = (props: IDishFormProps) => {

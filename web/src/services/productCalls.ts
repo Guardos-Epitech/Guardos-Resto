@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IProduct } from '@src/components/ProductCard/ProductCard';
+import { IProduct } from "@src/model/restaurantInterfaces";
 
 const baseUrl = 'http://localhost:8082/';
 
@@ -14,14 +14,14 @@ export const getAllRestoProducts = async (restoName: string) => {
 export const getAllProducts = async () => {
   const response = await axios({
     method: 'GET',
-    url: baseUrl + 'get'
+    url: baseUrl
   });
   return response.data;
 };
 
 export const addNewProduct = async (product: IProduct, restoName: string) => {
   const response = await axios({
-    url: baseUrl + 'post',
+    url: baseUrl,
     method: 'POST',
     data: JSON.stringify({
       name: product.name,
@@ -38,7 +38,7 @@ export const addNewProduct = async (product: IProduct, restoName: string) => {
 
 export const deleteProduct = async (product: any) => {
   const response = await axios({
-    url: baseUrl + 'delete',
+    url: baseUrl,
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'

@@ -5,11 +5,12 @@ import { Grid, Paper } from "@mui/material";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import PlaceIcon from "@mui/icons-material/Place";
 
-import { IRestaurantFrontEnd } from "@src/model/IRestaurant";
+import { IRestaurantFrontEnd } from "@src/model/restaurantInterfaces";
 import { deleteResto } from "@src/services/restoCalls";
 import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
 import Rating from "@src/components/RestoCard/Rating/Rating";
 import styles from "./RestoCard.module.scss";
+import { Popup } from "@src/components/dumpComponents/popup/Popup";
 
 interface IRestoCardProps {
   resto: IRestaurantFrontEnd;
@@ -19,6 +20,7 @@ interface IRestoCardProps {
 
 const RestoCard = (props: IRestoCardProps) => {
   const [extended, setExtended] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const { onUpdate, resto, editable } = props;
   const imgStr = `${resto.pictures[0]}?auto=compress&cs=tinysrgb&h=350`;
   const address =
@@ -32,6 +34,11 @@ const RestoCard = (props: IRestoCardProps) => {
 
   const handleClick = () => {
     setExtended(!extended);
+  };
+
+  const handleDeleteClick = (e: any) => {
+    e.stopPropagation();
+    setShowPopup(true);
   };
 
   async function getOnDelete() {
@@ -58,38 +65,47 @@ const RestoCard = (props: IRestoCardProps) => {
             <Rating restoRating={resto.rating}
               restoRatingsCount={78} />{/*TODO: get ratings count*/}
             {editable && (
-              <DishActions
-                actionList={[
-                  {
-                    actionName: "Menu",
-                    actionIcon: MenuBookIcon,
-                    actionRedirect: "/menu",
-                    redirectProps: {
-                      menu: resto.categories,
-                      restoName: resto.name,
-                      address: address
+              <>
+                <DishActions
+                  actionList={[
+                    {
+                      actionName: "Menu",
+                      actionIcon: MenuBookIcon,
+                      actionRedirect: "/menu",
+                      redirectProps: {
+                        menu: resto.categories,
+                        restoName: resto.name,
+                        address: address
+                      }
+                    },
+                    {
+                      actionName: "Edit",
+                      actionIcon: EditIcon,
+                      actionRedirect: "/editResto",
+                      redirectProps: {
+                        restoName: resto.name,
+                        phone: resto.name,
+                        street: resto.location.streetName,
+                        streetNumber: resto.location.streetNumber,
+                        postalCode: resto.location.postalCode,
+                        city: resto.location.city,
+                        country: resto.location.country,
+                        description: resto.description
+                      }
                     }
-                  },
-                  {
-                    actionName: "Edit",
-                    actionIcon: EditIcon,
-                    actionRedirect: "/editResto",
-                    redirectProps: {
-                      restoName: resto.name,
-                      phone: resto.name,
-                      street: resto.location.streetName,
-                      streetNumber: resto.location.streetNumber,
-                      postalCode: resto.location.postalCode,
-                      city: resto.location.city,
-                      country: resto.location.country,
-                      description: resto.description
-                    }
-                  }
-                ]}
-                onDelete={getOnDelete}
-                className={styles.ActionMenu}
-                onClick={handleChildClick}
-              />
+                  ]}
+                  onDelete={handleDeleteClick}
+                  className={styles.ActionMenu}
+                  onClick={handleChildClick}
+                />
+                {showPopup && (
+                  <Popup
+                    message={`Are you sure you want to delete ${resto.name}?`}
+                    onConfirm={getOnDelete}
+                    onCancel={() => setShowPopup(false)}
+                  />
+                )}
+              </>
             )}
           </div>
           <div className={styles.FlexParent}>

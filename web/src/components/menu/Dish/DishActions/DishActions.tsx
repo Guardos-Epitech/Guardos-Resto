@@ -13,13 +13,7 @@ import {
 
 import { NavigateTo } from "@src/utils/NavigateTo";
 import styles from "./DishActions.module.scss";
-
-interface IAction {
-  actionName: string,
-  actionIcon: any,
-  actionRedirect: string,
-  redirectProps?: any
-}
+import { IAction } from "@src/model/restaurantInterfaces";
 
 interface IDishActionsProps {
   actionList?: IAction[],
