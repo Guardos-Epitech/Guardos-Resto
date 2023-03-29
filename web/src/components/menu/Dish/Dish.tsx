@@ -6,7 +6,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
 import { deleteDish } from "@src/services/dishCalls";
 import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
-import { IDishFE } from "@src/model/IRestaurant";
+import {IDishFE} from "@src/model/dishInterfaces";
 import styles from "@src/components/menu/Dish/Dish.module.scss";
 import { Popup } from "@src/components/dumpComponents/popup/Popup";
 
@@ -63,9 +63,9 @@ const Dish = (props: IEditableDishProps) => {
                   <DishActions
                     actionList={[{
                       actionName: "Edit",
-                    actionIcon: EditIcon,
-                    actionRedirect: "/editDish",
-                    redirectProps: { dish: dish }
+                      actionIcon: EditIcon,
+                      actionRedirect: "/editDish",
+                      redirectProps: { dish: dish }
                     }]}
                     onDelete={handleDeleteClick}
                     onClick={handleChildClick}
@@ -123,9 +123,9 @@ const Dish = (props: IEditableDishProps) => {
                   <DishActions
                     actionList={[{
                       actionName: "Edit",
-                    actionIcon: EditIcon,
-                    actionRedirect: "/editDish",
-                    redirectProps: { dish: dish }
+                      actionIcon: EditIcon,
+                      actionRedirect: "/editDish",
+                      redirectProps: { dish: dish }
                     }]}
                     onDelete={handleDeleteClick}
                     onClick={handleChildClick}

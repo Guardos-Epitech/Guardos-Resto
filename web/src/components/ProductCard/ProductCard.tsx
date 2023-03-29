@@ -7,6 +7,7 @@ import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
 import { deleteProduct } from "@src/services/productCalls";
 import { Popup } from "@src/components/dumpComponents/popup/Popup";
 import { IProduct } from "@src/model/restaurantInterfaces";
+import styles from "./ProductCard.module.scss";
 
 interface IProductCardProps {
   index: number,
