@@ -12,7 +12,7 @@ import SuccessAlert
   from "@src/components/dumpComponents/SuccessAlert/SuccessAlert";
 
 const HomePage = () => {
-  const [restoData, setRestoData] = useState<Array<IRestaurantFrontEnd>>([]);
+  const [restoData, setRestoData] = useState<IRestaurantFrontEnd[]>([]);
 
   useEffect(() => {
     updateRestoData();
