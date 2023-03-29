@@ -65,6 +65,7 @@ const DishForm = (props: IDishFormProps) => {
   let restoNameList = [] as IRestoName[];
   const suggestions: string[] = ["Appetizer", "Maindish", "Dessert"];
   const suggestionsAller: string[] = ["Celery", "Gluten", "Crustaceans", "Eggs", "Fish", "Lupin", "Milk", "Molluscs", "Mustard", "Nuts", "Peanuts", "Sesame seeds", "Soya", "Sulphur dioxide"];
+  let dishList: IDishFE[] = [];
 
 
   useEffect(() => {
@@ -82,25 +83,28 @@ const DishForm = (props: IDishFormProps) => {
   }, []);
 
   async function sendRequestAndGoBack() {
-    const dish: IDishFE = {
-      name: dishName,
-      description: dishDescription,
-      price: price,
-      products: dishProducts,
-      allergens: selAllerg.join(","),
-      category: {
-        foodGroup: selCat[0],
-        extraGroup: "",
+    for (let i = 0; i < restoName.length; i++) {
+      dishList[i] = {
+        name: dishName,
+        description: dishDescription,
+        price: price,
+        products: dishProducts,
+        allergens: selAllerg.join(","),
+        category: {
+          foodGroup: selCat[0],
+          extraGroup: "",
+        },
+        resto: restoName[i]
       }
     }
 
     if (props.add) {
-      for (let i = 0; i < restoName.length; i++) {
-        await addNewDish(restoName[i], dish);
+      for (let i = 0; i < dishList.length; i++) {
+        await addNewDish(dishList[i].resto, dishList[i]);
       }
     } else {
-      for (let i = 0; i < restoName.length; i++) {
-        await editDish(restoName[i], dish);
+      for (let i = 0; i < dishList.length; i++) {
+        await editDish(dishList[i].resto, dishList[i]);
       }
     }
     return NavigateTo("/dishes", navigate, { successfulForm: true });

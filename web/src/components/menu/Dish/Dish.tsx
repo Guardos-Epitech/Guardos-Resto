@@ -22,7 +22,7 @@ const Dish = (props: IEditableDishProps) => {
   const [showPopup, setShowPopup] = useState(false);
   const { onUpdate, dish, editable } = props;
   const options = dish.category.extraGroup
-  const { name, allergens, description, price, pictures } = dish;
+  const { name, allergens, description, price, pictures, resto } = dish;
   const imgStr = `${pictures[0]}?auto=compress&cs=tinysrgb&h=350`;
   const priceStr = `${price.toFixed(2)} €`;
 
@@ -40,7 +40,7 @@ const Dish = (props: IEditableDishProps) => {
   };
 
   async function getOnDelete() {
-    await deleteDish("burgerme", name);
+    await deleteDish(dish.resto, name);
     if (onUpdate) {
       await onUpdate();
       setShowPopup(false);

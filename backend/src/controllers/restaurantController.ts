@@ -4,11 +4,11 @@ import {
   IOpeningHours, IProducts, IRestaurantBackEnd,
   IRestaurantFrontEnd, restaurantSchema
 } from '../models/restaurantInterfaces';
-import {ICategories} from '../models/categoryInterfaces';
-import {IDishBE, IDishFE} from '../models/dishInterfaces';
-import {IMealType} from '../models/mealTypeInterfaces';
-import {ILocation} from '../models/locationInterfaces';
-import {IRestaurantCommunication} from '../models/communicationInterfaces';
+import { ICategories } from '../models/categoryInterfaces';
+import { IDishBE, IDishFE } from '../models/dishInterfaces';
+import { IMealType } from '../models/mealTypeInterfaces';
+import { ILocation } from '../models/locationInterfaces';
+import { IRestaurantCommunication } from '../models/communicationInterfaces';
 
 function createBackEndObj(restaurant: IRestaurantBackEnd) {
   const restaurantBE: IRestaurantBackEnd = {
@@ -120,6 +120,7 @@ function createRestaurantObjFe(
             foodGroup: dish.category.foodGroup,
             extraGroup: dish.category.extraGroup
           },
+          resto: restaurant.name
         };
         categories.dishes.push(dishObj);
       }
@@ -131,7 +132,7 @@ function createRestaurantObjFe(
 
 export async function getRestaurantByName(restaurantName: string) {
   const Restaurant = mongoose.model('Restaurant', restaurantSchema);
-  const rest = await Restaurant.findOne({name: restaurantName});
+  const rest = await Restaurant.findOne({ name: restaurantName });
   if (!rest) return null;
 
   const restaurantBE = createBackEndObj({
@@ -195,7 +196,7 @@ export async function createNewRestaurant(
     dishes: obj.dishes ? obj.dishes : [],
     pictures: obj.pictures ? obj.pictures : ['empty.jpg'],
     openingHours: obj.openingHours ? obj.openingHours : [
-      {open: '11:00', close: '22:00', day: 0}],
+      { open: '11:00', close: '22:00', day: 0 }],
     location: obj.location ? obj.location : {},
     mealType: obj.mealType ? obj.mealType : [],
     products: obj.products ? obj.products : [],
@@ -208,7 +209,7 @@ export async function createNewRestaurant(
 
 export async function deleteRestaurantByName(restaurantName: string) {
   const Restaurant = mongoose.model('Restaurants', restaurantSchema);
-  await Restaurant.deleteOne({name: restaurantName});
+  await Restaurant.deleteOne({ name: restaurantName });
   return 'deleted ' + restaurantName;
 }
 
@@ -216,9 +217,9 @@ async function updateRestaurantByName(
   restaurant: IRestaurantBackEnd, restaurantName: string) {
   const Restaurant = mongoose.model('Restaurants', restaurantSchema);
   return Restaurant.findOneAndUpdate(
-    {name: restaurantName},
+    { name: restaurantName },
     restaurant,
-    {new: true}
+    { new: true }
   );
 }
 
@@ -226,7 +227,7 @@ export async function changeRestaurant(
   restaurant: IRestaurantCommunication, restaurantName: string) {
   const Restaurant = mongoose.model('Restaurant', restaurantSchema);
   const oldRest = await Restaurant
-    .findOne({name: restaurantName}) as IRestaurantBackEnd;
+    .findOne({ name: restaurantName }) as IRestaurantBackEnd;
   const newRest: IRestaurantBackEnd = {
     description: restaurant.description ?
       restaurant.description : oldRest.description,
@@ -254,15 +255,15 @@ export async function changeRestaurant(
 export async function addRestoProduct(product: IProducts, restoName: string) {
   const Restaurant = mongoose.model('Restaurant', restaurantSchema);
   return Restaurant.findOneAndUpdate(
-    {name: restoName},
-    {$push: {products: product}},
-    {new: true}
+    { name: restoName },
+    { $push: { products: product } },
+    { new: true }
   );
 }
 
 export async function getAllRestoProducts(restoName: string) {
   const Restaurant = mongoose.model('Restaurant', restaurantSchema);
-  const rest = await Restaurant.findOne({name: restoName});
+  const rest = await Restaurant.findOne({ name: restoName });
   if (!rest) return null;
   return rest.products;
 }

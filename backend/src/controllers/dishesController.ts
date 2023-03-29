@@ -1,23 +1,23 @@
 import mongoose from 'mongoose';
 
-import {IDishBE, IDishFE} from '../models/dishInterfaces';
-import {IDishesCommunication} from '../models/communicationInterfaces';
-import {restaurantSchema} from '../models/restaurantInterfaces';
-import {ICategoryFE} from '../models/categoryInterfaces';
+import { IDishBE, IDishFE } from '../models/dishInterfaces';
+import { IDishesCommunication } from '../models/communicationInterfaces';
+import { restaurantSchema } from '../models/restaurantInterfaces';
+import { ICategoryFE } from '../models/categoryInterfaces';
 
 export async function getDishesByRestaurantID(restaurantId: number) {
   const Restaurant = mongoose.model('Restaurant', restaurantSchema);
-  return Restaurant.find({_id: restaurantId}, 'dishes');
+  return Restaurant.find({ _id: restaurantId }, 'dishes');
 }
 
 export async function getDishesByRestaurantName(restaurantName: string) {
   const Restaurant = mongoose.model('Restaurant', restaurantSchema);
-  return Restaurant.find({name: restaurantName}, 'dishes');
+  return Restaurant.find({ name: restaurantName }, 'dishes');
 }
 
 export async function getDishByName(restaurantName: string, dishName: string) {
   const Restaurant = mongoose.model('Restaurant', restaurantSchema);
-  const restaurant = await Restaurant.findOne({name: restaurantName});
+  const restaurant = await Restaurant.findOne({ name: restaurantName });
   if (!restaurant) return null;
   return restaurant.dishes.find((dish) => dish.name === dishName);
 }
@@ -35,6 +35,7 @@ export async function getAllDishes() {
         pictures: [''],
         allergens: [''],
         category: {} as ICategoryFE,
+        resto: rest.name
       };
       dishFE.pictures.pop();
       dishFE.allergens.pop();
@@ -57,18 +58,18 @@ export async function getAllDishes() {
 async function deleteDish(restaurantName: string, dishName: string) {
   const Restaurant = mongoose.model('Restaurant', restaurantSchema);
   return Restaurant.findOneAndUpdate(
-    {name: restaurantName},
-    {$pull: {dishes: {name: dishName}}},
-    {new: true}
+    { name: restaurantName },
+    { $pull: { dishes: { name: dishName } } },
+    { new: true }
   );
 }
 
 async function createDish(restaurantName: string, dish: IDishesCommunication) {
   const Restaurant = mongoose.model('Restaurant', restaurantSchema);
   return Restaurant.findOneAndUpdate(
-    {name: restaurantName},
-    {$push: {dishes: dish}},
-    {new: true}
+    { name: restaurantName },
+    { $push: { dishes: dish } },
+    { new: true }
   );
 }
 
@@ -101,9 +102,9 @@ export async function updateDish(
   restaurantName: string, dish: IDishBE) {
   const Restaurant = mongoose.model('Restaurant', restaurantSchema);
   return Restaurant.findOneAndUpdate(
-    {name: restaurantName, 'dishes.name': dish.name},
-    {$set: {'dishes.$': dish}},
-    {new: true}
+    { name: restaurantName, 'dishes.name': dish.name },
+    { $set: { 'dishes.$': dish } },
+    { new: true }
   );
 }
 
@@ -119,7 +120,7 @@ export async function changeDishByName(
     products: dish.products ? dish.products : oldDish.products as [string],
     pictures: dish.pictures ? dish.pictures : oldDish.pictures as [string],
     allergens: dish.allergens ? dish.allergens as [string] :
-        oldDish.allergens as [string],
+      oldDish.allergens as [string],
     category: dish.category ? dish.category : oldDish.category as {
       menuGroup: string;
       foodGroup: string;

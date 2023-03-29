@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import {ICategoryBE, ICategoryFE} from './categoryInterfaces';
+import { ICategoryBE, ICategoryFE } from './categoryInterfaces';
 
 export interface IDishBE {
   name: string;
@@ -20,6 +20,7 @@ export interface IDishFE {
   allergens: [string];
   pictures: string[];
   category: ICategoryFE;
+  resto: string;
 }
 
 export const dishSchema = new mongoose.Schema({
