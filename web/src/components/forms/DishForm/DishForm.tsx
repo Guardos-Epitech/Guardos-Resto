@@ -49,19 +49,23 @@ interface IDishFormProps {
   dishDescription?: string,
   imageSrc?: string,
   price?: number,
-  add?: boolean
+  add?: boolean,
+  selCat?: string[],
+  selAllerg?: string[],
+  restoName?: string[]
 }
 
 const DishForm = (props: IDishFormProps) => {
   const navigate = useNavigate();
-  let restoName: string[] = [];
-  let { dishName, dishProducts, dishDescription, price } = props;
+  let { dishName, dishProducts, dishDescription, price, selCat, selAllerg, restoName } = props;
   const imageSrc = props.imageSrc && props.imageSrc.length != 0 ? props.imageSrc : placeholderImg;
   const [productList, setProductList] = useState<Array<IProduct>>([]);
   const [restoList, setRestoList] = useState<Array<IRestaurantFrontEnd>>([]);
   let dishProductsList = [] as IProduct[];
   let restoNameList = [] as IRestoName[];
-  let restotmp: string[] = [];
+  const suggestions: string[] = ["Appetizer", "Maindish", "Dessert"];
+  const suggestionsAller: string[] = ["Celery", "Gluten", "Crustaceans", "Eggs", "Fish", "Lupin", "Milk", "Molluscs", "Mustard", "Nuts", "Peanuts", "Sesame seeds", "Soya", "Sulphur dioxide"];
+
 
   useEffect(() => {
     getAllProducts().then((res) => {
@@ -83,20 +87,20 @@ const DishForm = (props: IDishFormProps) => {
       description: dishDescription,
       price: price,
       products: dishProducts,
-      allergens: "milk,gluten,nuts",
+      allergens: selAllerg.join(","),
       category: {
-        foodGroup: "Main",
+        foodGroup: selCat[0],
         extraGroup: "",
       }
     }
 
     if (props.add) {
-      for (let i = 0; i < restotmp.length; i++) {
-        await addNewDish(restotmp[i], dish);
+      for (let i = 0; i < restoName.length; i++) {
+        await addNewDish(restoName[i], dish);
       }
     } else {
-      for (let i = 0; i < restotmp.length; i++) {
-        await editDish(restotmp[i], dish);
+      for (let i = 0; i < restoName.length; i++) {
+        await editDish(restoName[i], dish);
       }
     }
     return NavigateTo("/dishes", navigate, { successfulForm: true });
@@ -183,12 +187,50 @@ const DishForm = (props: IDishFormProps) => {
               <Autocomplete
                 multiple
                 id="tags-outlined"
+                options={suggestionsAller}
+                getOptionLabel={(option) => (option ? (option as string) : "")}
+                defaultValue={selAllerg}
+                filterSelectedOptions
+                onChange={(e, value) => {
+                  selAllerg = value.map((allergene: string) => allergene);
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Allergens"
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={12}>
+              <Autocomplete
+                multiple
+                id="tags-outlined"
+                options={suggestions}
+                getOptionLabel={(option) => (option ? (option as string) : "")}
+                defaultValue={selCat}
+                filterSelectedOptions
+                onChange={(e, value) => {
+                  selCat = value.map((product: string) => product);
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Food Category"
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={4} sm={8} md={12}>
+              <Autocomplete
+                multiple
+                id="tags-outlined"
                 options={restoList}
                 getOptionLabel={(option) => (option ? (option as IRestoName).name : "")}
                 defaultValue={restoNameList}
                 filterSelectedOptions
                 onChange={(e, value: IRestoName[]) => {
-                  restotmp = value.map((restoNameVar: IRestoName) => restoNameVar.name);
+                  restoName = value.map((restoNameVar: IRestoName) => restoNameVar.name);
                 }}
                 renderInput={(params) => (
                   <TextField
