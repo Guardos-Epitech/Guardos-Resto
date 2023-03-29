@@ -1,9 +1,11 @@
 import React from "react";
-import styles from "./FixedBtn.module.scss";
-import Button from "@mui/material/Button";
-import { NavigateTo } from "@src/utils/NavigateTo";
 import { useNavigate } from "react-router-dom";
+
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+
+import { NavigateTo } from "@src/utils/NavigateTo";
+import styles from "./FixedBtn.module.scss";
 
 const PageBtn = () => {
   return createTheme({
@@ -26,8 +28,8 @@ const PageBtn = () => {
       },
     },
     shape: {
-      borderRadius: 5,
-    },
+      borderRadius: 5
+    }
   });
 };
 
@@ -39,6 +41,7 @@ interface IFixedBtnProps {
 const FixedBtn = (props: IFixedBtnProps) => {
   const navigate = useNavigate();
   const { title, redirect } = props;
+
   return (
     <div className={styles.FixedBtn}>
       <ThemeProvider theme={PageBtn()}>

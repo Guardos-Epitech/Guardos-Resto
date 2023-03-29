@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
+import React  from "react";
+
 import styled from "styled-components";
 
 type PopupProps = {
@@ -33,14 +33,15 @@ const PopupButton = styled.button`
   cursor: pointer;
 `;
 
-export const Popup: React.FC<PopupProps> = ({ message, onConfirm, onCancel }) => {
-    return (
-        <PopupContainer>
-            <div>{message}</div>
-            <div>
-                <PopupButton onClick={onConfirm}>Confirm</PopupButton>
-                <PopupButton onClick={onCancel}>Cancel</PopupButton>
-            </div>
-        </PopupContainer>
-    );
+export const Popup: React.FC<PopupProps> = (
+  { message, onConfirm, onCancel }) => {
+  return (
+    <PopupContainer>
+      <div>{message}</div>
+      <div>
+        <PopupButton onClick={onConfirm}>Confirm</PopupButton>
+        <PopupButton onClick={onCancel}>Cancel</PopupButton>
+      </div>
+    </PopupContainer>
+  );
 };
