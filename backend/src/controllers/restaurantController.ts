@@ -118,9 +118,11 @@ function createRestaurantObjFe(
           allergens: dish.allergens,
           category: {
             foodGroup: dish.category.foodGroup,
-            extraGroup: dish.category.extraGroup
+            extraGroup: dish.category.extraGroup,
+            menuGroup: dish.category.menuGroup
           },
-          resto: restaurant.name
+          resto: restaurant.name,
+          products: dish.products
         };
         categories.dishes.push(dishObj);
       }

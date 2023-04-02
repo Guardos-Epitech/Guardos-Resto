@@ -21,6 +21,7 @@ export interface IDishFE {
   pictures: string[];
   category: ICategoryFE;
   resto: string;
+  products: string[];
 }
 
 export const dishSchema = new mongoose.Schema({

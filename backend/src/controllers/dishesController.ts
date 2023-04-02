@@ -35,12 +35,14 @@ export async function getAllDishes() {
         pictures: [''],
         allergens: [''],
         category: {} as ICategoryFE,
-        resto: rest.name
+        resto: rest.name,
+        products: dish.products
       };
       dishFE.pictures.pop();
       dishFE.allergens.pop();
       dishFE.category.foodGroup = dish.category.foodGroup;
       dishFE.category.extraGroup = dish.category.extraGroup;
+      dishFE.category.menuGroup = dish.category.menuGroup;
       for (const pict of dish.pictures) {
         dishFE.pictures.push(pict);
       }

@@ -55,30 +55,34 @@ interface IDishFormProps {
   restoName?: string[]
 }
 
+interface IRestoNames {
+  name: string;
+}
+
 const DishForm = (props: IDishFormProps) => {
   const navigate = useNavigate();
   let { dishName, dishProducts, dishDescription, price, selCat, selAllerg, restoName } = props;
   const imageSrc = props.imageSrc && props.imageSrc.length != 0 ? props.imageSrc : placeholderImg;
-  const [productList, setProductList] = useState<Array<IProduct>>([]);
-  const [restoList, setRestoList] = useState<Array<IRestaurantFrontEnd>>([]);
-  let dishProductsList = [] as IProduct[];
-  let restoNameList = [] as IRestoName[];
+  const [productListTest, setProductListTest] = useState<Array<string>>([]);
+  const [restoList, setRestoList] = useState<Array<string>>([]);
+  let allRestoNames: string[] = [];
+  let allDishProd: string[] = [];
   const suggestions: string[] = ["Appetizer", "Maindish", "Dessert"];
-  const suggestionsAller: string[] = ["Celery", "Gluten", "Crustaceans", "Eggs", "Fish", "Lupin", "Milk", "Molluscs", "Mustard", "Nuts", "Peanuts", "Sesame seeds", "Soya", "Sulphur dioxide"];
+  const suggestionsAller: string[] = ["Celery", "Gluten", "Crustaceans", "Eggs", "Fish", "Lupin", "Milk", "Molluscs", "Mustard", "Nuts", "Peanuts", "Sesame seeds", "Soya", "Sulphur dioxide", "Lactose"];
   let dishList: IDishFE[] = [];
 
 
   useEffect(() => {
     getAllProducts().then((res) => {
-      setProductList(res);
-      dishProductsList = res.filter((product: IProduct) => dishProducts?.includes(product.name));
+      allDishProd = res.map((item: IProduct) => item.name);
+      setProductListTest(allDishProd);
     });
   }, []);
 
   useEffect(() => {
     getAllResto().then((res) => {
-      setRestoList(res);
-      restoNameList = restoList.map((restaurant) => ({ name: restaurant.name }));
+      allRestoNames = res.map((item: IRestaurantFrontEnd) => item.name);
+      setRestoList(allRestoNames);
     });
   }, []);
 
@@ -93,6 +97,7 @@ const DishForm = (props: IDishFormProps) => {
         category: {
           foodGroup: selCat[0],
           extraGroup: "",
+          menuGroup: selCat[0]
         },
         resto: restoName[i]
       }
@@ -172,12 +177,12 @@ const DishForm = (props: IDishFormProps) => {
               <Autocomplete
                 multiple
                 id="tags-outlined"
-                options={productList}
-                getOptionLabel={(option) => (option ? (option as IProduct).name : "")}
-                defaultValue={dishProductsList}
+                options={productListTest}
+                getOptionLabel={(option) => (option ? (option as string) : "")}
+                defaultValue={dishProducts}
                 filterSelectedOptions
                 onChange={(e, value) => {
-                  dishProducts = value.map((product: IProduct) => product.name);
+                  dishProducts = value.map((product: string) => product);
                 }}
                 renderInput={(params) => (
                   <TextField
@@ -230,11 +235,11 @@ const DishForm = (props: IDishFormProps) => {
                 multiple
                 id="tags-outlined"
                 options={restoList}
-                getOptionLabel={(option) => (option ? (option as IRestoName).name : "")}
-                defaultValue={restoNameList}
+                getOptionLabel={(option) => (option ? (option as string) : "")}
+                defaultValue={restoName}
                 filterSelectedOptions
-                onChange={(e, value: IRestoName[]) => {
-                  restoName = value.map((restoNameVar: IRestoName) => restoNameVar.name);
+                onChange={(e, value) => {
+                  restoName = value.map((restoNameVar: string) => restoNameVar);
                 }}
                 renderInput={(params) => (
                   <TextField

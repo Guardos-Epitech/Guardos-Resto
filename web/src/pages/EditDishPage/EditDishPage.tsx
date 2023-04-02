@@ -12,7 +12,10 @@ interface IEditDishPageProps {
 
 const EditDishPage = () => {
   const { dish } = useLocation().state as IEditDishPageProps;
-  const { name, products, description, price } = dish;
+  const { name, products, description, price, allergens, resto, category } = dish;
+  const selResto: string[] = [resto];
+  const selAllergens: string[] = allergens.toString().split(",");
+  const selCat: string[] = [category.menuGroup];
 
   return (
     <div className="test">
@@ -26,6 +29,9 @@ const EditDishPage = () => {
           dishProducts={products}
           dishDescription={description}
           price={price}
+          selAllerg={selAllergens}
+          restoName={selResto}
+          selCat={selCat}
         />
       </Layout>
     </div>

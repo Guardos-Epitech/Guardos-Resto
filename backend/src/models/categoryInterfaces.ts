@@ -1,8 +1,9 @@
-import {IDishFE} from './dishInterfaces';
+import { IDishFE } from './dishInterfaces';
 
 export interface ICategoryFE {
   foodGroup: string,
-  extraGroup: string[]
+  extraGroup: string[],
+  menuGroup: string
 }
 
 export interface ICategories {
