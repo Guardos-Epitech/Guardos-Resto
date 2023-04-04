@@ -1,10 +1,11 @@
 import React from "react";
-import Header from "@src/components/dumpComponents/Header/Header";
-import styles from "@src/pages/EditDishPage/EditDishPage.module.scss";
-import Layout from "../../components/dumpComponents/Layout/Layout";
-import DishForm from "@src/components/forms/DishForm/DishForm";
 import { useLocation } from "react-router-dom";
+
+import DishForm from "@src/components/forms/DishForm/DishForm";
+import Header from "@src/components/dumpComponents/Header/Header";
 import { IDishFE } from "@src/model/dishInterfaces";
+import Layout from "@src/components/dumpComponents/Layout/Layout";
+import styles from "@src/pages/EditDishPage/EditDishPage.module.scss";
 
 interface IEditDishPageProps {
   dish: IDishFE;
@@ -18,7 +19,7 @@ const EditDishPage = () => {
   const selCat: string[] = [category.menuGroup];
 
   return (
-    <div className="test">
+    <div>
       <Header />
       <div className={styles.RectOnImg}>
         <span className={styles.TitleSearch}>Edit dish</span>
