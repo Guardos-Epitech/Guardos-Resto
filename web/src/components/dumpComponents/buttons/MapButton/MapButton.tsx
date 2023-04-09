@@ -1,7 +1,9 @@
 import React from "react";
-import styles from "./MapButton.module.scss";
+
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Button from "@mui/material/Button";
+
+import styles from "./MapButton.module.scss";
 
 const MapBtn = () => {
   return createTheme({
@@ -24,8 +26,8 @@ const MapBtn = () => {
       },
     },
     shape: {
-      borderRadius: 5,
-    },
+      borderRadius: 5
+    }
   });
 };
 
