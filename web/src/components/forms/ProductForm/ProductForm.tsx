@@ -52,7 +52,7 @@ const ProductForm = (props: IDishFormProps) => {
   const navigate = useNavigate();
   let { productName, productIngredients } = props;
 
-  const ingredients:IIngredient[] = [
+  const ingredients: IIngredient[] = [
     { name: 'Milk' },
     { name: 'Wheat' },
     { name: 'Egg' },
@@ -62,7 +62,7 @@ const ProductForm = (props: IDishFormProps) => {
   const productIngredientsList = ingredients.filter(product => productIngredients?.includes(product.name));
 
   async function sendRequestAndGoBack() {
-    const product : IProduct = {
+    const product: IProduct = {
       name: productName,
       ingredients: productIngredients,
       allergens: [],
@@ -83,7 +83,7 @@ const ProductForm = (props: IDishFormProps) => {
                 defaultValue={productName}
                 id="component-outlined"
                 fullWidth
-                onChange={(e) => {productName = e.target.value}}
+                onChange={(e) => { productName = e.target.value }}
               />
             </FormControl>
           </Grid>
@@ -95,6 +95,7 @@ const ProductForm = (props: IDishFormProps) => {
               getOptionLabel={(option) => (option ? (option as IIngredient).name : "")}
               defaultValue={productIngredientsList}
               filterSelectedOptions
+              autoHighlight
               onChange={(e, value) => {
                 productIngredients = value.map((ingredient: IProduct) => ingredient.name);
               }}
