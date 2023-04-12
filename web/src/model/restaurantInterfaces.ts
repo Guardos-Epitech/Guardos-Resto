@@ -1,5 +1,6 @@
 import { ICategories } from '@src/model/categoryinterfaces'
 import { ILocation } from '@src/model/locationInterfaces';
+import { IOpeningHours } from '@src/model/openingHoursInterfaces';
 
 export interface IRestaurantFrontEnd {
   id: number;
@@ -8,8 +9,10 @@ export interface IRestaurantFrontEnd {
   categories: [ICategories];
   location: ILocation;
   rating: number;
-  range: number
+  openingHours: IOpeningHours[];
+  range: number;
   description: string;
+  ratingCount: number;
   hitRate: number;
   dishes: any;
   pictures: [string];

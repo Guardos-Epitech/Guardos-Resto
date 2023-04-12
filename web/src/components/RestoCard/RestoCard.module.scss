@@ -72,3 +72,24 @@
   font-size: 0.95rem;
   margin: 0.1rem 0 0 0.3rem;
 }
+
+.DaysTextValue {
+  font-family: "Montserrat", sans-serif;
+}
+
+
+.OCTextValue {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.ContainerOpeningHours {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 17rem;
+  padding: 0.5rem;
+}

@@ -60,8 +60,8 @@ interface IRestaurantFormProps {
   imageSrc?: string;
   phone?: string;
   add?: boolean;
-  openingHours?: IOpeningHours[]; ////add this field
-  website?: string; ///////////add this field
+  openingHours?: IOpeningHours[]; 
+  website?: string;
 }
 
 interface IDay {
@@ -80,7 +80,6 @@ const days: IDay[] = [
 
 const RestaurantForm = (props: IRestaurantFormProps) => {
   const navigate = useNavigate();
-  const [openingHours, setOpenHours] = useState<IOpeningHours[] | undefined>([])
   let {
     restaurantName,
     street,
@@ -92,6 +91,7 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
     phone,
     website,
   } = props;
+  let openingHours = props.openingHours ? props.openingHours : [];
   const origRestoName = restaurantName;
   const imageSrc =
     props.imageSrc && props.imageSrc.length != 0
@@ -108,9 +108,9 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
           }
           return item;
         });
-        setOpenHours(updatedOpeningHours);
+        openingHours = updatedOpeningHours;
       } else {
-        setOpenHours(prevItems => [...prevItems, data]);
+        openingHours = [...openingHours, data];
       }
     }
   }
@@ -125,9 +125,9 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
           }
           return item;
         });
-        setOpenHours(updatedOpeningHours);
+        openingHours = updatedOpeningHours;
       } else {
-        setOpenHours(prevItems => [...prevItems, data]);
+        openingHours = [...openingHours, data];
       }
     }
   }

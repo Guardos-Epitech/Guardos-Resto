@@ -83,6 +83,7 @@ function createRestaurantObjFe(
     website: restaurant.website,
     description: restaurant.description,
     rating: restaurant.rating,
+    ratingCount: restaurant.ratingCount,
     pictures: restaurant.pictures,
     openingHours: [{} as IOpeningHours],
     products: [{} as IProducts],

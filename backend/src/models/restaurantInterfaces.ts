@@ -30,6 +30,7 @@ export interface IRestaurantFrontEnd {
   openingHours: [IOpeningHours];
   pictures: [string];
   hitRate?: number;
+  ratingCount?: number;
   rating: number;
   products: [IProducts];
 }
