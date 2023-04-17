@@ -14,7 +14,7 @@ export const getAllRestoProducts = async (restoName: string) => {
     console.error('Error fetching all restaurant products:', error);
     throw new Error('Failed to fetch all restaurant products');
   }
-}
+};
 
 export const getAllProducts = async () => {
   try {
@@ -27,7 +27,7 @@ export const getAllProducts = async () => {
     console.error('Error fetching all products:', error);
     throw new Error('Failed to fetch all products');
   }
-}
+};
 
 export const addNewProduct = async (product: IProduct, restoName: string) => {
   try {
@@ -49,7 +49,7 @@ export const addNewProduct = async (product: IProduct, restoName: string) => {
     console.error('Error adding new product:', error);
     throw new Error('Failed to add new product');
   }
-}
+};
 
 export const deleteProduct = async (product: any) => {
   try {
@@ -66,4 +66,4 @@ export const deleteProduct = async (product: any) => {
     console.error('Error deleting product:', error);
     throw new Error('Failed to delete product');
   }
-}
+};

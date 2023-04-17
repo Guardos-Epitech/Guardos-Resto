@@ -13,7 +13,7 @@ export const getAllResto = async () => {
     console.error('Error fetching all restaurants:', error);
     throw new Error('Failed to fetch all restaurants');
   }
-}
+};
 
 export const addNewResto = async (body: any) => {
   try {
@@ -30,7 +30,7 @@ export const addNewResto = async (body: any) => {
     console.error('Error adding new restaurant:', error);
     throw new Error('Failed to add new restaurant');
   }
-}
+};
 
 export const editResto = async (restoName: string, body: any) => {
   try {
@@ -47,7 +47,7 @@ export const editResto = async (restoName: string, body: any) => {
     console.error('Error editing restaurant:', error);
     throw new Error('Failed to edit restaurant');
   }
-}
+};
 
 export const deleteResto = async (restoName: string) => {
   try {
@@ -60,4 +60,4 @@ export const deleteResto = async (restoName: string) => {
     console.error('Error deleting restaurant:', error);
     throw new Error('Failed to delete restaurant');
   }
-}
+};

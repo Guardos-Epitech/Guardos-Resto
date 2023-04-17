@@ -1,14 +1,9 @@
 import mongoose from 'mongoose';
 
+import { ICategoryFE } from '../models/categoryInterfaces';
 import { IDishBE, IDishFE } from '../models/dishInterfaces';
 import { IDishesCommunication } from '../models/communicationInterfaces';
 import { restaurantSchema } from '../models/restaurantInterfaces';
-import { ICategoryFE } from '../models/categoryInterfaces';
-
-export async function getDishesByRestaurantID(restaurantId: number) {
-  const Restaurant = mongoose.model('Restaurant', restaurantSchema);
-  return Restaurant.find({ _id: restaurantId }, 'dishes');
-}
 
 export async function getDishesByRestaurantName(restaurantName: string) {
   const Restaurant = mongoose.model('Restaurant', restaurantSchema);

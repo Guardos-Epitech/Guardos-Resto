@@ -9,9 +9,9 @@ import {
   TextField
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { getAllRestoProducts, getAllProducts } from "@src/services/productCalls";
+import { getAllProducts } from "@src/services/productCalls";
 import { addNewDish, editDish } from "@src/services/dishCalls";
-import { IProduct, IRestaurantFrontEnd, IRestoName } from "@src/model/restaurantInterfaces";
+import { IProduct, IRestaurantFrontEnd } from "@src/model/restaurantInterfaces";
 import { IDishFE } from "@src/model/dishInterfaces";
 import { getAllResto } from "@src/services/restoCalls";
 import { NavigateTo } from "@src/utils/NavigateTo";
@@ -51,14 +51,15 @@ interface IDishFormProps {
   imageSrc?: string,
   price?: number,
   add?: boolean,
-  selCat?: string[],
-  selAllerg?: string[],
+  selectCategory?: string[],
+  selectAllergene?: string[],
   restoName?: string[]
 }
 
 const DishForm = (props: IDishFormProps) => {
   const navigate = useNavigate();
-  let { dishName, dishProducts, dishDescription, price, selCat, selAllerg, restoName } = props;
+  let { dishName, dishProducts, dishDescription, price,
+    selectCategory, selectAllergene, restoName } = props;
   const imageSrc = props.imageSrc &&
     props.imageSrc.length !== 0 ? props.imageSrc : placeholderImg;
   const [productListTest, setProductListTest] = useState<Array<string>>([]);
@@ -66,22 +67,26 @@ const DishForm = (props: IDishFormProps) => {
   let allRestoNames: string[] = [];
   let allDishProd: string[] = [];
   const suggestions: string[] = ["Appetizer", "Maindish", "Dessert"];
-  const suggestionsAller: string[] = ["No Allergens", "Celery", "Gluten", "Crustaceans", "Eggs", "Fish", "Lupin", "Milk", "Molluscs", "Mustard", "Nuts", "Peanuts", "Sesame seeds", "Soya", "Sulphur dioxide", "Lactose"];
+  const suggestionsAller: string[] = ["No Allergens", "Celery", "Gluten",
+    "Crustaceans", "Eggs", "Fish", "Lupin", "Milk", "Molluscs", "Mustard",
+    "Nuts", "Peanuts", "Sesame seeds", "Soya", "Sulphur dioxide", "Lactose"];
   let dishList: IDishFE[] = [];
 
 
   useEffect(() => {
-    getAllProducts().then((res) => {
-      allDishProd = res.map((item: IProduct) => item.name);
-      setProductListTest(allDishProd);
-    });
-  }, []);;
+    getAllProducts()
+      .then((res) => {
+        allDishProd = res.map((item: IProduct) => item.name);
+        setProductListTest(allDishProd);
+      });
+  }, []);
 
   useEffect(() => {
-    getAllResto().then((res) => {
-      allRestoNames = res.map((item: IRestaurantFrontEnd) => item.name);
-      setRestoList(allRestoNames);
-    });
+    getAllResto()
+      .then((res) => {
+        allRestoNames = res.map((item: IRestaurantFrontEnd) => item.name);
+        setRestoList(allRestoNames);
+      });
   }, []);
 
   async function sendRequestAndGoBack() {
@@ -91,15 +96,15 @@ const DishForm = (props: IDishFormProps) => {
         description: dishDescription,
         price: price,
         products: dishProducts,
-        allergens: selAllerg.join(","),
+        allergens: selectAllergene.join(","),
         category: {
-          foodGroup: selCat[0],
+          foodGroup: selectCategory[0],
           extraGroup: "",
-          menuGroup: selCat[0]
+          menuGroup: selectCategory[0]
         },
         resto: restoName[i]
-      }
-    };
+      };
+    }
 
     if (props.add) {
       for (let i = 0; i < dishList.length; i++) {
@@ -225,10 +230,10 @@ const DishForm = (props: IDishFormProps) => {
                 id="tags-outlined"
                 options={suggestionsAller}
                 getOptionLabel={(option) => (option ? (option as string) : "")}
-                defaultValue={selAllerg}
+                defaultValue={selectAllergene}
                 filterSelectedOptions
                 onChange={(e, value) => {
-                  selAllerg = value.map((allergene: string) => allergene);
+                  selectAllergene = value.map((allergene: string) => allergene);
                 }}
                 renderInput={(params) => (
                   <TextField
@@ -244,10 +249,10 @@ const DishForm = (props: IDishFormProps) => {
                 id="tags-outlined"
                 options={suggestions}
                 getOptionLabel={(option) => (option ? (option as string) : "")}
-                defaultValue={selCat}
+                defaultValue={selectCategory}
                 filterSelectedOptions
                 onChange={(e, value) => {
-                  selCat = value.map((product: string) => product);
+                  selectCategory = value.map((product: string) => product);
                 }}
                 renderInput={(params) => (
                   <TextField

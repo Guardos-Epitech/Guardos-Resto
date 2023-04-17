@@ -11,8 +11,9 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { addNewProduct } from "@src/services/productCalls";
-import { IIngredient, IProduct, IRestaurantFrontEnd, IRestoName } from "@src/model/restaurantInterfaces";
 import { getAllResto } from "@src/services/restoCalls";
+import { IIngredient, IProduct, IRestaurantFrontEnd, IRestoName }
+  from "@src/model/restaurantInterfaces";
 import { NavigateTo } from "@src/utils/NavigateTo";
 import styles from "@src/components/forms/ProductForm/ProductForm.module.scss";
 
@@ -50,17 +51,17 @@ interface IDishFormProps {
 const ProductForm = (props: IDishFormProps) => {
   const navigate = useNavigate();
   let { productName, productIngredients } = props;
-  let restoName = "" as string;
   const [restoList, setRestoList] = useState<Array<IRestaurantFrontEnd>>([]);
   let restoNameList = [] as IRestoName[];
-  let restotmp: string[] = [];
-  const [selectedResto, setSelectedResto] = useState([] as IRestoName[]);
+  let selectedResto: string[] = [];
 
   useEffect(() => {
-    getAllResto().then((res) => {
-      setRestoList(res);
-      restoNameList = restoList.map((restaurant) => ({ name: restaurant.name }));
-    });
+    getAllResto()
+      .then((res) => {
+        setRestoList(res);
+        restoNameList = restoList.map((restaurant) =>
+          ({ name: restaurant.name }));
+      });
   }, []);
 
   const ingredients: IIngredient[] = [
@@ -80,12 +81,12 @@ const ProductForm = (props: IDishFormProps) => {
       allergens: []
     };
 
-    for (let i = 0; i < restotmp.length; i++) {
-      await addNewProduct(product, restotmp[i]); // TODO: replace with resto group someday
+    for (let i = 0; i < selectedResto.length; i++) {
+      await addNewProduct(product, selectedResto[i]); // TODO: replace with resto group someday
     }
 
-    for (let i = 0; i < restotmp.length; i++) {
-      await addNewProduct(product, restotmp[i]); // TODO: replace with resto group someday
+    for (let i = 0; i < selectedResto.length; i++) {
+      await addNewProduct(product, selectedResto[i]); // TODO: replace with resto group someday
     }
     return NavigateTo("/products", navigate, { successfulForm: true });
   }
@@ -138,11 +139,13 @@ const ProductForm = (props: IDishFormProps) => {
               multiple
               id="tags-outlined"
               options={restoList}
-              getOptionLabel={(option) => (option ? (option as IRestoName).name : "")}
+              getOptionLabel={(option) =>
+                (option ? (option as IRestoName).name : "")}
               defaultValue={restoNameList}
               filterSelectedOptions
               onChange={(e, value) => {
-                restotmp = value.map((restoNameVar: IRestoName) => restoNameVar.name);
+                selectedResto = value.map((restoNameVar: IRestoName) =>
+                  restoNameVar.name);
               }}
               renderInput={(params) => (
                 <TextField

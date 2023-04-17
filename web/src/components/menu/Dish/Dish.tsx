@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Grid, Paper } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
-import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
 import { deleteDish } from "@src/services/dishCalls";
 import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
 import { IDishFE } from "@src/model/dishInterfaces";
@@ -22,7 +21,7 @@ const Dish = (props: IEditableDishProps) => {
   const [showPopup, setShowPopup] = useState(false);
   const { onUpdate, dish, editable } = props;
   const options = dish.category.extraGroup
-  const { name, allergens, description, price, pictures, resto } = dish;
+  const { name, description, price, pictures } = dish;
   const imgStr = `${pictures[0]}?auto=compress&cs=tinysrgb&h=350`;
   const priceStr = `${price.toFixed(2)} €`;
 
