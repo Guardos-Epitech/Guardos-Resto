@@ -31,3 +31,7 @@ export interface IAction {
   actionRedirect: string,
   redirectProps?: any
 }
+
+export interface IRestoName {
+  name: string;
+}

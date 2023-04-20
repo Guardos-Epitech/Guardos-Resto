@@ -13,7 +13,12 @@ interface IEditDishPageProps {
 
 const EditDishPage = () => {
   const { dish } = useLocation().state as IEditDishPageProps;
-  const { name, products, description, price } = dish;
+  const { name, products, description, price, allergens, resto, category }
+    = dish;
+  const selectResto: string[] = [resto];
+  const selectAllergens: string[] = allergens.toString()
+    .split(",");
+  const selectCategories: string[] = [category.menuGroup];
 
   return (
     <div>
@@ -27,6 +32,9 @@ const EditDishPage = () => {
           dishProducts={products}
           dishDescription={description}
           price={price}
+          selectAllergene={selectAllergens}
+          restoName={selectResto}
+          selectCategory={selectCategories}
         />
       </Layout>
     </div>

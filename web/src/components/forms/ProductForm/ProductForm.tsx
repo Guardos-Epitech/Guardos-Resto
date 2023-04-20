@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -11,7 +11,9 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { addNewProduct } from "@src/services/productCalls";
-import { IIngredient, IProduct } from "@src/model/restaurantInterfaces";
+import { getAllResto } from "@src/services/restoCalls";
+import { IIngredient, IProduct, IRestaurantFrontEnd, IRestoName }
+  from "@src/model/restaurantInterfaces";
 import { NavigateTo } from "@src/utils/NavigateTo";
 import styles from "@src/components/forms/ProductForm/ProductForm.module.scss";
 
@@ -49,6 +51,18 @@ interface IDishFormProps {
 const ProductForm = (props: IDishFormProps) => {
   const navigate = useNavigate();
   let { productName, productIngredients } = props;
+  const [restoList, setRestoList] = useState<Array<IRestaurantFrontEnd>>([]);
+  let restoNameList = [] as IRestoName[];
+  let selectedResto: string[] = [];
+
+  useEffect(() => {
+    getAllResto()
+      .then((res) => {
+        setRestoList(res);
+        restoNameList = restoList.map((restaurant) =>
+          ({ name: restaurant.name }));
+      });
+  }, []);
 
   const ingredients: IIngredient[] = [
     { name: 'Milk' },
@@ -67,7 +81,13 @@ const ProductForm = (props: IDishFormProps) => {
       allergens: []
     };
 
-    await addNewProduct(product, "burgerme"); // TODO: replace with resto group someday
+    for (let i = 0; i < selectedResto.length; i++) {
+      await addNewProduct(product, selectedResto[i]); // TODO: replace with resto group someday
+    }
+
+    for (let i = 0; i < selectedResto.length; i++) {
+      await addNewProduct(product, selectedResto[i]); // TODO: replace with resto group someday
+    }
     return NavigateTo("/products", navigate, { successfulForm: true });
   }
 
@@ -110,6 +130,27 @@ const ProductForm = (props: IDishFormProps) => {
                 <TextField
                   {...params}
                   label="Ingredients"
+                />
+              )}
+            />
+          </Grid>
+          <Grid item xs={4} sm={8} md={12}>
+            <Autocomplete
+              multiple
+              id="tags-outlined"
+              options={restoList}
+              getOptionLabel={(option) =>
+                (option ? (option as IRestoName).name : "")}
+              defaultValue={restoNameList}
+              filterSelectedOptions
+              onChange={(e, value) => {
+                selectedResto = value.map((restoNameVar: IRestoName) =>
+                  restoNameVar.name);
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Restaurant"
                 />
               )}
             />

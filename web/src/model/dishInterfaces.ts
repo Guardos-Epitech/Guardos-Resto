@@ -8,4 +8,5 @@ export interface IDishFE {
     price: number;
     products: string[];
     category: ICategoryFE;
+    resto: string;
 }

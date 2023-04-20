@@ -8,5 +8,6 @@ export interface ICategories {
 
 export interface ICategoryFE {
     foodGroup: string,
-    extraGroup: string
+    extraGroup: string,
+    menuGroup: string
 }

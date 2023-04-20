@@ -3,10 +3,9 @@ import React, { useState } from "react";
 import { Grid, Paper } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
-import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
 import { deleteDish } from "@src/services/dishCalls";
 import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
-import {IDishFE} from "@src/model/dishInterfaces";
+import { IDishFE } from "@src/model/dishInterfaces";
 import styles from "@src/components/menu/Dish/Dish.module.scss";
 import { Popup } from "@src/components/dumpComponents/popup/Popup";
 
@@ -21,8 +20,8 @@ const Dish = (props: IEditableDishProps) => {
   const [extended, setExtended] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const { onUpdate, dish, editable } = props;
-  const options = dish.category.extraGroup;
-  const { name, allergens, description, price, pictures } = dish;
+  const options = dish.category.extraGroup
+  const { name, description, price, pictures } = dish;
   const imgStr = `${pictures[0]}?auto=compress&cs=tinysrgb&h=350`;
   const priceStr = `${price.toFixed(2)} €`;
 
@@ -40,7 +39,7 @@ const Dish = (props: IEditableDishProps) => {
   };
 
   async function getOnDelete() {
-    await deleteDish("burgerme", name);
+    await deleteDish(dish.resto, name);
     if (onUpdate) {
       await onUpdate();
       setShowPopup(false);
