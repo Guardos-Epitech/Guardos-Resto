@@ -20,6 +20,7 @@ export interface IDishFE {
   allergens: [string];
   pictures: string[];
   category: ICategoryFE;
+  products: string[];
 }
 
 export const dishSchema = new mongoose.Schema({

@@ -59,20 +59,24 @@ interface IProduct {
 const DishForm = (props: IDishFormProps) => {
   const navigate = useNavigate();
   const restoName = "burgerme";
-  let {dishName, dishProducts, dishDescription, price } = props;
+  let { dishName, dishProducts, dishDescription, price } = props;
   const imageSrc = props.imageSrc && props.imageSrc.length != 0 ? props.imageSrc : placeholderImg;
   const [productList, setProductList] = useState<Array<IProduct>>([]);
-  let dishProductsList = [] as IProduct[]
+  const [dishProductsList, setDishProductsList] = useState<Array<IProduct>>([]);
+
+  function getDefaultValues(element: IProduct) {
+    return dishProducts?.includes(element.name);
+  }
 
   useEffect(() => {
     getAllRestoProducts("burgerme").then((res) => {
       setProductList(res);
-      dishProductsList = res.filter((product : IProduct) => dishProducts?.includes(product.name));
+      setDishProductsList(res.filter(getDefaultValues));
     });
   }, []);
 
   async function sendRequestAndGoBack() {
-    const dish : IDishFE = {
+    const dish: IDishFE = {
       name: dishName,
       description: dishDescription,
       price: price,
@@ -122,7 +126,7 @@ const DishForm = (props: IDishFormProps) => {
                   defaultValue={dishName}
                   id="component-outlined"
                   fullWidth
-                  onChange={(e) => {dishName = e.target.value}}
+                  onChange={(e) => { dishName = e.target.value }}
                 />
               </FormControl>
             </Grid>
@@ -133,7 +137,7 @@ const DishForm = (props: IDishFormProps) => {
                   id="outlined-end-adornment"
                   fullWidth
                   defaultValue={price?.toFixed(2)}
-                  onChange={(e) => {price = parseInt(e.target.value)}}
+                  onChange={(e) => { price = parseInt(e.target.value) }}
                   InputProps={{
                     endAdornment: <InputAdornment position="end">€</InputAdornment>,
                   }}
@@ -147,7 +151,7 @@ const DishForm = (props: IDishFormProps) => {
                   label="Description"
                   defaultValue={dishDescription}
                   multiline
-                  onChange={(e) => {dishDescription = e.target.value}}
+                  onChange={(e) => { dishDescription = e.target.value }}
                 />
               </FormControl>
             </Grid>
@@ -157,10 +161,12 @@ const DishForm = (props: IDishFormProps) => {
                 id="tags-outlined"
                 options={productList}
                 getOptionLabel={(option) => (option ? (option as IProduct).name : "")}
-                defaultValue={dishProductsList}
+                value={dishProductsList}
                 filterSelectedOptions
+                autoHighlight
                 onChange={(e, value) => {
                   dishProducts = value.map((product: IProduct) => product.name);
+                  setDishProductsList(productList.filter(getDefaultValues));
                 }}
                 renderInput={(params) => (
                   <TextField

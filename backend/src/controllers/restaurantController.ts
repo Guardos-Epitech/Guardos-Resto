@@ -120,6 +120,7 @@ function createRestaurantObjFe(
             foodGroup: dish.category.foodGroup,
             extraGroup: dish.category.extraGroup
           },
+          products: dish.products,
         };
         categories.dishes.push(dishObj);
       }

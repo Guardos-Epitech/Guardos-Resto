@@ -35,6 +35,7 @@ export async function getAllDishes() {
         pictures: [''],
         allergens: [''],
         category: {} as ICategoryFE,
+        products: dish.products,
       };
       dishFE.pictures.pop();
       dishFE.allergens.pop();
