@@ -1,16 +1,17 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AddRestaurantPage from "@src/pages/AddRestaurantPage";
-import MenuPage from "@src/pages/MenuPage";
-import HomePage from "@src/pages/HomePage";
-import ScrollToTop from "@src/components/ScrollToTop/ScrollToTop";
-import ProductsPage from "@src/pages/ProductsPage";
-import DishesPage from "@src/pages/DishesPage";
+
 import AddDishPage from "@src/pages/AddDishPage";
+import AppOutlet from "@src/pages/AppOutlet/AppOutlet";
+import AddProductPage from "@src/pages/AddProductPage";
+import AddRestaurantPage from "@src/pages/AddRestaurantPage";
+import DishesPage from "@src/pages/DishesPage";
 import EditDishPage from "@src/pages/EditDishPage";
 import EditRestaurantPage from "@src/pages/EditRestaurantPage";
-import AddProductPage from "@src/pages/AddProductPage";
-import AppOutlet from "@src/pages/AppOutlet/AppOutlet";
+import HomePage from "@src/pages/HomePage";
+import MenuPage from "@src/pages/MenuPage";
+import ProductsPage from "@src/pages/ProductsPage";
+import ScrollToTop from "@src/components/ScrollToTop/ScrollToTop";
 
 const MVPRouter = () => {
   return (

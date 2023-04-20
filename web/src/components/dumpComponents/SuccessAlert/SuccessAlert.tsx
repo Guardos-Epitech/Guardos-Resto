@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { Alert, Snackbar } from "@mui/material";
 import { useLocation } from "react-router-dom";
+
+import { Alert, Snackbar } from "@mui/material";
 
 const HomePage = () => {
   const [hidden, setHidden] = React.useState(true);
@@ -11,9 +12,10 @@ const HomePage = () => {
       setHidden(false);
     }
     successfulForm = false;
-  }, [])
+  }, []);
 
-  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+  const handleClose = (event?: React.SyntheticEvent | Event,
+    reason?: string) => {
     if (reason === 'clickaway') {
       return;
     }

@@ -1,1 +1,1 @@
-export { default } from "./AddRestaurantPage";
+export { default } from './AddRestaurantPage';

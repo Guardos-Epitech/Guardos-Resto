@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import styles from "@src/components/forms/DishForm/DishForm.module.scss";
+import { useNavigate } from "react-router-dom";
+
 import {
   Autocomplete,
   Box, Button,
@@ -7,13 +8,15 @@ import {
   Grid, InputAdornment,
   TextField
 } from "@mui/material";
-import placeholderImg from "@src/assets/placeholder.png";
-import { NavigateTo } from "@src/utils/NavigateTo";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
-import { getAllRestoProducts } from "@src/services/productCalls";
+
 import { addNewDish, editDish } from "@src/services/dishCalls";
-import { IDishFE } from "@src/model/IRestaurant";
+import { IProduct } from "@src/model/restaurantInterfaces";
+import { IDishFE } from "@src/model/dishInterfaces";
+import { getAllRestoProducts } from "@src/services/productCalls";
+import { NavigateTo } from "@src/utils/NavigateTo";
+import placeholderImg from "@src/assets/placeholder.png";
+import styles from "@src/components/forms/DishForm/DishForm.module.scss";
 
 const PageBtn = () => {
   return createTheme({
@@ -36,8 +39,8 @@ const PageBtn = () => {
       },
     },
     shape: {
-      borderRadius: 5,
-    },
+      borderRadius: 5
+    }
   });
 };
 
@@ -48,12 +51,6 @@ interface IDishFormProps {
   imageSrc?: string,
   price?: number,
   add?: boolean
-}
-
-interface IProduct {
-  name: string;
-  ingredients: string[];
-  allergens: string[];
 }
 
 const DishForm = (props: IDishFormProps) => {
@@ -86,7 +83,7 @@ const DishForm = (props: IDishFormProps) => {
         foodGroup: "Main",
         extraGroup: "",
       }
-    }
+    };
 
     if (props.add) {
       await addNewDish(restoName, dish);
@@ -98,17 +95,33 @@ const DishForm = (props: IDishFormProps) => {
 
   return (
     <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-      <Grid className={styles.GridSpaceTop} container columns={{ xs: 4, sm: 8, md: 12 }}>
+      <Grid
+        className={styles.GridSpaceTop}
+        container
+        columns={{ xs: 4, sm: 8, md: 12 }}
+      >
         <Grid item xs={4} sm={2} md={3}>
-          <img className={styles.ImageDimensions} src={imageSrc} alt="Resto Img" />
+          <img
+            className={styles.ImageDimensions}
+            src={imageSrc}
+            alt="Resto Img"
+          />
           <div className={styles.FormControlMargin}>
             <FormControl className={styles.ImageFlex}>
               <ThemeProvider theme={PageBtn()}>
-                <Button className={styles.FormControlMargin} variant="outlined" component="label">
+                <Button
+                  className={styles.FormControlMargin}
+                  variant="outlined"
+                  component="label"
+                >
                   Change Image
                   <input hidden accept="image/*" multiple type="file" />
                 </Button>
-                <Button className={styles.FormControlMargin} variant="text" component="label">
+                <Button
+                  className={styles.FormControlMargin}
+                  variant="text"
+                  component="label"
+                >
                   Delete Image
                   <input hidden accept="image/*" multiple type="file" />
                 </Button>
@@ -118,7 +131,11 @@ const DishForm = (props: IDishFormProps) => {
         </Grid>
 
         <Grid className={styles.TextNextToImageField} item xs={4} sm={6} md={9}>
-          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+          <Grid
+            container
+            spacing={{ xs: 2, md: 3 }}
+            columns={{ xs: 4, sm: 8, md: 12 }}
+          >
             <Grid item xs={4} sm={5} md={8} className={styles.FieldMarginRight}>
               <FormControl fullWidth>
                 <TextField
@@ -139,7 +156,10 @@ const DishForm = (props: IDishFormProps) => {
                   defaultValue={price?.toFixed(2)}
                   onChange={(e) => { price = parseInt(e.target.value) }}
                   InputProps={{
-                    endAdornment: <InputAdornment position="end">€</InputAdornment>,
+                    endAdornment:
+                      <InputAdornment position="end">
+                        €
+                      </InputAdornment>
                   }}
                 />
               </FormControl>
