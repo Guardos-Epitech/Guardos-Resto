@@ -14,7 +14,7 @@ import {IIngredientsCommunication} from '../models/communicationInterfaces';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (_req, res) => {
   const ingredients = await getAllIngredients();
   res.status(200)
     .send(ingredients);
