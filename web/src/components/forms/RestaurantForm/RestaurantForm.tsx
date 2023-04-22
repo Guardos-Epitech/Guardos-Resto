@@ -311,6 +311,7 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
                     <TimePicker
                       label="Opening"
                       ampm={false}
+                      defaultValue={openingHours[key]?.open || null}
                       onChange={(value: any) =>
                         addTimeOpen({
                           open:
@@ -327,6 +328,7 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
                     <TimePicker
                       label="Closing"
                       ampm={false}
+                      defaultValue={openingHours[key]?.close || null}
                       onChange={(value: any) =>
                         addTimeClose({
                           close:
