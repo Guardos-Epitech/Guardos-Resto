@@ -1,5 +1,5 @@
 import React from "react";
-import {Chip} from "@mui/material";
+import { Chip } from "@mui/material";
 
 import styles from "@src/components/menu/AllergenTags/AllergenTags.module.scss";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -27,26 +27,27 @@ const Tags = () => {
 };
 
 interface IAllergenTagsProps {
-  dishAllergens: string[]
+  dishAllergens: string[];
 }
 
 const AllergenTags = (props: IAllergenTagsProps) => {
-    const { dishAllergens } = props;
+  const { dishAllergens } = props;
 
-    return (
-      <ThemeProvider theme={Tags()}>
-        {dishAllergens.length != 0 && dishAllergens.map((allergen) => (
+  return (
+    <ThemeProvider theme={Tags()}>
+      {dishAllergens.length != 0 &&
+        dishAllergens.map((allergen) => (
           <Chip
-              key={allergen}
-              label={allergen}
-              color="primary"
-              variant={"filled"}
-              size="small"
-              className={styles.TagMargin}
+            key={allergen}
+            label={allergen}
+            color="primary"
+            variant={"filled"}
+            size="small"
+            className={styles.TagMargin}
           />
         ))}
-      </ThemeProvider>
-    )
-}
+    </ThemeProvider>
+  );
+};
 
 export default AllergenTags;

@@ -5,8 +5,8 @@ import Checkbox from "@mui/material/Checkbox";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Slider from "@mui/material/Slider";
 import Box from "@mui/material/Box";
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
 
 const GlobalStyle = () => {
   return createTheme({
@@ -20,7 +20,7 @@ const GlobalStyle = () => {
       MuiChip: {
         styleOverrides: {
           colorPrimary: {
-            backgroundColor: '#FFFFFF',
+            backgroundColor: "#FFFFFF",
             color: "#000000",
             fontFamily: "Montserrat",
             textTransform: "none",
@@ -28,7 +28,7 @@ const GlobalStyle = () => {
             fontWeight: "400",
           },
           colorSecondary: {
-            backgroundColor: '#AC2A37',
+            backgroundColor: "#AC2A37",
             color: "#ffffff",
             fontFamily: "Montserrat",
             textTransform: "none",
@@ -37,14 +37,21 @@ const GlobalStyle = () => {
           },
         },
       },
-    },  
+    },
   });
 };
 
-type color = "primary" | "secondary" | "default" | "error" | "info" | "success" | "warning"
+type color =
+  | "primary"
+  | "secondary"
+  | "default"
+  | "error"
+  | "info"
+  | "success"
+  | "warning";
 
 const Filter = () => {
-  const [colorChip, setColorChip] = useState<color>("primary")
+  const [colorChip, setColorChip] = useState<color>("primary");
   const handleClick = () => {
     if (colorChip == "primary") setColorChip("secondary");
     if (colorChip == "secondary") setColorChip("primary");
@@ -109,16 +116,36 @@ const Filter = () => {
           <div>
             <Stack direction="row" spacing={1}>
               <ThemeProvider theme={GlobalStyle()}>
-                <Chip label="Aller 1" color={colorChip} variant="outlined" onClick={handleClick} />
+                <Chip
+                  label="Aller 1"
+                  color={colorChip}
+                  variant="outlined"
+                  onClick={handleClick}
+                />
               </ThemeProvider>
               <ThemeProvider theme={GlobalStyle()}>
-                <Chip label="Aller 2" color={colorChip} variant="outlined" onClick={handleClick} />
+                <Chip
+                  label="Aller 2"
+                  color={colorChip}
+                  variant="outlined"
+                  onClick={handleClick}
+                />
               </ThemeProvider>
               <ThemeProvider theme={GlobalStyle()}>
-                <Chip label="Aller 3" color={colorChip} variant="outlined" onClick={handleClick} />
+                <Chip
+                  label="Aller 3"
+                  color={colorChip}
+                  variant="outlined"
+                  onClick={handleClick}
+                />
               </ThemeProvider>
               <ThemeProvider theme={GlobalStyle()}>
-                <Chip label="Aller 4" color={colorChip} variant="outlined" onClick={handleClick} />
+                <Chip
+                  label="Aller 4"
+                  color={colorChip}
+                  variant="outlined"
+                  onClick={handleClick}
+                />
               </ThemeProvider>
             </Stack>
           </div>

@@ -20,7 +20,7 @@ const HomePage = () => {
     getAllResto().then((res) => {
       setRestoData(res);
     });
-  }
+  };
 
   return (
     <div>

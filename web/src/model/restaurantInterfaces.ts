@@ -1,6 +1,6 @@
-import { ICategories } from '@src/model/categoryinterfaces'
-import { ILocation } from '@src/model/locationInterfaces';
-import { IOpeningHours } from '@src/model/openingHoursInterfaces';
+import { ICategories } from "@src/model/categoryinterfaces";
+import { ILocation } from "@src/model/locationInterfaces";
+import { IOpeningHours } from "@src/model/openingHoursInterfaces";
 
 export interface IRestaurantFrontEnd {
   id: number;
@@ -19,9 +19,9 @@ export interface IRestaurantFrontEnd {
 }
 
 export interface IProduct {
-  name: string,
-  ingredients: string[],
-  allergens: string[]
+  name: string;
+  ingredients: string[];
+  allergens: string[];
 }
 
 export interface IIngredient {
@@ -29,8 +29,8 @@ export interface IIngredient {
 }
 
 export interface IAction {
-  actionName: string,
-  actionIcon: any,
-  actionRedirect: string,
-  redirectProps?: any
+  actionName: string;
+  actionIcon: any;
+  actionRedirect: string;
+  redirectProps?: any;
 }

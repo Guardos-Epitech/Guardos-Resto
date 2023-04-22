@@ -2,9 +2,9 @@ import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styles from "@src/components/RestoCard/Rating/Rating.module.scss";
 
-import StarIcon from '@mui/icons-material/Star';
-import StarHalfIcon from '@mui/icons-material/StarHalf';
-import StarOutlineIcon from '@mui/icons-material/StarOutline';
+import StarIcon from "@mui/icons-material/Star";
+import StarHalfIcon from "@mui/icons-material/StarHalf";
+import StarOutlineIcon from "@mui/icons-material/StarOutline";
 
 const RatingColor = () => {
   return createTheme({
@@ -18,8 +18,8 @@ const RatingColor = () => {
 };
 
 interface IRatingProps {
-  restoRating: number,
-  restoRatingsCount: number
+  restoRating: number;
+  restoRatingsCount: number;
 }
 
 const Rating = (props: IRatingProps) => {
@@ -28,24 +28,30 @@ const Rating = (props: IRatingProps) => {
 
   return (
     <ThemeProvider theme={RatingColor}>
-      { [...Array(fullRating)].map((elem, index) =>
+      {[...Array(fullRating)].map((elem, index) => (
         <ThemeProvider key={index} theme={RatingColor}>
-          <StarIcon className={styles.StarPosition} color={"primary"} key={index} />
+          <StarIcon
+            className={styles.StarPosition}
+            color={"primary"}
+            key={index}
+          />
         </ThemeProvider>
-      )}
-      { restoRating - fullRating > 0 &&
+      ))}
+      {restoRating - fullRating > 0 && (
         <ThemeProvider theme={RatingColor}>
           <StarHalfIcon className={styles.StarPosition} color={"primary"} />
         </ThemeProvider>
-      }
-      { [...Array(Math.floor(5 - restoRating))].map((elem, index) =>
-        <ThemeProvider key={index} theme={RatingColor}>
-          <StarOutlineIcon className={styles.StarPosition} color={"primary"} key={index} />
-        </ThemeProvider>
       )}
-      <span className={styles.RatingCount}>
-        {`(${restoRatingsCount})`}
-      </span>
+      {[...Array(Math.floor(5 - restoRating))].map((elem, index) => (
+        <ThemeProvider key={index} theme={RatingColor}>
+          <StarOutlineIcon
+            className={styles.StarPosition}
+            color={"primary"}
+            key={index}
+          />
+        </ThemeProvider>
+      ))}
+      <span className={styles.RatingCount}>{`(${restoRatingsCount})`}</span>
     </ThemeProvider>
   );
 };

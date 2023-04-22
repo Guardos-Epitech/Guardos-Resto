@@ -5,7 +5,6 @@ import Layout from "../../components/dumpComponents/Layout/Layout";
 import RestaurantForm from "@src/components/forms/RestaurantForm/RestaurantForm";
 
 const AddRestaurantPage = () => {
-
   return (
     <div className="test">
       <Header />

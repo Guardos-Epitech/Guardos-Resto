@@ -1,12 +1,12 @@
-import { IDishFE } from '@src/model/dishInterfaces'
+import { IDishFE } from "@src/model/dishInterfaces";
 
 export interface ICategories {
-    name: string;
-    hitRate: number;
-    dishes: [IDishFE];
+  name: string;
+  hitRate: number;
+  dishes: [IDishFE];
 }
 
 export interface ICategoryFE {
-    foodGroup: string,
-    extraGroup: string
+  foodGroup: string;
+  extraGroup: string;
 }

@@ -20,7 +20,7 @@ const ProductsPage = () => {
     getAllProducts().then((res) => {
       setProductData(res);
     });
-  }
+  };
 
   return (
     <div>
@@ -29,7 +29,11 @@ const ProductsPage = () => {
         <span className={styles.TitleSearch}>My products</span>
       </div>
       <Layout>
-        <Grid container spacing={{ xs: 1, sm: 2, md: 3 }} justifyContent={"space-between"}>
+        <Grid
+          container
+          spacing={{ xs: 1, sm: 2, md: 3 }}
+          justifyContent={"space-between"}
+        >
           {productData.map((product, index) => (
             <ProductCard
               key={index}

@@ -12,7 +12,7 @@ import { deleteResto } from "@src/services/restoCalls";
 
 interface IRestoCardProps {
   resto: IRestaurantFrontEnd;
-  onUpdate: Function,
+  onUpdate: Function;
   editable?: boolean;
 }
 
@@ -22,14 +22,14 @@ interface IDay {
 }
 
 const days: IDay[] = [
-  {id: 0, name: "Monday"},
-  {id: 1, name: "Tuesday"},
-  {id: 2, name: "Wednesday"},
-  {id: 3, name: "Thursday"},
-  {id: 4, name: "Friday"},
-  {id: 5, name: "Saturday"},
-  {id: 6, name: "Sunday"},
-]
+  { id: 0, name: "Monday" },
+  { id: 1, name: "Tuesday" },
+  { id: 2, name: "Wednesday" },
+  { id: 3, name: "Thursday" },
+  { id: 4, name: "Friday" },
+  { id: 5, name: "Saturday" },
+  { id: 6, name: "Sunday" },
+];
 
 const RestoCard = (props: IRestoCardProps) => {
   const [extended, setExtended] = useState(false);
@@ -51,7 +51,7 @@ const RestoCard = (props: IRestoCardProps) => {
     await deleteResto(resto.name);
     await onUpdate();
   }
-  console.log(resto);
+
   return (
     <Paper className={styles.DishBox} elevation={3} onClick={handleClick}>
       <Grid container>
@@ -68,7 +68,10 @@ const RestoCard = (props: IRestoCardProps) => {
         <Grid item xs={9} className={styles.GridItem}>
           <div className={styles.FlexParent}>
             <h3 className={styles.DishTitle}>{resto.name}</h3>
-            <Rating restoRating={resto.rating} restoRatingsCount={resto.ratingCount} />
+            <Rating
+              restoRating={resto.rating}
+              restoRatingsCount={resto.ratingCount}
+            />
             {editable && (
               <DishActions
                 actionList={[
@@ -122,8 +125,8 @@ const RestoCard = (props: IRestoCardProps) => {
             <div key={key} className={styles.ContainerOpeningHours}>
               <span className={styles.DaysTextValue}>{days[key].name} :</span>
               <div>
-                <span className={styles.OCTextValue}>{index?.open}</span>
-                <span className={styles.OCTextValue}>{index?.close}</span>
+                <span className={styles.OpenCloseTextValue}>{index?.open}</span>
+                <span className={styles.OpenCloseTextValue}>{index?.close}</span>
               </div>
             </div>
           ))}

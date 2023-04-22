@@ -1,18 +1,24 @@
 import React from "react";
-import { IconButton, ListItemIcon, ListItemText, Menu, MenuItem } from "@mui/material";
+import {
+  IconButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 
 import styles from "@src/components/menu/Dish/DishActions/DishActions.module.scss";
-import DeleteIcon from '@mui/icons-material/Delete';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import DeleteIcon from "@mui/icons-material/Delete";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { NavigateTo } from "@src/utils/NavigateTo";
 import { useNavigate } from "react-router-dom";
 import { IAction } from "@src/model/restaurantInterfaces";
 
 interface IDishActionsProps {
-  actionList?: IAction[],
-  onDelete: any,
-  onClick: any,
-  className?: any
+  actionList?: IAction[];
+  onDelete: any;
+  onClick: any;
+  className?: any;
 }
 
 const DishActions = (props: IDishActionsProps) => {
@@ -35,8 +41,8 @@ const DishActions = (props: IDishActionsProps) => {
         className={styles.ButtonSize}
         aria-label="more"
         id="long-button"
-        aria-controls={open ? 'long-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
+        aria-controls={open ? "long-menu" : undefined}
+        aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
         onClick={handleClick}
       >
@@ -48,17 +54,28 @@ const DishActions = (props: IDishActionsProps) => {
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button',
+          "aria-labelledby": "basic-button",
         }}
       >
-        {(actionList && actionList.length != 0) && actionList.map((action) => (
-          <MenuItem key={action.actionName} onClick={() => NavigateTo(action.actionRedirect, navigate, action.redirectProps)}>
-            <ListItemIcon>
-              <action.actionIcon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText>{action.actionName}</ListItemText>
-          </MenuItem>
-        ))}
+        {actionList &&
+          actionList.length != 0 &&
+          actionList.map((action) => (
+            <MenuItem
+              key={action.actionName}
+              onClick={() =>
+                NavigateTo(
+                  action.actionRedirect,
+                  navigate,
+                  action.redirectProps
+                )
+              }
+            >
+              <ListItemIcon>
+                <action.actionIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>{action.actionName}</ListItemText>
+            </MenuItem>
+          ))}
         <MenuItem onClick={onDelete}>
           <ListItemIcon>
             <DeleteIcon fontSize="small" />

@@ -19,7 +19,7 @@ interface IEditableDishProps {
 const Dish = (props: IEditableDishProps) => {
   const [extended, setExtended] = useState(false);
   const { onUpdate, dish, editable } = props;
-  const options = dish.category.extraGroup
+  const options = dish.category.extraGroup;
   const { name, allergens, description, price, pictures } = dish;
   const imgStr = `${pictures[0]}?auto=compress&cs=tinysrgb&h=350`;
   const priceStr = `${price.toFixed(2)} €`;
@@ -67,14 +67,10 @@ const Dish = (props: IEditableDishProps) => {
                 />
               )}
             </div>
-            {extended && <AllergenTags dishAllergens={allergens.split(',')} />}
+            {extended && <AllergenTags dishAllergens={allergens.split(",")} />}
           </Grid>
           <Grid item className={styles.FlexParent}>
-            <img
-              src={imgStr}
-              alt="new"
-              className={styles.ImageDimensions}
-            />;
+            <img src={imgStr} alt="new" className={styles.ImageDimensions} />;
           </Grid>
           <Grid item xs={12} className={styles.GridItemDescription}>
             <p
@@ -122,7 +118,7 @@ const Dish = (props: IEditableDishProps) => {
                 />
               )}
             </div>
-            {extended && <AllergenTags dishAllergens={allergens.split(',')} />}
+            {extended && <AllergenTags dishAllergens={allergens.split(",")} />}
             <p
               className={
                 extended
@@ -144,12 +140,7 @@ const Dish = (props: IEditableDishProps) => {
           </Grid>
 
           <Grid item xs={2} className={styles.GridItemImage}>
-            {
-              <img src={imgStr}
-                alt="new"
-                className={styles.ImageDimensions}
-              />
-            }
+            {<img src={imgStr} alt="new" className={styles.ImageDimensions} />}
           </Grid>
         </Grid>
       </div>

@@ -2,10 +2,13 @@
   {
     "name": "Restaurant Name",
     "id": 4,
-    "rating" : 3,
+    "rating": 3,
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
     "phoneNumber": "0123091123",
-    "pictures": ["https://www.ndr.de/fernsehen/sendungen/nordmagazin/bilderaktion/bilderaktionmv1862_v-contentgross.jpg", "asdfgfds.def"],
+    "pictures": [
+      "https://www.ndr.de/fernsehen/sendungen/nordmagazin/bilderaktion/bilderaktionmv1862_v-contentgross.jpg",
+      "asdfgfds.def"
+    ],
     "categories": [
       {
         "name": "Appetizers",
@@ -38,24 +41,24 @@
         "hitRate": 0,
         "dishes": [
           {
-              "name": "Juicy Burger",
-              "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-              "price": 10,
-              "products": "Bread,Cheese,Salad,Tomato,Onion,Mayonnaise",
-              "category": {
+            "name": "Juicy Burger",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+            "price": 10,
+            "products": "Bread,Cheese,Salad,Tomato,Onion,Mayonnaise",
+            "category": {
               "foodGroup": "burger",
               "extraGroup": "cheese, olives"
-              }
+            }
           },
           {
-              "name": "Juicy Burger",
-              "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-              "price": 10,
-              "products": "Bread,Cheese,Salad,Tomato,Onion,Mayonnaise",
-              "category": {
+            "name": "Juicy Burger",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+            "price": 10,
+            "products": "Bread,Cheese,Salad,Tomato,Onion,Mayonnaise",
+            "category": {
               "foodGroup": "burger",
               "extraGroup": "cheese, olives"
-              }
+            }
           },
           {
             "name": "Juicy Burger",
@@ -68,14 +71,14 @@
             }
           },
           {
-              "name": "Juicy Burger",
-              "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-              "price": 10,
-              "products": "Gluten,Lactose,Nuts,Sesame,Tree nuts",
-              "category": {
+            "name": "Juicy Burger",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+            "price": 10,
+            "products": "Gluten,Lactose,Nuts,Sesame,Tree nuts",
+            "category": {
               "foodGroup": "burger",
               "extraGroup": "cheese, olives"
-              }
+            }
           }
         ]
       },
@@ -100,18 +103,21 @@
       "streetName": "ABC Street",
       "streetNumber": "96A",
       "postalCode": "12590",
-      "country" : "germany",
-      "city" : "berlin"
+      "country": "germany",
+      "city": "berlin"
     },
     "hitRate": 100
   },
   {
     "name": "burgerme",
     "id": 3,
-    "rating" : 4.7,
+    "rating": 4.7,
     "description": "You want freshly prepared burgers, delivered to your home in just 25 minutes? Then burgerme is the right place for you! How about a real classic like our Cheese Burger, with juicy beef, melting cheese, spicy onions, pickles, fresh tomatoes and crisp lettuce, served with the right sauces in a brioche bun? Or would you prefer something fancy, like our Big Angus Teriyaki, the New Yorker or our Hot Crunchy Chicken? Of course, we also have plenty of vegetarian and vegan burgers on offer - and delicious finger food, crisp salads and sweet desserts make the offer perfect!",
     "phoneNumber": "0123091123",
-    "pictures": ["https://m.media-amazon.com/images/I/615WjS1XbEL._AC_SY328_.jpg", "asdfgfds.def"],
+    "pictures": [
+      "https://m.media-amazon.com/images/I/615WjS1XbEL._AC_SY328_.jpg",
+      "asdfgfds.def"
+    ],
     "categories": [
       {
         "name": "appetizer",
@@ -155,18 +161,21 @@
       "streetName": "beckeraaastreet",
       "streetNumber": "96A",
       "postalCode": "12590",
-      "country" : "germany",
-      "city" : "berlin"
+      "country": "germany",
+      "city": "berlin"
     },
     "hitRate": 100
   },
   {
     "name": "burger king",
     "id": 2,
-    "rating" : 3.8,
+    "rating": 3.8,
     "description": "Burger King is an American-based multinational chain of hamburger fast food restaurants. Headquartered in Miami-Dade County, Florida, the company was founded in 1953 as Insta-Burger King, a Jacksonville, Florida–based restaurant chain.",
     "phoneNumber": "01232191",
-    "pictures": ["https://amp.wuv.de/var/wuv/storage/images/media/bilder/burger_king_alt/9957518-1-ger-DE/burger_king_alt_gross.jpg", "asdfgfds.def"],
+    "pictures": [
+      "https://amp.wuv.de/var/wuv/storage/images/media/bilder/burger_king_alt/9957518-1-ger-DE/burger_king_alt_gross.jpg",
+      "asdfgfds.def"
+    ],
     "categories": [
       {
         "name": "dessert",
@@ -209,18 +218,21 @@
       "streetName": "Notbeckerstreet",
       "streetNumber": "10",
       "postalCode": "12123",
-      "country" : "germany",
-      "city" : "berlin"
+      "country": "germany",
+      "city": "berlin"
     },
     "hitRate": 100
   },
   {
     "name": "mcdonalds",
     "id": 1,
-    "rating" : 3.8,
+    "rating": 3.8,
     "description": "McDonald's Corporation is an American multinational fast food chain, founded in 1940 as a restaurant operated by Richard and Maurice McDonald, in San Bernardino, California, United States.",
     "phoneNumber": "0123091",
-    "pictures": ["https://www.ndr.de/fernsehen/sendungen/nordmagazin/bilderaktion/bilderaktionmv1862_v-contentgross.jpg", "asdfgfds.def"],
+    "pictures": [
+      "https://www.ndr.de/fernsehen/sendungen/nordmagazin/bilderaktion/bilderaktionmv1862_v-contentgross.jpg",
+      "asdfgfds.def"
+    ],
     "categories": [
       {
         "name": "maindish",
@@ -264,8 +276,8 @@
       "streetName": "beckerstreet",
       "streetNumber": "6A",
       "postalCode": "12570",
-      "country" : "germany",
-      "city" : "munich"
+      "country": "germany",
+      "city": "munich"
     },
     "hitRate": 100
   }

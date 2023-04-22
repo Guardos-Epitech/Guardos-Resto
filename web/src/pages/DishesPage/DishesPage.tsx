@@ -20,7 +20,7 @@ const DishesPage = () => {
     getAllDishes().then((res) => {
       setDishData(res);
     });
-  }
+  };
 
   return (
     <div className="test">
@@ -37,7 +37,7 @@ const DishesPage = () => {
               onUpdate={updateDishData}
               editable
             />
-          )
+          );
         })}
       </Layout>
       <FixedBtn title={"Add dish"} redirect={"/addDish"} />
