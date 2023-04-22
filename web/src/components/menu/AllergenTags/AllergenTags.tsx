@@ -1,8 +1,9 @@
 import React from "react";
+
 import { Chip } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import styles from "@src/components/menu/AllergenTags/AllergenTags.module.scss";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const Tags = () => {
   return createTheme({
@@ -21,8 +22,8 @@ const Tags = () => {
       },
     },
     shape: {
-      borderRadius: 5,
-    },
+      borderRadius: 5
+    }
   });
 };
 
@@ -35,7 +36,7 @@ const AllergenTags = (props: IAllergenTagsProps) => {
 
   return (
     <ThemeProvider theme={Tags()}>
-      {dishAllergens.length != 0 &&
+      {dishAllergens.length !== 0 &&
         dishAllergens.map((allergen) => (
           <Chip
             key={allergen}

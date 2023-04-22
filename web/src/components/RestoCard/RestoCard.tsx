@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import styles from "./RestoCard.module.scss";
+
 import EditIcon from "@mui/icons-material/Edit";
+import { Grid, Paper } from "@mui/material";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import PlaceIcon from "@mui/icons-material/Place";
-import { Grid, Paper } from "@mui/material";
-import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
 
-import Rating from "@src/components/RestoCard/Rating/Rating";
 import { IRestaurantFrontEnd } from "@src/model/restaurantInterfaces";
 import { deleteResto } from "@src/services/restoCalls";
+import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
+import Rating from "@src/components/RestoCard/Rating/Rating";
+import styles from "./RestoCard.module.scss";
+import { Popup } from "@src/components/dumpComponents/popup/Popup";
 
 interface IRestoCardProps {
   resto: IRestaurantFrontEnd;
@@ -33,11 +35,13 @@ const days: IDay[] = [
 
 const RestoCard = (props: IRestoCardProps) => {
   const [extended, setExtended] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const { onUpdate, resto, editable } = props;
   const imgStr = `${resto.pictures[0]}?auto=compress&cs=tinysrgb&h=350`;
   const address =
     `${resto.location.streetName} ${resto.location.streetNumber}` +
-    `, ${resto.location.postalCode} ${resto.location.city}, ${resto.location.country}`;
+    `, ${resto.location.postalCode} ${resto.location.city}` +
+    `, ${resto.location.country}`;
 
   const handleChildClick = (e: any) => {
     e.stopPropagation();
@@ -45,6 +49,11 @@ const RestoCard = (props: IRestoCardProps) => {
 
   const handleClick = () => {
     setExtended(!extended);
+  };
+
+  const handleDeleteClick = (e: any) => {
+    e.stopPropagation();
+    setShowPopup(true);
   };
 
   async function getOnDelete() {
@@ -73,38 +82,47 @@ const RestoCard = (props: IRestoCardProps) => {
               restoRatingsCount={resto.ratingCount}
             />
             {editable && (
-              <DishActions
-                actionList={[
-                  {
-                    actionName: "Menu",
-                    actionIcon: MenuBookIcon,
-                    actionRedirect: "/menu",
-                    redirectProps: {
-                      menu: resto.categories,
-                      restoName: resto.name,
-                      address: address,
+              <>
+                <DishActions
+                  actionList={[
+                    {
+                      actionName: "Menu",
+                      actionIcon: MenuBookIcon,
+                      actionRedirect: "/menu",
+                      redirectProps: {
+                        menu: resto.categories,
+                        restoName: resto.name,
+                        address: address
+                      }
                     },
-                  },
-                  {
-                    actionName: "Edit",
-                    actionIcon: EditIcon,
-                    actionRedirect: "/editResto",
-                    redirectProps: {
-                      restoName: resto.name,
-                      phone: resto.name,
-                      street: resto.location.streetName,
-                      streetNumber: resto.location.streetNumber,
-                      postalCode: resto.location.postalCode,
-                      city: resto.location.city,
-                      country: resto.location.country,
-                      description: resto.description,
-                    },
-                  },
-                ]}
-                onDelete={getOnDelete}
-                className={styles.ActionMenu}
-                onClick={handleChildClick}
-              />
+                    {
+                      actionName: "Edit",
+                      actionIcon: EditIcon,
+                      actionRedirect: "/editResto",
+                      redirectProps: {
+                        restoName: resto.name,
+                        phone: resto.name,
+                        street: resto.location.streetName,
+                        streetNumber: resto.location.streetNumber,
+                        postalCode: resto.location.postalCode,
+                        city: resto.location.city,
+                        country: resto.location.country,
+                        description: resto.description
+                      }
+                    }
+                  ]}
+                  onDelete={handleDeleteClick}
+                  className={styles.ActionMenu}
+                  onClick={handleChildClick}
+                />
+                {showPopup && (
+                  <Popup
+                    message={`Are you sure you want to delete ${resto.name}?`}
+                    onConfirm={getOnDelete}
+                    onCancel={() => setShowPopup(false)}
+                  />
+                )}
+              </>
             )}
           </div>
           <div className={styles.FlexParent}>
@@ -125,8 +143,12 @@ const RestoCard = (props: IRestoCardProps) => {
             <div key={key} className={styles.ContainerOpeningHours}>
               <span className={styles.DaysTextValue}>{days[key].name} :</span>
               <div>
-                <span className={styles.OpenCloseTextValue}>{index?.open}</span>
-                <span className={styles.OpenCloseTextValue}>{index?.close}</span>
+                <span className={styles.OpenCloseTextValue}>
+                  {index?.open}
+                </span>
+                <span className={styles.OpenCloseTextValue}>
+                  {index?.close}
+                </span>
               </div>
             </div>
           ))}

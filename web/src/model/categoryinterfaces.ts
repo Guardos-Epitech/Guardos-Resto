@@ -9,4 +9,5 @@ export interface ICategories {
 export interface ICategoryFE {
   foodGroup: string;
   extraGroup: string;
+  menuGroup: string;
 }

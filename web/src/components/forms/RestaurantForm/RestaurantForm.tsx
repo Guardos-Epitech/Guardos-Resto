@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import styles from "@src/components/forms/RestaurantForm/RestaurantForm.module.scss";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   Box,
   Button,
@@ -7,16 +8,17 @@ import {
   Grid,
   InputLabel,
   OutlinedInput,
-  TextField,
+  TextField
 } from "@mui/material";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import placeholderImg from "@src/assets/profile-placeholder.png";
-import { NavigateTo } from "@src/utils/NavigateTo";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
+
 import { addNewResto, editResto } from "@src/services/restoCalls";
+import { NavigateTo } from "@src/utils/NavigateTo";
+import placeholderImg from "@src/assets/profile-placeholder.png";
+import styles from "./RestaurantForm.module.scss";
 
 const PageBtn = () => {
   return createTheme({
@@ -39,8 +41,8 @@ const PageBtn = () => {
       },
     },
     shape: {
-      borderRadius: 5,
-    },
+      borderRadius: 5
+    }
   });
 };
 
@@ -96,7 +98,7 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
   let openingHours = props.openingHours ? props.openingHours : [];
   const origRestoName = restaurantName;
   const imageSrc =
-    props.imageSrc && props.imageSrc.length != 0
+    props.imageSrc && props.imageSrc.length !== 0
       ? props.imageSrc
       : placeholderImg;
 
@@ -150,8 +152,8 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
         streetNumber: streetNumber,
         postalCode: postalCode,
         city: city,
-        country: country,
-      },
+        country: country
+      }
     };
 
     if (props.add) {
@@ -312,9 +314,11 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
                       onChange={(value: any) =>
                         addTimeOpen({
                           open:
-                            new Date(value.$d).getHours() +
+                            new Date(value.$d)
+                              .getHours() +
                             ":" +
-                            new Date(value.$d).getMinutes(),
+                            new Date(value.$d)
+                              .getMinutes(),
                           day: index.id,
                         })
                       }
@@ -326,9 +330,11 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
                       onChange={(value: any) =>
                         addTimeClose({
                           close:
-                            new Date(value.$d).getHours() +
+                            new Date(value.$d)
+                              .getHours() +
                             ":" +
-                            new Date(value.$d).getMinutes(),
+                            new Date(value.$d)
+                              .getMinutes(),
                           day: index.id,
                         })
                       }

@@ -1,10 +1,11 @@
 import React from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import styles from "@src/components/RestoCard/Rating/Rating.module.scss";
 
-import StarIcon from "@mui/icons-material/Star";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
+import StarIcon from "@mui/icons-material/Star";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
+
+import styles from "@src/components/RestoCard/Rating/Rating.module.scss";
 
 const RatingColor = () => {
   return createTheme({
@@ -28,18 +29,27 @@ const Rating = (props: IRatingProps) => {
 
   return (
     <ThemeProvider theme={RatingColor}>
-      {[...Array(fullRating)].map((elem, index) => (
+      {[...Array(fullRating)].map((elem, index) =>
         <ThemeProvider key={index} theme={RatingColor}>
           <StarIcon
             className={styles.StarPosition}
-            color={"primary"}
+            color="primary"
             key={index}
           />
         </ThemeProvider>
-      ))}
-      {restoRating - fullRating > 0 && (
+      )}
+      {restoRating - fullRating > 0 &&
         <ThemeProvider theme={RatingColor}>
-          <StarHalfIcon className={styles.StarPosition} color={"primary"} />
+          <StarHalfIcon className={styles.StarPosition} color="primary" />
+        </ThemeProvider>
+      }
+      {[...Array(Math.floor(5 - restoRating))].map((elem, index) =>
+        <ThemeProvider key={index} theme={RatingColor}>
+          <StarOutlineIcon
+            className={styles.StarPosition}
+            color="primary"
+            key={index}
+          />
         </ThemeProvider>
       )}
       {[...Array(Math.floor(5 - restoRating))].map((elem, index) => (

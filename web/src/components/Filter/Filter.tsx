@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import styles from "./Filter.module.scss";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Slider from "@mui/material/Slider";
+
 import Box from "@mui/material/Box";
+import Checkbox from "@mui/material/Checkbox";
 import Chip from "@mui/material/Chip";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Slider from "@mui/material/Slider";
 import Stack from "@mui/material/Stack";
+
+import styles from "./Filter.module.scss";
 
 const GlobalStyle = () => {
   return createTheme({
@@ -53,8 +55,8 @@ type color =
 const Filter = () => {
   const [colorChip, setColorChip] = useState<color>("primary");
   const handleClick = () => {
-    if (colorChip == "primary") setColorChip("secondary");
-    if (colorChip == "secondary") setColorChip("primary");
+    if (colorChip === "primary") setColorChip("secondary");
+    if (colorChip === "secondary") setColorChip("primary");
   };
 
   return (
@@ -65,36 +67,18 @@ const Filter = () => {
         </div>
         <div className={styles.DivRating}>
           <span className={styles.TitleSubFilter}>Rating:</span>
-          <ThemeProvider theme={GlobalStyle()}>
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label={<span className={styles.TitleCheck}>{"5 stars"}</span>}
-            />
-          </ThemeProvider>
-          <ThemeProvider theme={GlobalStyle()}>
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label={<span className={styles.TitleCheck}>{"4 stars"}</span>}
-            />
-          </ThemeProvider>
-          <ThemeProvider theme={GlobalStyle()}>
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label={<span className={styles.TitleCheck}>{"3 stars"}</span>}
-            />
-          </ThemeProvider>
-          <ThemeProvider theme={GlobalStyle()}>
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label={<span className={styles.TitleCheck}>{"2 stars"}</span>}
-            />
-          </ThemeProvider>
-          <ThemeProvider theme={GlobalStyle()}>
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label={<span className={styles.TitleCheck}>{"1 star"}</span>}
-            />
-          </ThemeProvider>
+          {[1, 2, 3, 4, 5].map((item) => (
+            <ThemeProvider key={item} theme={GlobalStyle()}>
+              <FormControlLabel
+                control={<Checkbox defaultChecked />}
+                label={
+                  <span className={styles.TitleCheck}>
+                    {`${item} stars`}
+                  </span>
+                }
+              />
+            </ThemeProvider>
+          ))}
         </div>
         <div className={styles.DivRange}>
           <div>
@@ -115,38 +99,16 @@ const Filter = () => {
           </div>
           <div>
             <Stack direction="row" spacing={1}>
-              <ThemeProvider theme={GlobalStyle()}>
-                <Chip
-                  label="Aller 1"
-                  color={colorChip}
-                  variant="outlined"
-                  onClick={handleClick}
-                />
-              </ThemeProvider>
-              <ThemeProvider theme={GlobalStyle()}>
-                <Chip
-                  label="Aller 2"
-                  color={colorChip}
-                  variant="outlined"
-                  onClick={handleClick}
-                />
-              </ThemeProvider>
-              <ThemeProvider theme={GlobalStyle()}>
-                <Chip
-                  label="Aller 3"
-                  color={colorChip}
-                  variant="outlined"
-                  onClick={handleClick}
-                />
-              </ThemeProvider>
-              <ThemeProvider theme={GlobalStyle()}>
-                <Chip
-                  label="Aller 4"
-                  color={colorChip}
-                  variant="outlined"
-                  onClick={handleClick}
-                />
-              </ThemeProvider>
+              {["Gluten", "Lactose", "Egg", "Fish"].map((item) => (
+                <ThemeProvider key={item} theme={GlobalStyle()}>
+                  <Chip
+                    label={item}
+                    color={colorChip}
+                    variant="outlined"
+                    onClick={handleClick}
+                  />
+                </ThemeProvider>
+              ))}
             </Stack>
           </div>
         </div>

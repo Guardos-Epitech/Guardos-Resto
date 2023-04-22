@@ -1,11 +1,13 @@
 import React from "react";
-import styles from "./Header.module.scss";
+import { useNavigate } from "react-router-dom";
+
 import logo from "@src/assets/logo.png";
 import { NavigateTo } from "@src/utils/NavigateTo";
-import { useNavigate } from "react-router-dom";
+import styles from "./Header.module.scss";
 
 const Header = () => {
   const navigate = useNavigate();
+
   return (
     <div className={styles.BackgroundRect}>
       <span className={styles.NavTitle}>Login</span>

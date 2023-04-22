@@ -1,17 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
+import DeleteIcon from "@mui/icons-material/Delete";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
   IconButton,
   ListItemIcon,
   ListItemText,
   Menu,
-  MenuItem,
+  MenuItem
 } from "@mui/material";
 
-import styles from "@src/components/menu/Dish/DishActions/DishActions.module.scss";
-import DeleteIcon from "@mui/icons-material/Delete";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { NavigateTo } from "@src/utils/NavigateTo";
-import { useNavigate } from "react-router-dom";
+import styles from "./DishActions.module.scss";
 import { IAction } from "@src/model/restaurantInterfaces";
 
 interface IDishActionsProps {
@@ -54,11 +55,11 @@ const DishActions = (props: IDishActionsProps) => {
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          "aria-labelledby": "basic-button",
+          "aria-labelledby": "basic-button"
         }}
       >
         {actionList &&
-          actionList.length != 0 &&
+          actionList.length !== 0 &&
           actionList.map((action) => (
             <MenuItem
               key={action.actionName}

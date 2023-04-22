@@ -1,10 +1,11 @@
 import React from "react";
-import Header from "@src/components/dumpComponents/Header/Header";
-import styles from "@src/pages/EditDishPage/EditDishPage.module.scss";
-import Layout from "../../components/dumpComponents/Layout/Layout";
-import DishForm from "@src/components/forms/DishForm/DishForm";
 import { useLocation } from "react-router-dom";
+
+import DishForm from "@src/components/forms/DishForm/DishForm";
+import Header from "@src/components/dumpComponents/Header/Header";
 import { IDishFE } from "@src/model/dishInterfaces";
+import Layout from "@src/components/dumpComponents/Layout/Layout";
+import styles from "@src/pages/EditDishPage/EditDishPage.module.scss";
 
 interface IEditDishPageProps {
   dish: IDishFE;
@@ -12,10 +13,15 @@ interface IEditDishPageProps {
 
 const EditDishPage = () => {
   const { dish } = useLocation().state as IEditDishPageProps;
-  const { name, products, description, price } = dish;
+  const { name, products, description, price, allergens, resto, category }
+    = dish;
+  const selectResto: string[] = [resto];
+  const selectAllergens: string[] = allergens.toString()
+    .split(",");
+  const selectCategories: string[] = [category.menuGroup];
 
   return (
-    <div className="test">
+    <div>
       <Header />
       <div className={styles.RectOnImg}>
         <span className={styles.TitleSearch}>Edit dish</span>
@@ -26,6 +32,9 @@ const EditDishPage = () => {
           dishProducts={products}
           dishDescription={description}
           price={price}
+          selectAllergene={selectAllergens}
+          restoName={selectResto}
+          selectCategory={selectCategories}
         />
       </Layout>
     </div>

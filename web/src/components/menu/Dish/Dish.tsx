@@ -1,13 +1,13 @@
 import React, { useState } from "react";
+
 import { Grid, Paper } from "@mui/material";
-
-import styles from "@src/components/menu/Dish/Dish.module.scss";
-
-import AllergenTags from "@src/components/menu/AllergenTags/AllergenTags";
-import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
 import EditIcon from "@mui/icons-material/Edit";
-import { IDishFE } from "@src/model/dishInterfaces";
+
 import { deleteDish } from "@src/services/dishCalls";
+import DishActions from "@src/components/menu/Dish/DishActions/DishActions";
+import { IDishFE } from "@src/model/dishInterfaces";
+import styles from "@src/components/menu/Dish/Dish.module.scss";
+import { Popup } from "@src/components/dumpComponents/popup/Popup";
 
 interface IEditableDishProps {
   dish: IDishFE;
@@ -18,9 +18,10 @@ interface IEditableDishProps {
 
 const Dish = (props: IEditableDishProps) => {
   const [extended, setExtended] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const { onUpdate, dish, editable } = props;
   const options = dish.category.extraGroup;
-  const { name, allergens, description, price, pictures } = dish;
+  const { name, description, price, pictures } = dish;
   const imgStr = `${pictures[0]}?auto=compress&cs=tinysrgb&h=350`;
   const priceStr = `${price.toFixed(2)} €`;
 
@@ -32,10 +33,16 @@ const Dish = (props: IEditableDishProps) => {
     setExtended(!extended);
   };
 
+  const handleDeleteClick = (e: any) => {
+    e.stopPropagation();
+    setShowPopup(true);
+  };
+
   async function getOnDelete() {
-    await deleteDish("burgerme", name);
+    await deleteDish(dish.resto, name);
     if (onUpdate) {
       await onUpdate();
+      setShowPopup(false);
     }
   }
 
@@ -43,7 +50,7 @@ const Dish = (props: IEditableDishProps) => {
     <Paper className={styles.DishBox} elevation={3} onClick={handleClick}>
       {/*mobile version of dish element*/}
       <div className={styles.MobileVersion}>
-        <Grid container justifyContent={"space-between"}>
+        <Grid container justifyContent="space-between">
           <Grid
             item
             className={extended ? styles.GridItem : styles.FlexGridItem}
@@ -51,26 +58,35 @@ const Dish = (props: IEditableDishProps) => {
             <div className={styles.FlexParent}>
               <h3 className={styles.DishTitle}>{name}</h3>
               {editable && (
-                <DishActions
-                  actionList={[
-                    {
+                <>
+                  <DishActions
+                    actionList={[{
                       actionName: "Edit",
                       actionIcon: EditIcon,
                       actionRedirect: "/editDish",
-                      redirectProps: {
-                        dish: dish,
-                      },
-                    },
-                  ]}
-                  onDelete={getOnDelete}
-                  onClick={handleChildClick}
-                />
+                      redirectProps: { dish: dish }
+                    }]}
+                    onDelete={handleDeleteClick}
+                    onClick={handleChildClick}
+                  />
+                  {showPopup && (
+                    <Popup
+                      message={`Are you sure you want to delete ${dish.name}?`}
+                      onConfirm={getOnDelete}
+                      onCancel={() => setShowPopup(false)}
+                    />
+                  )}
+                </>
               )}
             </div>
-            {extended && <AllergenTags dishAllergens={allergens.split(",")} />}
+            {/* {extended && <AllergenTags dishAllergens={allergens.split(",")} />} */}
           </Grid>
           <Grid item className={styles.FlexParent}>
-            <img src={imgStr} alt="new" className={styles.ImageDimensions} />;
+            <img
+              src={imgStr}
+              alt="new"
+              className={styles.ImageDimensions}
+            />
           </Grid>
           <Grid item xs={12} className={styles.GridItemDescription}>
             <p
@@ -83,7 +99,7 @@ const Dish = (props: IEditableDishProps) => {
               {description}
             </p>
             <span className={styles.OptionsText}>
-              {options && options.length != 0 && (
+              {options && options.length !== 0 && (
                 <div className={!extended && styles.OptionsWrap}>
                   <b>{"Options: "}</b>
                   {options}
@@ -102,23 +118,28 @@ const Dish = (props: IEditableDishProps) => {
             <div className={styles.FlexParent}>
               <h3 className={styles.DishTitle}>{name}</h3>
               {editable && (
-                <DishActions
-                  actionList={[
-                    {
+                <>
+                  <DishActions
+                    actionList={[{
                       actionName: "Edit",
                       actionIcon: EditIcon,
                       actionRedirect: "/editDish",
-                      redirectProps: {
-                        dish: dish,
-                      },
-                    },
-                  ]}
-                  onDelete={getOnDelete}
-                  onClick={handleChildClick}
-                />
+                      redirectProps: { dish: dish }
+                    }]}
+                    onDelete={handleDeleteClick}
+                    onClick={handleChildClick}
+                  />
+                  {showPopup && (
+                    <Popup
+                      message={`Are you sure you want to delete ${dish.name}?`}
+                      onConfirm={getOnDelete}
+                      onCancel={() => setShowPopup(false)}
+                    />
+                  )}
+                </>
               )}
             </div>
-            {extended && <AllergenTags dishAllergens={allergens.split(",")} />}
+            {/* {extended && <AllergenTags dishAllergens={allergens.split(",")} />} */}
             <p
               className={
                 extended
@@ -129,7 +150,7 @@ const Dish = (props: IEditableDishProps) => {
               {description}
             </p>
             <span className={styles.OptionsText}>
-              {options && options.length != 0 && (
+              {options && options.length !== 0 && (
                 <div className={!extended && styles.OptionsWrap}>
                   <b>{"Options: "}</b>
                   {options}
