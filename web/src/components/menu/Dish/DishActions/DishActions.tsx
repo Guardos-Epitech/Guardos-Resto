@@ -16,10 +16,10 @@ import styles from "./DishActions.module.scss";
 import { IAction } from "@src/model/restaurantInterfaces";
 
 interface IDishActionsProps {
-  actionList?: IAction[],
-  onDelete: any,
-  onClick: any,
-  className?: any
+  actionList?: IAction[];
+  onDelete: any;
+  onClick: any;
+  className?: any;
 }
 
 const DishActions = (props: IDishActionsProps) => {
@@ -58,16 +58,25 @@ const DishActions = (props: IDishActionsProps) => {
           "aria-labelledby": "basic-button"
         }}
       >
-        {(actionList && actionList.length !== 0) && actionList.map((action) => (
-          <MenuItem key={action.actionName}
-            onClick={() => NavigateTo(
-              action.actionRedirect, navigate, action.redirectProps)}>
-            <ListItemIcon>
-              <action.actionIcon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText>{action.actionName}</ListItemText>
-          </MenuItem>
-        ))}
+        {actionList &&
+          actionList.length !== 0 &&
+          actionList.map((action) => (
+            <MenuItem
+              key={action.actionName}
+              onClick={() =>
+                NavigateTo(
+                  action.actionRedirect,
+                  navigate,
+                  action.redirectProps
+                )
+              }
+            >
+              <ListItemIcon>
+                <action.actionIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>{action.actionName}</ListItemText>
+            </MenuItem>
+          ))}
         <MenuItem onClick={onDelete}>
           <ListItemIcon>
             <DeleteIcon fontSize="small" />

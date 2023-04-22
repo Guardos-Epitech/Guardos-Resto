@@ -36,16 +36,17 @@ const AllergenTags = (props: IAllergenTagsProps) => {
 
   return (
     <ThemeProvider theme={Tags()}>
-      {dishAllergens.length !== 0 && dishAllergens.map((allergen) => (
-        <Chip
-          key={allergen}
-          label={allergen}
-          color="primary"
-          variant="filled"
-          size="small"
-          className={styles.TagMargin}
-        />
-      ))}
+      {dishAllergens.length !== 0 &&
+        dishAllergens.map((allergen) => (
+          <Chip
+            key={allergen}
+            label={allergen}
+            color="primary"
+            variant={"filled"}
+            size="small"
+            className={styles.TagMargin}
+          />
+        ))}
     </ThemeProvider>
   );
 };

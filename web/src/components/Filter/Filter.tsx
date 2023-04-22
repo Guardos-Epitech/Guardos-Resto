@@ -22,7 +22,7 @@ const GlobalStyle = () => {
       MuiChip: {
         styleOverrides: {
           colorPrimary: {
-            backgroundColor: '#FFFFFF',
+            backgroundColor: "#FFFFFF",
             color: "#000000",
             fontFamily: "Montserrat",
             textTransform: "none",
@@ -30,7 +30,7 @@ const GlobalStyle = () => {
             fontWeight: "400",
           },
           colorSecondary: {
-            backgroundColor: '#AC2A37',
+            backgroundColor: "#AC2A37",
             color: "#ffffff",
             fontFamily: "Montserrat",
             textTransform: "none",
@@ -39,12 +39,18 @@ const GlobalStyle = () => {
           },
         },
       },
-    },  
+    },
   });
 };
 
-type color = "primary" | "secondary" | "default" | "error" | "info"
-  | "success" | "warning";
+type color =
+  | "primary"
+  | "secondary"
+  | "default"
+  | "error"
+  | "info"
+  | "success"
+  | "warning";
 
 const Filter = () => {
   const [colorChip, setColorChip] = useState<color>("primary");

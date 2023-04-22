@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 import {
   Autocomplete,
-  Box, Button, Container,
+  Box,
+  Button,
+  Container,
   FormControl,
   Grid,
-  TextField
+  TextField,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -44,8 +46,8 @@ const PageBtn = () => {
 };
 
 interface IDishFormProps {
-  productName?: string,
-  productIngredients?: string[],
+  productName?: string;
+  productIngredients?: string[];
 }
 
 const ProductForm = (props: IDishFormProps) => {
@@ -65,14 +67,15 @@ const ProductForm = (props: IDishFormProps) => {
   }, []);
 
   const ingredients: IIngredient[] = [
-    { name: 'Milk' },
-    { name: 'Wheat' },
-    { name: 'Egg' },
-    { name: 'Tomato' },
-    { name: 'Salt' }
+    { name: "Milk" },
+    { name: "Wheat" },
+    { name: "Egg" },
+    { name: "Tomato" },
+    { name: "Salt" },
   ];
-  const productIngredientsList = ingredients.filter(product =>
-    productIngredients?.includes(product.name));
+  const productIngredientsList = ingredients.filter((product) =>
+    productIngredients?.includes(product.name)
+  );
 
   async function sendRequestAndGoBack() {
     const product: IProduct = {
@@ -82,18 +85,14 @@ const ProductForm = (props: IDishFormProps) => {
     };
 
     for (let i = 0; i < selectedResto.length; i++) {
-      await addNewProduct(product, selectedResto[i]); // TODO: replace with resto group someday
-    }
-
-    for (let i = 0; i < selectedResto.length; i++) {
-      await addNewProduct(product, selectedResto[i]); // TODO: replace with resto group someday
+      await addNewProduct(product, selectedResto[i]);
     }
     return NavigateTo("/products", navigate, { successfulForm: true });
   }
 
   return (
-    <Container maxWidth="md">
-      <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+    <Container maxWidth={"md"}>
+      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
         <Grid
           className={styles.GridSpaceTop}
           container
@@ -119,18 +118,17 @@ const ProductForm = (props: IDishFormProps) => {
               id="tags-outlined"
               options={ingredients}
               getOptionLabel={(option) =>
-                (option ? (option as IIngredient).name : "")}
+                option ? (option as IIngredient).name : ""
+              }
               defaultValue={productIngredientsList}
               filterSelectedOptions
               onChange={(e, value) => {
-                productIngredients =
-                  value.map((ingredient: IProduct) => ingredient.name);
+                productIngredients = value.map(
+                  (ingredient: IProduct) => ingredient.name
+                );
               }}
               renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Ingredients"
-                />
+                <TextField {...params} label="Ingredients" />
               )}
             />
           </Grid>
@@ -168,7 +166,6 @@ const ProductForm = (props: IDishFormProps) => {
         </ThemeProvider>
       </Box>
     </Container>
-
   );
 };
 

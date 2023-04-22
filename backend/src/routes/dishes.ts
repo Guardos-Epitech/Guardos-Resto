@@ -10,7 +10,7 @@ import {checkIfRestaurantExists} from '../middleware/restaurantMiddleWare';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (_req, res) => {
   const dishes = await getAllDishes();
   return res.status(200)
     .send(dishes);

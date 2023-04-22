@@ -14,9 +14,24 @@ import { Popup } from "@src/components/dumpComponents/popup/Popup";
 
 interface IRestoCardProps {
   resto: IRestaurantFrontEnd;
-  onUpdate: Function,
+  onUpdate: Function;
   editable?: boolean;
 }
+
+interface IDay {
+  id?: number;
+  name?: string;
+}
+
+const days: IDay[] = [
+  { id: 0, name: "Monday" },
+  { id: 1, name: "Tuesday" },
+  { id: 2, name: "Wednesday" },
+  { id: 3, name: "Thursday" },
+  { id: 4, name: "Friday" },
+  { id: 5, name: "Saturday" },
+  { id: 6, name: "Sunday" },
+];
 
 const RestoCard = (props: IRestoCardProps) => {
   const [extended, setExtended] = useState(false);
@@ -62,8 +77,10 @@ const RestoCard = (props: IRestoCardProps) => {
         <Grid item xs={9} className={styles.GridItem}>
           <div className={styles.FlexParent}>
             <h3 className={styles.DishTitle}>{resto.name}</h3>
-            <Rating restoRating={resto.rating}
-              restoRatingsCount={78} />{/*TODO: get ratings count*/}
+            <Rating
+              restoRating={resto.rating}
+              restoRatingsCount={resto.ratingCount}
+            />
             {editable && (
               <>
                 <DishActions
@@ -121,6 +138,20 @@ const RestoCard = (props: IRestoCardProps) => {
           >
             {resto.description}
           </p>
+          <h3>Opening hours</h3>
+          {resto.openingHours.map((index, key) => (
+            <div key={key} className={styles.ContainerOpeningHours}>
+              <span className={styles.DaysTextValue}>{days[key].name} :</span>
+              <div>
+                <span className={styles.OpenCloseTextValue}>
+                  {index?.open}
+                </span>
+                <span className={styles.OpenCloseTextValue}>
+                  {index?.close}
+                </span>
+              </div>
+            </div>
+          ))}
         </Grid>
       </Grid>
     </Paper>

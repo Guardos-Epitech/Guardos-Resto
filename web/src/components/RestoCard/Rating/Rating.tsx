@@ -19,8 +19,8 @@ const RatingColor = () => {
 };
 
 interface IRatingProps {
-  restoRating: number,
-  restoRatingsCount: number
+  restoRating: number;
+  restoRatingsCount: number;
 }
 
 const Rating = (props: IRatingProps) => {
@@ -52,9 +52,16 @@ const Rating = (props: IRatingProps) => {
           />
         </ThemeProvider>
       )}
-      <span className={styles.RatingCount}>
-        {`(${restoRatingsCount})`}
-      </span>
+      {[...Array(Math.floor(5 - restoRating))].map((elem, index) => (
+        <ThemeProvider key={index} theme={RatingColor}>
+          <StarOutlineIcon
+            className={styles.StarPosition}
+            color={"primary"}
+            key={index}
+          />
+        </ThemeProvider>
+      ))}
+      <span className={styles.RatingCount}>{`(${restoRatingsCount})`}</span>
     </ThemeProvider>
   );
 };

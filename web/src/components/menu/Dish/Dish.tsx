@@ -20,7 +20,7 @@ const Dish = (props: IEditableDishProps) => {
   const [extended, setExtended] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const { onUpdate, dish, editable } = props;
-  const options = dish.category.extraGroup
+  const options = dish.category.extraGroup;
   const { name, description, price, pictures } = dish;
   const imgStr = `${pictures[0]}?auto=compress&cs=tinysrgb&h=350`;
   const priceStr = `${price.toFixed(2)} €`;
@@ -161,12 +161,7 @@ const Dish = (props: IEditableDishProps) => {
           </Grid>
 
           <Grid item xs={2} className={styles.GridItemImage}>
-            {
-              <img src={imgStr}
-                alt="new"
-                className={styles.ImageDimensions}
-              />
-            }
+            {<img src={imgStr} alt="new" className={styles.ImageDimensions} />}
           </Grid>
         </Grid>
       </div>

@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 import {
   Autocomplete,
-  Box, Button,
+  Box,
+  Button,
   FormControl,
-  Grid, InputAdornment,
-  TextField
+  Grid,
+  InputAdornment,
+  TextField,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { getAllProducts } from "@src/services/productCalls";
@@ -45,15 +47,15 @@ const PageBtn = () => {
 };
 
 interface IDishFormProps {
-  dishName?: string,
-  dishProducts?: string[],
-  dishDescription?: string,
-  imageSrc?: string,
-  price?: number,
-  add?: boolean,
-  selectCategory?: string[],
-  selectAllergene?: string[],
-  restoName?: string[]
+  dishName?: string;
+  dishProducts?: string[];
+  dishDescription?: string;
+  imageSrc?: string;
+  price?: number;
+  add?: boolean;
+  selectCategory?: string[];
+  selectAllergene?: string[];
+  restoName?: string[];
 }
 
 const DishForm = (props: IDishFormProps) => {
@@ -70,8 +72,7 @@ const DishForm = (props: IDishFormProps) => {
   const suggestionsAller: string[] = ["No Allergens", "Celery", "Gluten",
     "Crustaceans", "Eggs", "Fish", "Lupin", "Milk", "Molluscs", "Mustard",
     "Nuts", "Peanuts", "Sesame seeds", "Soya", "Sulphur dioxide", "Lactose"];
-  let dishList: IDishFE[] = [];
-
+  const dishList: IDishFE[] = [];
 
   useEffect(() => {
     getAllProducts()
@@ -217,10 +218,7 @@ const DishForm = (props: IDishFormProps) => {
                   dishProducts = value.map((product: string) => product);
                 }}
                 renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Products"
-                  />
+                  <TextField {...params} label="Products" />
                 )}
               />
             </Grid>

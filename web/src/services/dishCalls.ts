@@ -1,17 +1,17 @@
-import axios from 'axios';
+import axios from "axios";
 
-const baseUrl = 'http://localhost:8082/api/dishes/';
+const baseUrl = "http://localhost:8082/api/dishes/";
 
 export const getAllDishes = async () => {
   try {
     const response = await axios({
-      method: 'GET',
+      method: "GET",
       url: baseUrl,
     });
     return response.data;
   } catch (error) {
-    console.error('Error fetching all dishes:', error);
-    throw new Error('Failed to fetch all dishes');
+    console.error("Error fetching all dishes:", error);
+    throw new Error("Failed to fetch all dishes");
   }
 };
 
@@ -19,16 +19,16 @@ export const addNewDish = async (restoName: string, body: any) => {
   try {
     const response = await axios({
       url: baseUrl + restoName,
-      method: 'POST',
+      method: "POST",
       data: JSON.stringify(body),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
     return response.data;
   } catch (error) {
-    console.error('Error adding dish:', error);
-    throw new Error('Failed to add dish');
+    console.error("Error adding dish:", error);
+    throw new Error("Failed to add dish");
   }
 };
 
@@ -36,16 +36,16 @@ export const editDish = async (restoName: string, body: any) => {
   try {
     const response = await axios({
       url: baseUrl + restoName,
-      method: 'PUT',
+      method: "PUT",
       data: JSON.stringify(body),
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
     });
     return response.data;
   } catch (error) {
-    console.error('Error editing dish:', error);
-    throw new Error('Failed to edit dish');
+    console.error("Error editing dish:", error);
+    throw new Error("Failed to edit dish");
   }
 };
 
@@ -53,15 +53,15 @@ export const deleteDish = async (restoName: string, dishName: string) => {
   try {
     const response = await axios({
       url: baseUrl + restoName,
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       data: JSON.stringify({ name: dishName }),
     });
     return response.data;
   } catch (error) {
-    console.error('Error deleting dish:', error);
-    throw new Error('Failed to delete dish');
+    console.error("Error deleting dish:", error);
+    throw new Error("Failed to delete dish");
   }
 };

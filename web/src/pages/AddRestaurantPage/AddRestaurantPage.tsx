@@ -7,7 +7,6 @@ import RestaurantForm
 import styles from "@src/pages/AddRestaurantPage/AddRestaurantPage.module.scss";
 
 const AddRestaurantPage = () => {
-
   return (
     <div>
       <Header />

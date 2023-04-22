@@ -10,6 +10,9 @@ import {
   OutlinedInput,
   TextField
 } from "@mui/material";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { addNewResto, editResto } from "@src/services/restoCalls";
@@ -43,6 +46,12 @@ const PageBtn = () => {
   });
 };
 
+interface IOpeningHours {
+  open?: string;
+  close?: string;
+  day?: number;
+}
+
 interface IRestaurantFormProps {
   restaurantName?: string;
   street?: string;
@@ -54,7 +63,24 @@ interface IRestaurantFormProps {
   imageSrc?: string;
   phone?: string;
   add?: boolean;
+  openingHours?: IOpeningHours[];
+  website?: string;
 }
+
+interface IDay {
+  id?: number;
+  name?: string;
+}
+
+const days: IDay[] = [
+  { id: 0, name: "Monday" },
+  { id: 1, name: "Tuesday" },
+  { id: 2, name: "Wednesday" },
+  { id: 3, name: "Thursday" },
+  { id: 4, name: "Friday" },
+  { id: 5, name: "Saturday" },
+  { id: 6, name: "Sunday" },
+];
 
 const RestaurantForm = (props: IRestaurantFormProps) => {
   const navigate = useNavigate();
@@ -66,19 +92,61 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
     city,
     country,
     description,
-    phone
+    phone,
+    website
   } = props;
+  let openingHours = props.openingHours ? props.openingHours : [];
   const origRestoName = restaurantName;
   const imageSrc =
     props.imageSrc && props.imageSrc.length !== 0
       ? props.imageSrc
       : placeholderImg;
 
+  function addTimeOpen(data: IOpeningHours) {
+    if (Array.isArray(openingHours)) {
+      const existingObjectIndex: number = openingHours.findIndex(
+        (item) => item.day === data.day
+      );
+      if (existingObjectIndex >= 0) {
+        const updatedOpeningHours = openingHours.map((item, index) => {
+          if (index === existingObjectIndex) {
+            return { ...item, open: data.open };
+          }
+          return item;
+        });
+        openingHours = updatedOpeningHours;
+      } else {
+        openingHours = [...openingHours, data];
+      }
+    }
+  }
+
+  function addTimeClose(data: IOpeningHours) {
+    if (Array.isArray(openingHours)) {
+      const existingObjectIndex: number = openingHours.findIndex(
+        (item) => item.day === data.day
+      );
+      if (existingObjectIndex >= 0) {
+        const updatedOpeningHours = openingHours.map((item, index) => {
+          if (index === existingObjectIndex) {
+            return { ...item, close: data.close };
+          }
+          return item;
+        });
+        openingHours = updatedOpeningHours;
+      } else {
+        openingHours = [...openingHours, data];
+      }
+    }
+  }
+
   async function sendRequestAndGoBack() {
     const resto = {
       name: restaurantName,
       phoneNumber: phone,
       description: description,
+      website: website,
+      openingHours: openingHours,
       location: {
         streetName: street,
         streetNumber: streetNumber,
@@ -232,6 +300,59 @@ const RestaurantForm = (props: IRestaurantFormProps) => {
                   label="Description"
                   multiline
                   onChange={(e) => (description = e.target.value)}
+                />
+              </FormControl>
+            </Grid>
+            {days.map((index, key) => (
+              <LocalizationProvider dateAdapter={AdapterDayjs} key={key}>
+                <Grid item xs={4} sm={8} md={1.71}>
+                  <FormControl fullWidth>
+                    <span className={styles.DayDisplay}>{index.name}</span>
+                    <TimePicker
+                      label="Opening"
+                      ampm={false}
+                      defaultValue={openingHours[key]?.open || null}
+                      onChange={(value: any) =>
+                        addTimeOpen({
+                          open:
+                            new Date(value.$d)
+                              .getHours() +
+                            ":" +
+                            new Date(value.$d)
+                              .getMinutes(),
+                          day: index.id,
+                        })
+                      }
+                    />
+                    <br />
+                    <TimePicker
+                      label="Closing"
+                      ampm={false}
+                      defaultValue={openingHours[key]?.close || null}
+                      onChange={(value: any) =>
+                        addTimeClose({
+                          close:
+                            new Date(value.$d)
+                              .getHours() +
+                            ":" +
+                            new Date(value.$d)
+                              .getMinutes(),
+                          day: index.id,
+                        })
+                      }
+                    />
+                  </FormControl>
+                </Grid>
+              </LocalizationProvider>
+            ))}
+            <Grid item xs={4} sm={8} md={5.15}>
+              <FormControl fullWidth>
+                <TextField
+                  id="outlined-multiline-flexible"
+                  defaultValue={website}
+                  label="Web Site"
+                  multiline
+                  onChange={(e) => (website = e.target.value)}
                 />
               </FormControl>
             </Grid>

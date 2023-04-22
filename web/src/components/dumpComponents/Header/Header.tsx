@@ -14,16 +14,22 @@ const Header = () => {
       <span
         className={styles.NavTitle}
         onClick={() => NavigateTo("/", navigate)}
-      >My Restaurants</span>
+      >
+        My Restaurants
+      </span>
       <img className={styles.LogoImg} src={logo} alt="Logo" />
       <span
         className={styles.NavTitle}
         onClick={() => NavigateTo("/dishes", navigate)}
-      >My Dishes</span>
+      >
+        My Dishes
+      </span>
       <span
         className={styles.NavTitle}
         onClick={() => NavigateTo("/products", navigate)}
-      >My Products</span>
+      >
+        My Products
+      </span>
     </div>
   );
 };

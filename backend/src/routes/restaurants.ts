@@ -9,7 +9,7 @@ import {findMaxIndexRestaurants} from '../middleware/restaurantMiddleWare';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (_req, res) => {
   const restaurant = await getAllRestaurants();
   return res.status(200)
     .send(restaurant);
